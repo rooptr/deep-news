@@ -7,17 +7,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Black, White, Grey Theme */
-            --magenta: #777; /* Dark Grey for offset */
-            --cyan: #bbb;    /* Light Grey for offset */
-            --yellow: #fff;  /* White */
+            /* Poppy, eye-pleasing vibrant colors */
+            --magenta: #ff477e; /* vibrant coral */
+            --cyan: #06d6a0; /* vibrant mint */
+            --yellow: #ffd166; /* bright sunny yellow */
             --black: #111;
         }
         
         body, html {
             margin: 0;
             padding: 0;
-            min-height: 100%;
+            height: 100vh; /* Prevent scrolling */
+            overflow: hidden; /* Lock the screen */
             /* Halftone dot pattern background */
             background-color: #f0f0f0;
             background-image: radial-gradient(#ccc 15%, transparent 16%), radial-gradient(#ccc 15%, transparent 16%);
@@ -34,30 +35,66 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: flex-start;
             position: relative;
-            padding: 20px;
+            padding: 10px;
+            height: 100%;
+            box-sizing: border-box;
         }
 
-        /* Chromatic Aberration Header */
+        /* Date Header */
         h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            letter-spacing: 3px;
+            font-size: 24px; /* Made smaller */
+            margin-top: 20px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             text-align: center;
             background: #fff;
-            padding: 10px 30px;
-            border: 4px solid var(--black);
-            /* Spider-Verse style drop shadows now mapped to greyscale */
-            box-shadow: 4px 4px 0px var(--magenta), -4px -4px 0px var(--cyan), 8px 8px 0px var(--black);
-            transform: rotate(-2deg);
+            padding: 5px 20px;
+            border: 3px solid var(--black);
+            /* Spider-Verse style drop shadows */
+            box-shadow: 3px 3px 0px var(--magenta), -3px -3px 0px var(--cyan), 6px 6px 0px var(--black);
         }
         
+        /* --- EXTRAS BUTTON (Now above pizza) --- */
+        .extras {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            z-index: 10;
+        }
+
+        .extra-btn {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 22px;
+            font-weight: bold;
+            background: var(--yellow);
+            border: 3px solid var(--black);
+            padding: 8px 24px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--magenta), -2px -2px 0px var(--cyan), 6px 6px 0px var(--black);
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .extra-btn:hover {
+            transform: translate(-2px, -2px) scale(1.05);
+            box-shadow: 6px 6px 0px var(--magenta), -4px -4px 0px var(--cyan), 8px 8px 0px var(--black);
+        }
+
+        .extra-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--black);
+        }
+
+        /* --- PIZZA --- */
         .pizza-wrapper {
             position: relative;
             width: 300px;
             height: 400px;
-            margin-top: 10px;
+            /* Scale down slightly to ensure it fits without scrolling */
+            transform: scale(0.8);
+            transform-origin: top center;
         }
 
         /* Pizza with chromatic aberration borders */
@@ -89,11 +126,10 @@
             box-shadow: 4px 4px 0px var(--black);
         }
         
-        /* Greyscale toppings */
-        .t-et { top: 85px; left: 60px; transform: rotate(-5deg); background-color: #eee; border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; }
-        .t-bs { top: 100px; left: 155px; transform: rotate(8deg); background-color: #ddd; border-radius: 60% 40% 45% 55% / 40% 60% 45% 55%; }
-        .t-fe { top: 175px; left: 100px; transform: rotate(-10deg); background-color: #fff; border-radius: 55% 45% 40% 60% / 60% 40% 55% 45%; }
-        .t-mint { top: 265px; left: 112px; transform: rotate(4deg); background-color: #f5f5f5; border-radius: 45% 55% 60% 40% / 45% 55% 40% 60%; }
+        .t-et { top: 85px; left: 60px; transform: rotate(-5deg); background-color: var(--magenta); color: #fff; border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; }
+        .t-bs { top: 100px; left: 155px; transform: rotate(8deg); background-color: var(--cyan); border-radius: 60% 40% 45% 55% / 40% 60% 45% 55%; }
+        .t-fe { top: 175px; left: 100px; transform: rotate(-10deg); background-color: var(--yellow); border-radius: 55% 45% 40% 60% / 60% 40% 55% 45%; }
+        .t-mint { top: 265px; left: 112px; transform: rotate(4deg); background-color: #fff; border-radius: 45% 55% 60% 40% / 45% 55% 40% 60%; }
 
         a.topping:hover {
             transform: scale(1.2) rotate(0deg);
@@ -101,35 +137,6 @@
             z-index: 10;
         }
 
-        /* --- EXTRAS BUTTON --- */
-        .extras {
-            margin-top: 0px;
-            margin-bottom: 30px;
-        }
-
-        .extra-btn {
-            font-family: 'Patrick Hand', cursive;
-            font-size: 26px;
-            font-weight: bold;
-            background: var(--yellow);
-            border: 4px solid var(--black);
-            padding: 10px 30px;
-            cursor: pointer;
-            box-shadow: 5px 5px 0px var(--magenta), -3px -3px 0px var(--cyan), 8px 8px 0px var(--black);
-            transform: rotate(2deg);
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-        }
-
-        .extra-btn:hover {
-            transform: translate(-2px, -2px) rotate(0deg) scale(1.05);
-            box-shadow: 7px 7px 0px var(--magenta), -5px -5px 0px var(--cyan), 10px 10px 0px var(--black);
-        }
-
-        .extra-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px var(--black);
-        }
 
         /* --- CLIPBOARD MODAL --- */
         .modal-overlay {
@@ -144,17 +151,18 @@
         
         .clipboard {
             position: relative;
-            background: #555; /* Greyscale clipboard board */
+            background: #8b5a2b; /* Wooden board */
             width: 90%; max-width: 500px;
             padding: 40px 20px 20px 20px;
             border-radius: 10px;
             border: 4px solid var(--black);
             box-shadow: 10px 10px 0px var(--black);
-            transform: translateY(50px) rotate(-2deg);
+            /* Removed rotation so it's not tilted */
+            transform: translateY(50px);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .modal-overlay.active .clipboard { transform: translateY(0) rotate(0deg); }
+        .modal-overlay.active .clipboard { transform: translateY(0); }
 
         /* Silver Clip at top */
         .clip {
@@ -178,26 +186,16 @@
             text-align: center;
         }
 
-        .paper h2 {
-            margin-top: 0;
-            border-bottom: 2px dashed #ccc;
-            padding-bottom: 10px;
-            font-size: 28px;
-            color: var(--black); /* Keep text black in greyscale theme */
-        }
-
         .paper img {
             max-width: 100%;
             border: 2px solid #333;
-            /* Give the image a slight tilt */
-            transform: rotate(1deg);
         }
 
         .modal-close {
             position: absolute;
             top: -20px; right: -20px;
             width: 40px; height: 40px;
-            background: var(--magenta); /* Matches dark grey */
+            background: var(--magenta);
             color: #fff;
             border: 3px solid var(--black);
             border-radius: 50%;
@@ -208,46 +206,26 @@
         }
         .modal-close:hover { transform: scale(1.1); }
 
-        /* Hydration Toast */
-        .toast {
-            position: fixed;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-1deg);
-            background: #fff;
-            color: var(--black);
-            padding: 12px 24px;
-            border: 3px solid var(--black);
-            border-radius: 30px;
-            font-size: 22px;
-            font-weight: bold;
-            box-shadow: 4px 4px 0px var(--cyan);
-            z-index: 1000;
-            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none; /* so it doesn't block clicks */
-        }
-        .toast.show {
-            top: 20px;
-        }
-
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Date Header -->
         <h1 id="date-header">Today's Edition</h1>
         
-        <!-- Moved Market Button ABOVE pizza slice -->
+        <!-- Market Button moved above Pizza -->
         <div class="extras">
             <button class="extra-btn" onclick="openModal()">Market</button>
         </div>
 
+        <!-- Pizza Element -->
         <div class="pizza-wrapper">
             <!-- Sketchy Pizza SVG Outline -->
             <svg class="slice-outline" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
-                <!-- Base slice (Greyscale white) -->
-                <path d="M 15 45 Q 150 10 285 45 Q 295 55 285 65 L 175 365 Q 150 390 125 365 L 15 65 Q 5 55 15 45 Z" fill="#fff" stroke="#111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Crust detail (Greyscale light grey) -->
-                <path d="M 15 45 Q 150 10 285 45 Q 295 55 285 65 L 265 60 Q 150 25 35 60 Z" fill="#ddd" stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Base slice (Golden Cheese) -->
+                <path d="M 15 45 Q 150 10 285 45 Q 295 55 285 65 L 175 365 Q 150 390 125 365 L 15 65 Q 5 55 15 45 Z" fill="#ffb703" stroke="#111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Crust detail (Baked crust color) -->
+                <path d="M 15 45 Q 150 10 285 45 Q 295 55 285 65 L 265 60 Q 150 25 35 60 Z" fill="#fb8500" stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M 25 70 Q 150 35 275 70" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>
                 <!-- Drippy cheese details -->
                 <path d="M 40 70 Q 45 80 40 90 M 260 70 Q 255 80 260 90 M 150 370 L 150 380 M 140 372 L 142 376 M 160 372 L 158 376 M 50 160 L 55 165 M 240 180 L 235 185 M 150 190 Q 155 200 150 210" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" />
@@ -269,17 +247,10 @@
             <div class="clip"></div>
             <button class="modal-close" onclick="closeModal(event)">X</button>
             <div class="paper">
-                <h2>The Markets On Tuesday</h2>
-                <!-- We load the image generated by the GitHub Action -->
-                <!-- If the image isn't there yet, we show an alt message -->
+                <!-- Removed Title (The Markets on Tuesday) -->
                 <img src="market_box.png" alt="Market data will appear here after the 8:15 AM cloud run!" onerror="this.onerror=null; this.src=''; this.alt='Market data will appear here tomorrow at 8:15 AM after the cloud script runs!'; this.style.border='none';">
             </div>
         </div>
-    </div>
-
-    <!-- Hydration Toast -->
-    <div id="toast" class="toast">
-        💧 Hydrate before you read! 🥤
     </div>
 
     <script>
@@ -297,18 +268,6 @@
             modal.classList.remove('active');
             setTimeout(() => modal.style.display = 'none', 300);
         }
-
-        // Hydration toast logic
-        window.addEventListener('load', () => {
-            const toast = document.getElementById('toast');
-            setTimeout(() => {
-                toast.classList.add('show');
-            }, 600); // Wait slightly after load
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3500); // Disappear gracefully after 3 seconds
-        });
     </script>
 </body>
 </html>
