@@ -25,13 +25,12 @@ jobs:
         run: python fetch_papers.py
 
       - name: Crop Market Box using pdftocairo
-        # pdftocairo options:
-        # -png : output png
-        # -x 0 -y 0 : start at top left (0,0)
-        # -W 600 -H 500 : crop to 600 pixels wide and 500 pixels tall
-        # bs.pdf : input
-        # market_box : output prefix
-        run: pdftocairo -png -x 0 -y 0 -W 600 -H 500 bs.pdf market_box
+        # Snipe just the market table:
+        # Push Y down by 220px to skip the date/location header.
+        # Push X right by 25px to skip the left margin.
+        # Set Width to 320px to avoid the photo on the right.
+        # Set Height to 250px to capture just the table and footnotes.
+        run: pdftocairo -png -x 25 -y 220 -W 320 -H 250 bs.pdf market_box
 
       - name: Upload Image Artifact
         uses: actions/upload-artifact@v4
