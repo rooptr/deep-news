@@ -205,38 +205,50 @@
         .modal-close:hover { transform: scale(1.1); }
 
         /* --- HYDRATION TOAST --- */
-        .toast-popup {
+        .toast-overlay {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            /* Start hidden off-screen */
-            transform: translateX(-50%) translateY(-150px);
-            background-color: var(--magenta); /* Swapped from cyan */
-            color: #fff; /* White text for contrast */
-            padding: 12px 24px;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .toast-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .toast-popup {
+            background-color: var(--magenta);
+            color: #fff;
+            padding: 15px 30px;
             border: 3px solid var(--black);
             border-radius: 8px;
             font-size: 24px;
             font-weight: bold;
             text-align: center;
             box-shadow: 4px 4px 0px var(--orange), 8px 8px 0px var(--black);
-            z-index: 1000;
-            /* 5 second animation: slides down, waits, slides up */
-            animation: slideDownOut 5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes slideDownOut {
-            0% { transform: translateX(-50%) translateY(-150px); }
-            10% { transform: translateX(-50%) translateY(0); }
-            80% { transform: translateX(-50%) translateY(0); }
-            100% { transform: translateX(-50%) translateY(-150px); }
+        .toast-overlay.visible .toast-popup {
+            transform: scale(1);
         }
 
     </style>
 </head>
 <body>
-    <!-- Hydration Reminder -->
-    <div id="hydration-toast" class="toast-popup">WAIT! Make sure you hydrate before reading.</div>
+    <!-- Hydration Reminder Overlay -->
+    <div id="hydration-overlay" class="toast-overlay">
+        <div class="toast-popup">WAIT! Make sure you hydrate before reading.</div>
+    </div>
 
     <div class="container">
         <!-- Date Header -->
@@ -286,14 +298,25 @@
         const options = { weekday: 'long', month: 'long', day: 'numeric' };
         document.getElementById('date-header').innerText = new Date().toLocaleDateString('en-US', options);
 
-        // Fallback for mobile devices (like iOS on Low Power Mode) that pause CSS animations.
-        // This ensures the popup is forcefully removed from the screen after 5.5 seconds.
-        setTimeout(() => {
-            const toast = document.getElementById('hydration-toast');
-            if (toast) {
-                toast.style.display = 'none';
+        // Smooth Hydration Popup Logic
+        window.addEventListener('DOMContentLoaded', () => {
+            const toastOverlay = document.getElementById('hydration-overlay');
+            if (toastOverlay) {
+                // Show smoothly after a tiny delay
+                setTimeout(() => {
+                    toastOverlay.classList.add('visible');
+                }, 300);
+
+                // Hide smoothly after 4 seconds
+                setTimeout(() => {
+                    toastOverlay.classList.remove('visible');
+                    // Fully remove from view after transition completes
+                    setTimeout(() => {
+                        toastOverlay.style.display = 'none';
+                    }, 400); 
+                }, 4300);
             }
-        }, 5500);
+        });
 
         function openModal() {
             const modal = document.getElementById('modal');
