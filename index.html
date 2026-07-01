@@ -208,6 +208,28 @@
         }
         .modal-close:hover { transform: scale(1.1); }
 
+        /* Hydration Toast */
+        .toast {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-1deg);
+            background: #fff;
+            color: var(--black);
+            padding: 12px 24px;
+            border: 3px solid var(--black);
+            border-radius: 30px;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 4px 4px 0px var(--cyan);
+            z-index: 1000;
+            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none; /* so it doesn't block clicks */
+        }
+        .toast.show {
+            top: 20px;
+        }
+
     </style>
 </head>
 <body>
@@ -255,6 +277,11 @@
         </div>
     </div>
 
+    <!-- Hydration Toast -->
+    <div id="toast" class="toast">
+        💧 Hydrate before you read! 🥤
+    </div>
+
     <script>
         const options = { weekday: 'long', month: 'long', day: 'numeric' };
         document.getElementById('date-header').innerText = new Date().toLocaleDateString('en-US', options);
@@ -270,6 +297,18 @@
             modal.classList.remove('active');
             setTimeout(() => modal.style.display = 'none', 300);
         }
+
+        // Hydration toast logic
+        window.addEventListener('load', () => {
+            const toast = document.getElementById('toast');
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 600); // Wait slightly after load
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500); // Disappear gracefully after 3 seconds
+        });
     </script>
 </body>
 </html>
