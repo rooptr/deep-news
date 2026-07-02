@@ -1,0 +1,14 @@
+name: Test Scheduler
+
+on:
+  schedule:
+    # This is set to run at 18:55 UTC (which is exactly 00:25 AM IST)
+    - cron: '55 18 * * *'
+  workflow_dispatch:
+
+jobs:
+  test-cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Success Message
+        run: echo "The cron scheduler is working perfectly! It woke up on its own and ran this job."
