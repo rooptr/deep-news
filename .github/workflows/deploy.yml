@@ -2,8 +2,8 @@ name: Daily Newspaper Deploy
 
 on:
   schedule:
-    # 02:45 UTC is 08:15 AM IST
-    - cron: '45 2 * * *'
+    # 04:10 UTC is 09:40 AM IST
+    - cron: '10 4 * * *'
   workflow_dispatch: # Allows you to manually trigger it anytime
 
 jobs:
