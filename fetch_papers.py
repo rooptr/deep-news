@@ -89,6 +89,7 @@ def fetch_headlines():
         items = soup.find_all('item')[:10]
         for item in items:
             title = item.title.text.strip() if item.title else ""
+            title = title.replace("<![CDATA[", "").replace("]]>", "").strip()
             if title: headlines_data.append({"paper": "ECONOMIC TIMES", "title": title})
         print(f"Fetched {len(items)} headlines from Economic Times")
     except Exception as e:
@@ -103,6 +104,7 @@ def fetch_headlines():
         items = soup.find_all('item')[:10]
         for item in items:
             title = item.title.text.strip() if item.title else ""
+            title = title.replace("<![CDATA[", "").replace("]]>", "").strip()
             title = title.rsplit(' - Business Standard', 1)[0] # clean up google title
             if title: headlines_data.append({"paper": "BUSINESS STANDARD", "title": title})
         print(f"Fetched {len(items)} headlines from Business Standard")
@@ -117,6 +119,7 @@ def fetch_headlines():
         items = soup.find_all('item')[:10]
         for item in items:
             title = item.title.text.strip() if item.title else ""
+            title = title.replace("<![CDATA[", "").replace("]]>", "").strip()
             if title: headlines_data.append({"paper": "MINT", "title": title})
         print(f"Fetched {len(items)} headlines from Mint")
     except Exception as e:
@@ -131,6 +134,7 @@ def fetch_headlines():
         items = soup.find_all('item')[:10]
         for item in items:
             title = item.title.text.strip() if item.title else ""
+            title = title.replace("<![CDATA[", "").replace("]]>", "").strip()
             title = title.rsplit(' - Financial Express', 1)[0] # clean up google title
             if title: headlines_data.append({"paper": "FINANCIAL EXPRESS", "title": title})
         print(f"Fetched {len(items)} headlines from Financial Express")
