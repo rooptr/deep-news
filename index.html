@@ -49,14 +49,14 @@
         /* Date Header */
         h1 {
             position: relative;
-            font-size: 48px; /* Restored large size */
-            margin-top: 20px;
-            margin-bottom: 20px;
-            letter-spacing: 3px;
+            font-size: 32px; /* Reduced from 48px */
+            margin-top: 15px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             text-align: center;
             background: #fff;
-            padding: 10px 30px;
+            padding: 8px 20px;
             border: 3px solid var(--black);
             /* Spider-Verse style drop shadows */
             box-shadow: 3px 3px 0px var(--magenta), -3px -3px 0px var(--orange), 6px 6px 0px var(--black);
@@ -65,10 +65,10 @@
         /* Comic Book Circular Sticker */
         .comic-sticker {
             position: absolute;
-            top: -25px;
-            right: -45px;
-            width: 90px;
-            height: 90px;
+            top: -20px;
+            right: -25px; /* Pushed out so it doesn't cover date */
+            width: 80px;
+            height: 80px;
             background-color: var(--yellow);
             border: 4px dashed var(--black);
             border-radius: 50%;
@@ -141,15 +141,15 @@
             z-index: 3;
         }
 
-        /* Comic Book Toppings (Sausage Theme) */
+        /* Comic Book Toppings (Minimalist Sketch Theme) */
         a.topping {
             position: absolute;
             width: 76px; height: 76px;
             border: 4px solid var(--black);
             display: flex; align-items: center; justify-content: center;
             text-align: center; text-decoration: none;
-            color: #fff; font-size: 18px; font-weight: bold; line-height: 1.1;
-            background-color: var(--sausage);
+            color: var(--black); font-size: 18px; font-weight: bold; line-height: 1.1;
+            background-color: #fff;
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             /* Comic shadow */
             box-shadow: 4px 4px 0px var(--black);
