@@ -1,6 +1,9 @@
 name: Daily Newspaper Deploy
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     # 04:10 UTC is 09:40 AM IST
     - cron: '10 4 * * *'
