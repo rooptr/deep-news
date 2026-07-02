@@ -94,18 +94,18 @@ def fetch_headlines():
     except Exception as e:
         print(f"Error fetching ET headlines: {e}")
 
-    # 2. Business Standard (RSS)
+    # 2. Hindu Business Line (RSS)
     try:
-        req = urllib.request.Request('https://www.business-standard.com/rss/home_page_top_stories.rss', headers=headers)
+        req = urllib.request.Request('https://www.thehindubusinessline.com/feeder/default.rss', headers=headers)
         xml = urllib.request.urlopen(req, timeout=10).read()
         soup = BeautifulSoup(xml, 'html.parser')
         items = soup.find_all('item')[:10]
         for item in items:
             title = item.title.text.strip() if item.title else ""
-            if title: headlines_data.append({"paper": "BUSINESS STANDARD", "title": title})
-        print(f"Fetched {len(items)} headlines from Business Standard")
+            if title: headlines_data.append({"paper": "HINDU BUSINESS LINE", "title": title})
+        print(f"Fetched {len(items)} headlines from Hindu Business Line")
     except Exception as e:
-        print(f"Error fetching BS headlines: {e}")
+        print(f"Error fetching Hindu Business Line headlines: {e}")
 
     # 3. Mint (RSS)
     try:
@@ -120,22 +120,18 @@ def fetch_headlines():
     except Exception as e:
         print(f"Error fetching Mint headlines: {e}")
 
-    # 4. Financial Express (Scrape Homepage)
+    # 4. Moneycontrol (RSS)
     try:
-        req = urllib.request.Request('https://www.financialexpress.com/', headers=headers)
-        html = urllib.request.urlopen(req, timeout=10).read()
-        soup = BeautifulSoup(html, 'html.parser')
-        # FE usually uses h2 or h3 for headlines
-        headings = soup.find_all(['h2', 'h3'])
-        count = 0
-        for h in headings:
-            if h.text and len(h.text.strip()) > 30:  # Avoid short navigation links
-                headlines_data.append({"paper": "FINANCIAL EXPRESS", "title": h.text.strip()})
-                count += 1
-            if count >= 10: break
-        print(f"Fetched {count} headlines from Financial Express")
+        req = urllib.request.Request('https://www.moneycontrol.com/rss/MCtopnews.xml', headers=headers)
+        xml = urllib.request.urlopen(req, timeout=10).read()
+        soup = BeautifulSoup(xml, 'html.parser')
+        items = soup.find_all('item')[:10]
+        for item in items:
+            title = item.title.text.strip() if item.title else ""
+            if title: headlines_data.append({"paper": "MONEYCONTROL", "title": title})
+        print(f"Fetched {len(items)} headlines from Moneycontrol")
     except Exception as e:
-        print(f"Error fetching FE headlines: {e}")
+        print(f"Error fetching Moneycontrol headlines: {e}")
 
     with open('headlines.json', 'w', encoding='utf-8') as f:
         json.dump(headlines_data, f, indent=2)
