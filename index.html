@@ -332,7 +332,7 @@
 <body>
     <!-- Hydration Reminder Overlay -->
     <div id="hydration-overlay" class="toast-overlay">
-        <div class="toast-popup">WAIT! Make sure you hydrate before reading.</div>
+        <div class="toast-popup">WAIT DEEPTI! Make sure you hydrate before reading.</div>
     </div>
 
     <div class="container">
@@ -372,7 +372,7 @@
                     <div class="speech-container">
                         <div class="bubble b1">PIHHH</div>
                         <div class="bubble b2">PIHHH</div>
-                        <div class="bubble b3">PIHHHHH!</div>
+                        <div class="bubble b3">DEEPTI!</div>
                     </div>
                     <!-- 16-Bit Style 2yo Baby Boy Walking -->
                     <svg class="baby-sprite" viewBox="0 0 40 40" width="50" height="50" shape-rendering="crispEdges">
@@ -414,7 +414,8 @@
 
     <script>
         const options = { weekday: 'long', month: 'long', day: 'numeric' };
-        document.getElementById('date-header').innerText = new Date().toLocaleDateString('en-US', options);
+        const dateStr = new Date().toLocaleDateString('en-US', options);
+        document.getElementById('date-header').innerHTML = `Deepti's Daily Edition<br><span style="font-size: 24px; color: var(--sausage);">${dateStr}</span>`;
 
         // Force browser to fetch the absolute latest PDFs and Images by appending a timestamp
         const cacheBuster = '?v=' + new Date().getTime();
