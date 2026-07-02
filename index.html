@@ -37,8 +37,7 @@
             color: var(--black);
         }
         
-        /* Removed .container */
-        .old-container {
+        .container {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -167,77 +166,6 @@
             background-color: #d14343; /* slightly lighter sausage on hover */
         }
 
-
-
-        /* --- PIZZA BOX & SCROLL ANIMATION --- */
-        .scroll-track {
-            height: 250vh; /* Allow plenty of scrolling */
-            width: 100%;
-        }
-        .sticky-scene {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            perspective: 1200px;
-            overflow: hidden;
-        }
-        .pizza-box-container {
-            position: relative;
-            width: 340px;
-            height: 400px;
-            transform-style: preserve-3d;
-            margin-top: 20px;
-        }
-        .box-bottom, .box-lid {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            transform-style: preserve-3d;
-        }
-        .box-bottom {
-            z-index: 1;
-        }
-        .box-lid {
-            z-index: 10;
-            transform-origin: top; /* Hinge at the top */
-            backface-visibility: visible;
-        }
-        .pizza-content-wrapper {
-            position: absolute;
-            top: 20px;
-            left: 65px;
-            width: 300px;
-            height: 400px;
-            transform: scale(0.7);
-            transform-origin: top left;
-            z-index: 2;
-        }
-        .box-sticker {
-            position: absolute;
-            bottom: 30px;
-            right: -40px;
-            z-index: 20;
-            transform: rotate(5deg);
-        }
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--black);
-            animation: bounce 1.5s infinite;
-            text-align: center;
-            opacity: 1;
-            transition: opacity 0.3s;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(15px); }
-        }
 
         /* --- CLIPBOARD MODAL --- */
         .modal-overlay {
@@ -453,118 +381,77 @@
         <div class="toast-popup">WAIT DEEPTI! Make sure you hydrate before reading.</div>
     </div>
 
-    
-    <div class="scroll-track">
-        <div class="sticky-scene">
-            <!-- Date Header -->
-            <h1 id="date-header">
-                <span id="date-text"></span>
-            </h1>
+    <div class="container">
+        <!-- Date Header -->
+        <h1 id="date-header">
+            <span id="date-text"></span>
+        </h1>
+        
+        <!-- Market Button moved above Pizza -->
+        <div class="extras">
+            <button class="extra-btn market-btn" onclick="openModal()">Market</button>
+        </div>
 
-            <div class="pizza-box-container">
-                <!-- BOX LID -->
-                <div class="box-lid" id="pizza-box-lid">
-                    <svg class="lid-svg" viewBox="0 0 340 400" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Cardboard Flaps -->
-                        <path d="M 0 50 L 340 50" stroke="#111" stroke-width="2" stroke-dasharray="8 8"/>
-                        <path d="M 0 350 L 340 350" stroke="#111" stroke-width="2" stroke-dasharray="8 8"/>
-                        <!-- Cardboard Base -->
-                        <rect x="5" y="5" width="330" height="390" fill="#e0c097" stroke="#111" stroke-width="4" rx="5" ry="5"/>
-                        <!-- Inner Line -->
-                        <rect x="15" y="15" width="310" height="370" fill="none" stroke="#111" stroke-width="2" stroke-dasharray="5 5" rx="2" ry="2"/>
-                        
-                        <!-- Text Design -->
-                        <text x="170" y="140" font-family="'Patrick Hand', cursive" font-size="38" font-weight="bold" fill="#111" text-anchor="middle">DEEPTI'S</text>
-                        <text x="170" y="210" font-family="'Patrick Hand', cursive" font-size="68" font-weight="bold" fill="#111" text-anchor="middle">DAILY</text>
-                        <text x="170" y="270" font-family="'Patrick Hand', cursive" font-size="52" font-weight="bold" fill="#111" text-anchor="middle">EDITION</text>
-                        <text x="170" y="320" font-family="'Patrick Hand', cursive" font-size="20" fill="#111" text-anchor="middle">DELIVERY, HOT & FRESH</text>
-                    </svg>
-                </div>
+        <!-- Pizza Element -->
+        <div class="pizza-wrapper">
+            <!-- Comic Book Sticker on the Slice -->
+            <div class="comic-sticker">Deepti's<br>Daily<br>Edition</div>
 
-                <!-- BOX BOTTOM -->
-                <div class="box-bottom">
-                    <svg class="bottom-svg" viewBox="0 0 340 400" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="5" y="5" width="330" height="390" fill="#d4b285" stroke="#111" stroke-width="4" rx="5" ry="5"/>
-                        <!-- Back lip of box -->
-                        <path d="M 5 5 L 335 5 L 325 25 L 15 25 Z" fill="#c3a070" stroke="#111" stroke-width="2"/>
-                        <!-- Grease Stains -->
-                        <circle cx="100" cy="150" r="30" fill="#c3a070" opacity="0.6" filter="blur(3px)"/>
-                        <circle cx="250" cy="280" r="50" fill="#c3a070" opacity="0.4" filter="blur(5px)"/>
-                    </svg>
+            <!-- Sketchy Pizza SVG Outline -->
+            <svg class="slice-outline" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Base slice (Muted Cream) -->
+                <path d="M 15 45 Q 150 10 285 45 Q 295 55 285 65 L 175 365 Q 150 390 125 365 L 15 65 Q 5 55 15 45 Z" fill="#fdfbf5" stroke="#111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Crust detail (Soft Tan) -->
+                <path d="M 15 45 Q 150 10 285 45 Q 295 55 285 65 L 265 60 Q 150 25 35 60 Z" fill="#e8dac5" stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 25 70 Q 150 35 275 70" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+                <!-- Drippy cheese details -->
+                <path d="M 40 70 Q 45 80 40 90 M 260 70 Q 255 80 260 90 M 150 370 L 150 380 M 140 372 L 142 376 M 160 372 L 158 376 M 50 160 L 55 165 M 240 180 L 235 185 M 150 190 Q 155 200 150 210" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" />
+            </svg>
 
-                    <!-- Inner Pizza and Elements -->
-                    <div class="pizza-content-wrapper">
-                        <!-- Market Button (Now a sticker inside) -->
-                        <button class="extra-btn market-btn box-sticker" onclick="openModal()">Market</button>
-
-                        <!-- Pizza Element -->
-                        <div class="pizza-wrapper">
-                            <!-- Comic Book Sticker on the Slice -->
-                            <div class="comic-sticker">Deepti's<br>Daily<br>Edition</div>
-
-                            <!-- Sketchy Pizza SVG Outline -->
-                            <svg class="slice-outline" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Base slice (Muted Cream) -->
-                                <path d="M 15 45 Q 150 10 285 45 Q 295 55 285 65 L 175 365 Q 150 390 125 365 L 15 65 Q 5 55 15 45 Z" fill="#fdfbf5" stroke="#111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <!-- Crust detail (Soft Tan) -->
-                                <path d="M 15 45 Q 150 10 285 45 Q 295 55 285 65 L 265 60 Q 150 25 35 60 Z" fill="#e8dac5" stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M 25 70 Q 150 35 275 70" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>
-                                <!-- Drippy cheese details -->
-                                <path d="M 40 70 Q 45 80 40 90 M 260 70 Q 255 80 260 90 M 150 370 L 150 380 M 140 372 L 142 376 M 160 372 L 158 376 M 50 160 L 55 165 M 240 180 L 235 185 M 150 190 Q 155 200 150 210" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" />
-                            </svg>
-
-                            <!-- Toppings (Links) -->
-                            <div class="toppings">
-                                <a href="et.pdf" class="topping t-et">Eco<br>Times</a>
-                                <a href="bs.pdf" class="topping t-bs">Biz<br>Std</a>
-                                <a href="fe.pdf" class="topping t-fe">Fin<br>Exp</a>
-                                <a href="mint.pdf" class="topping t-mint">Mint</a>
-                            </div>
-
-                            <!-- Animated Baby Boy Sprite -->
-                            <div class="animated-container">
-                                <div class="animated-walker">
-                                    <!-- Stacked Sequential Speech Bubbles -->
-                                    <div class="speech-container">
-                                        <div class="bubble b1">PIHHH</div>
-                                        <div class="bubble b2">PIHHH</div>
-                                        <div class="bubble b3">DEEPTI!</div>
-                                    </div>
-                                    <!-- 16-Bit Style 2yo Baby Boy Walking -->
-                                    <svg class="baby-sprite" viewBox="0 0 40 40" width="50" height="50" shape-rendering="crispEdges">
-                                        <g class="walker-group">
-                                            <g class="arm-back" style="transform-origin: 14px 19px;"><path d="M12 19 h4 v6 h-4 z" fill="#dfaa77"/></g>
-                                            <g class="leg-back" style="transform-origin: 16px 26px;">
-                                                <path d="M14 26 h4 v6 h-4 z" fill="#dfaa77"/><path d="M14 32 h6 v2 h-6 z" fill="#dfaa77"/>
-                                            </g>
-                                            <g class="torso-head">
-                                                <path d="M14 4 h10 v4 h-10 z M12 6 h2 v4 h-2 z M24 6 h2 v2 h-2 z" fill="#654321"/>
-                                                <path d="M14 8 h10 v10 h-10 z M24 10 h2 v6 h-2 z" fill="#ffcc99"/>
-                                                <path d="M21 10 h2 v2 h-2 z" fill="#000"/>
-                                                <path d="M14 18 h10 v8 h-10 z" fill="#fff"/>
-                                                <path d="M12 18 h2 v6 h-2 z M24 18 h2 v4 h-2 z" fill="#fff"/>
-                                                <path d="M14 26 h10 v2 h-10 z" fill="#ccc"/>
-                                            </g>
-                                            <g class="leg-front" style="transform-origin: 19px 26px;">
-                                                <path d="M17 26 h4 v6 h-4 z" fill="#ffcc99"/><path d="M17 32 h6 v2 h-6 z" fill="#ffcc99"/>
-                                            </g>
-                                            <g class="arm-front" style="transform-origin: 18px 19px;"><path d="M16 19 h4 v6 h-4 z" fill="#ffcc99"/></g>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Toppings (Links) -->
+            <div class="toppings">
+                <a href="et.pdf" class="topping t-et">Eco<br>Times</a>
+                <a href="bs.pdf" class="topping t-bs">Biz<br>Std</a>
+                <a href="fe.pdf" class="topping t-fe">Fin<br>Exp</a>
+                <a href="mint.pdf" class="topping t-mint">Mint</a>
             </div>
 
-            <!-- Scroll Down Indicator -->
-            <div class="scroll-indicator" id="scroll-prompt">
-                ↓ Scroll down to open box ↓
+            <!-- Animated Baby Boy Sprite -->
+            <div class="animated-container">
+                <div class="animated-walker">
+                    <!-- Stacked Sequential Speech Bubbles -->
+                    <div class="speech-container">
+                        <div class="bubble b1">PIHHH</div>
+                        <div class="bubble b2">PIHHH</div>
+                        <div class="bubble b3">DEEPTI!</div>
+                    </div>
+                    <!-- 16-Bit Style 2yo Baby Boy Walking -->
+                    <svg class="baby-sprite" viewBox="0 0 40 40" width="50" height="50" shape-rendering="crispEdges">
+                        <g class="walker-group">
+                            <g class="arm-back" style="transform-origin: 14px 19px;"><path d="M12 19 h4 v6 h-4 z" fill="#dfaa77"/></g>
+                            <g class="leg-back" style="transform-origin: 16px 26px;">
+                                <path d="M14 26 h4 v6 h-4 z" fill="#dfaa77"/><path d="M14 32 h6 v2 h-6 z" fill="#dfaa77"/>
+                            </g>
+                            <g class="torso-head">
+                                <path d="M14 4 h10 v4 h-10 z M12 6 h2 v4 h-2 z M24 6 h2 v2 h-2 z" fill="#654321"/>
+                                <path d="M14 8 h10 v10 h-10 z M24 10 h2 v6 h-2 z" fill="#ffcc99"/>
+                                <path d="M21 10 h2 v2 h-2 z" fill="#000"/>
+                                <path d="M14 18 h10 v8 h-10 z" fill="#fff"/>
+                                <path d="M12 18 h2 v6 h-2 z M24 18 h2 v4 h-2 z" fill="#fff"/>
+                                <path d="M14 26 h10 v2 h-10 z" fill="#ccc"/>
+                            </g>
+                            <g class="leg-front" style="transform-origin: 19px 26px;">
+                                <path d="M17 26 h4 v6 h-4 z" fill="#ffcc99"/><path d="M17 32 h6 v2 h-6 z" fill="#ffcc99"/>
+                            </g>
+                            <g class="arm-front" style="transform-origin: 18px 19px;"><path d="M16 19 h4 v6 h-4 z" fill="#ffcc99"/></g>
+                        </g>
+                    </svg>
+                </div>
             </div>
         </div>
     </div>
-<!-- Clipboard Modal -->
+
+    <!-- Clipboard Modal -->
     <div id="modal" class="modal-overlay" onclick="closeModal(event)">
         <div class="clipboard" onclick="event.stopPropagation()">
             <div class="clip"></div>
@@ -609,30 +496,6 @@
                         toastOverlay.style.display = 'none';
                     }, 400); 
                 }, 4300);
-            }
-        });
-
-        
-        // Scroll Animation Logic
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY || window.pageYOffset;
-            // Determine max scroll based on body height vs window height
-            const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-            
-            // Calculate percentage scrolled (0 to 1)
-            let scrollPercent = scrollY / maxScroll;
-            if (scrollPercent > 1) scrollPercent = 1;
-            
-            // Map percentage to rotation (-130deg max)
-            let rotation = scrollPercent * -140;
-            
-            // Apply rotation to the lid
-            document.getElementById('pizza-box-lid').style.transform = `rotateX(${rotation}deg)`;
-            
-            // Fade out the scroll prompt
-            const prompt = document.getElementById('scroll-prompt');
-            if (prompt) {
-                prompt.style.opacity = scrollPercent > 0.1 ? '0' : '1';
             }
         });
 
