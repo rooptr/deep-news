@@ -28,6 +28,8 @@ def fetch_paper(filename, url):
         data = json.loads(response)
         html = data[0]['content']['rendered']
         soup = BeautifulSoup(html, 'html.parser')
+        
+        links = soup.find_all('a', href=True)
         drive_link = None
         for a in links:
             if 'drive.google' in a['href'] and 'Download' in a.text:
