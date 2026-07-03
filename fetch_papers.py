@@ -150,69 +150,8 @@ def fetch_headlines():
         json.dump(headlines_data, f, indent=2)
     print(f"Saved {len(headlines_data)} total headlines to headlines.json")
 
-def fetch_market_stats():
-    print("\nFetching Live Market Stats from Yahoo Finance...")
-    symbols = {
-        "NIFTY 50": "^NSEI",
-        "SENSEX": "^BSESN",
-        "USD/INR": "INR=X",
-        "BRENT CRUDE": "BZ=F",
-        "S&P 500": "^GSPC",
-        "US 10Y BOND": "^TNX",
-        "VIX": "^VIX",
-        "GOLD": "GC=F",
-        "MOODY'S": "MCO",
-        "BANK OF AMERICA": "BAC"
-    }
-    
-    market_data = []
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
-    
-    for display_name, symbol in symbols.items():
-        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
-        req = urllib.request.Request(url, headers=headers)
-        try:
-            res = urllib.request.urlopen(req, timeout=10).read()
-            data = json.loads(res)
-            meta = data['chart']['result'][0]['meta']
-            price = meta['regularMarketPrice']
-            prev_close = meta['chartPreviousClose']
-            change = price - prev_close
-            pct_change = (change / prev_close) * 100
-            
-            direction = "up" if change >= 0 else "down"
-            
-            # Format outputs
-            if symbol == "INR=X":
-                formatted_price = f"₹{price:.2f}"
-            elif symbol == "^TNX":
-                formatted_price = f"{price:.3f}%"
-            elif symbol in ["^NSEI", "^BSESN", "^GSPC", "MCO"]:
-                formatted_price = f"{price:,.2f}"
-            else:
-                formatted_price = f"${price:,.2f}"
-                
-            formatted_change = f"{change:+.2f} ({pct_change:+.2f}%)"
-            if symbol == "^TNX":
-                formatted_change = f"{change:+.3f}% ({pct_change:+.2f}%)"
-                
-            market_data.append({
-                "name": display_name,
-                "value": formatted_price,
-                "change": formatted_change,
-                "direction": direction
-            })
-            print(f"Fetched {display_name}: {formatted_price.replace('₹', 'Rs.')} ({formatted_change})")
-        except Exception as e:
-            print(f"Error fetching {display_name}: {e}")
-            
-    with open('market_stats.json', 'w', encoding='utf-8') as f:
-        json.dump(market_data, f, indent=2)
-    print("Saved market stats to market_stats.json")
-
 if __name__ == "__main__":
     for filename, url in papers.items():
         fetch_paper(filename, url)
     fetch_gold_rate()
     fetch_headlines()
-    fetch_market_stats()
