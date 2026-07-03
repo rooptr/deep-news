@@ -44,8 +44,13 @@ jobs:
 
       - name: Crop Market Box
         run: |
-          pdftocairo -png -f 1 -l 1 -x 25 -y 220 -W 320 -H 250 bs.pdf crop
-          mv crop*.png market_box.png
+          if [ -f "bs.pdf" ]; then
+            pdftocairo -png -f 1 -l 1 -x 25 -y 220 -W 320 -H 250 bs.pdf crop
+            mv crop*.png market_box.png
+          else
+            echo "Warning: bs.pdf not found! Creating dummy market_box.png to prevent crash."
+            touch market_box.png
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

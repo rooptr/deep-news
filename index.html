@@ -697,6 +697,86 @@
             box-shadow: 2px 2px 0px var(--black);
         }
 
+        /* ========================================
+           MARKET TICKER SYSTEM (PINNED - COMIC THEME)
+           ======================================== */
+        .market-ticker-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 35px;
+            background: var(--black);
+            border-bottom: 2px solid #333;
+            z-index: 9999;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85em;
+            color: #fff;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .market-ticker-track {
+            display: flex;
+            white-space: nowrap;
+            will-change: transform;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            animation: ticker 50s linear infinite;
+        }
+
+        .market-ticker-track:hover {
+            animation-play-state: paused;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            font-weight: bold;
+        }
+
+        .ticker-name {
+            color: #aaa;
+            margin-right: 8px;
+            text-transform: uppercase;
+        }
+
+        .ticker-value {
+            color: #fff;
+            margin-right: 8px;
+        }
+
+        .ticker-change {
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .ticker-change.up {
+            color: #4caf50;
+        }
+
+        .ticker-change.down {
+            color: #f44336;
+        }
+
+        .ticker-separator {
+            color: #444;
+            margin-left: 25px;
+        }
+
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
     </style>
 
     <!-- GSAP, ScrollTrigger, & Lenis -->
@@ -704,8 +784,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 </head>
-<body>
-<body style="display: flex; flex-direction: column; align-items: center;">
+<body style="display: flex; flex-direction: column; align-items: center; padding-top: 35px;">
+    <!-- Market Ticker -->
+    <div class="market-ticker-container">
+        <div class="market-ticker-track" id="market-ticker">
+            <span style="padding: 0 20px; color: #888;">Fetching live market rates...</span>
+        </div>
+    </div>
+
     <!-- Hydration Reminder Overlay -->
     <div id="hydration-overlay" class="toast-overlay">
         <div class="toast-popup">WAIT DEEPTI! Make sure you hydrate before reading.</div>
@@ -877,6 +963,37 @@
                 })
                 .catch(err => console.error("Could not fetch gold rate", err));
         }
+
+        // ==========================================
+        // FETCH MARKET STATS FOR TICKER
+        // ==========================================
+        fetch('market_stats.json' + cacheBuster)
+            .then(response => response.json())
+            .then(data => {
+                const ticker = document.getElementById('market-ticker');
+                ticker.innerHTML = '';
+                
+                let tickerHTML = '';
+                data.forEach(item => {
+                    const dirClass = item.direction === 'up' ? 'up' : 'down';
+                    const icon = item.direction === 'up' ? '▲' : '▼';
+                    tickerHTML += `
+                        <div class="ticker-item">
+                            <span class="ticker-name">${item.name}</span>
+                            <span class="ticker-value">${item.value}</span>
+                            <span class="ticker-change ${dirClass}">${icon} ${item.change}</span>
+                            <span class="ticker-separator">|</span>
+                        </div>
+                    `;
+                });
+                
+                // Duplicate multiple times to create seamless scrolling loop
+                ticker.innerHTML = tickerHTML + tickerHTML + tickerHTML + tickerHTML;
+            })
+            .catch(error => {
+                console.error('Error fetching market stats:', error);
+                document.getElementById('market-ticker').innerHTML = '<span style="padding: 0 20px; color: #ff4757;">Failed to load live market stats.</span>';
+            });
 
         function closeModal(e) {
             const modal = document.getElementById('modal');

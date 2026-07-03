@@ -12,17 +12,22 @@ papers = {
     "et.pdf": "https://dailyepaper.in/economic-times-newspaper-today-2026/",
     "bs.pdf": "https://dailyepaper.in/business-standard-epaper-feb-2026/",
     "fe.pdf": "https://dailyepaper.in/financial-express-newspaper-free-download-2026/",
-    "mint.pdf": "https://dailyepaper.in/live-mint-epaper-feb-2026/"
+    "mint.pdf": "https://dailyepaper.in/live-mint-epaper-feb-2026/",
+    "eenadu.pdf": "https://dailyepaper.in/eenadu-epaper-free-download-2026/"
 }
 
 def fetch_paper(filename, url):
     print(f"\nFetching {filename} from {url} ...")
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    
+    slug = url.strip('/').split('/')[-1]
+    api_url = f"https://dailyepaper.in/wp-json/wp/v2/posts?slug={slug}"
+    
+    req = urllib.request.Request(api_url, headers={'User-Agent': 'Mozilla/5.0'})
     try:
-        html = urllib.request.urlopen(req).read()
+        response = urllib.request.urlopen(req).read()
+        data = json.loads(response)
+        html = data[0]['content']['rendered']
         soup = BeautifulSoup(html, 'html.parser')
-        
-        links = soup.find_all('a', href=True)
         drive_link = None
         for a in links:
             if 'drive.google' in a['href'] and 'Download' in a.text:
@@ -95,10 +100,10 @@ def fetch_headlines():
     except Exception as e:
         print(f"Error fetching ET headlines: {e}")
 
-    # 2. Business Standard (via Bing News RSS to bypass Cloudflare and Google 503)
+    # 2. Business Standard (via Google News RSS to bypass Cloudflare and Bing blocks)
     try:
         bs_query = urllib.parse.quote('site:business-standard.com')
-        req = urllib.request.Request(f'https://www.bing.com/news/search?q={bs_query}&format=rss&cc=IN&setlang=en', headers=headers)
+        req = urllib.request.Request(f'https://news.google.com/rss/search?q={bs_query}&hl=en-IN&gl=IN&ceid=IN:en', headers=headers)
         xml = urllib.request.urlopen(req, timeout=10).read()
         soup = BeautifulSoup(xml, 'html.parser')
         items = soup.find_all('item')[:10]
@@ -124,10 +129,10 @@ def fetch_headlines():
     except Exception as e:
         print(f"Error fetching Mint headlines: {e}")
 
-    # 4. Financial Express (via Bing News RSS to bypass Cloudflare and Google 503)
+    # 4. Financial Express (via Google News RSS to bypass Cloudflare and Bing blocks)
     try:
         fe_query = urllib.parse.quote('site:financialexpress.com')
-        req = urllib.request.Request(f'https://www.bing.com/news/search?q={fe_query}&format=rss&cc=IN&setlang=en', headers=headers)
+        req = urllib.request.Request(f'https://news.google.com/rss/search?q={fe_query}&hl=en-IN&gl=IN&ceid=IN:en', headers=headers)
         xml = urllib.request.urlopen(req, timeout=10).read()
         soup = BeautifulSoup(xml, 'html.parser')
         items = soup.find_all('item')[:10]
