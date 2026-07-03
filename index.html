@@ -789,7 +789,16 @@
     <!-- Market Ticker -->
     <div class="market-ticker-container">
         <div class="market-ticker-track" id="market-ticker">
-            <span style="padding: 0 20px; color: #888;">Fetching live market rates...</span>
+            <div class="ticker-item"><span class="ticker-name">Nifty 50</span><span class="ticker-value" data-ticker-val="NSEI">--</span><span class="ticker-change" data-ticker-change="NSEI">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Sensex</span><span class="ticker-value" data-ticker-val="BSESN">--</span><span class="ticker-change" data-ticker-change="BSESN">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">USD/INR</span><span class="ticker-value" data-ticker-val="USDINR" data-prefix="₹">--</span><span class="ticker-change" data-ticker-change="USDINR">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Brent Crude</span><span class="ticker-value" data-ticker-val="BZF" data-prefix="$">--</span><span class="ticker-change" data-ticker-change="BZF">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">S&P 500</span><span class="ticker-value" data-ticker-val="GSPC">--</span><span class="ticker-change" data-ticker-change="GSPC">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">US 10Y Yield</span><span class="ticker-value" data-ticker-val="TNX">--</span><span class="ticker-change" data-ticker-change="TNX">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">VIX</span><span class="ticker-value" data-ticker-val="VIX" data-prefix="$">--</span><span class="ticker-change" data-ticker-change="VIX">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Gold (1g)</span><span class="ticker-value" data-ticker-val="GCF" data-prefix="₹">--</span><span class="ticker-change" data-ticker-change="GCF">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Moody's</span><span class="ticker-value" data-ticker-val="MCO" data-prefix="$">--</span><span class="ticker-change" data-ticker-change="MCO">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Bank of America</span><span class="ticker-value" data-ticker-val="BAC" data-prefix="$">--</span><span class="ticker-change" data-ticker-change="BAC">--</span></div>
         </div>
     </div>
 
@@ -967,35 +976,102 @@
         }
 
         // ==========================================
-        // FETCH MARKET STATS FOR TICKER
+        // DYNAMIC CLIENT-SIDE TICKER (Google Sheets)
         // ==========================================
-        fetch('market_stats.json' + cacheBuster)
-            .then(response => response.json())
-            .then(data => {
-                const ticker = document.getElementById('market-ticker');
-                ticker.innerHTML = '';
-                
-                let tickerHTML = '';
-                data.forEach(item => {
-                    const dirClass = item.direction === 'up' ? 'up' : 'down';
-                    const icon = item.direction === 'up' ? '▲' : '▼';
-                    tickerHTML += `
-                        <div class="ticker-item">
-                            <span class="ticker-name">${item.name}</span>
-                            <span class="ticker-value">${item.value}</span>
-                            <span class="ticker-change ${dirClass}">${icon} ${item.change}</span>
-                            <span class="ticker-separator">|</span>
-                        </div>
-                    `;
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2ZyIXY5fgZSLN1rPQTIB4yw8LA99laMVJnT8eEyMAxhcBXznBsV91HmgS2RwylgYEAK-Mq4rf0JYb/pub?gid=1159062743&single=true&output=csv';
+
+        // Duplicate the ticker track content once so it loops seamlessly in CSS marquee
+        const tickerTrack = document.getElementById('market-ticker');
+        tickerTrack.innerHTML += tickerTrack.innerHTML;
+
+        function updateTickerUI(dataRows) {
+            const cachedData = JSON.parse(localStorage.getItem('marketTickerCache') || '{}');
+            let hasUpdates = false;
+
+            dataRows.forEach(row => {
+                // Ignore temporary "Loading..." from Google Sheets if we have cached data
+                if (row.price.includes('Loading') || row.change.includes('Loading')) {
+                    if (cachedData[row.id]) {
+                        row = cachedData[row.id]; // Fallback to cache
+                    } else {
+                        return; // Do nothing if no cache available
+                    }
+                } else {
+                    cachedData[row.id] = row;
+                    hasUpdates = true;
+                }
+
+                const valNodes = document.querySelectorAll(`[data-ticker-val="${row.id}"]`);
+                const changeNodes = document.querySelectorAll(`[data-ticker-change="${row.id}"]`);
+
+                valNodes.forEach(node => {
+                    const prefix = node.getAttribute('data-prefix') || '';
+                    node.textContent = prefix + row.price;
                 });
-                
-                // Duplicate multiple times to create seamless scrolling loop
-                ticker.innerHTML = tickerHTML + tickerHTML + tickerHTML + tickerHTML;
-            })
-            .catch(error => {
-                console.error('Error fetching market stats:', error);
-                document.getElementById('market-ticker').innerHTML = '<span style="padding: 0 20px; color: #ff4757;">Failed to load live market stats.</span>';
+
+                changeNodes.forEach(node => {
+                    const changeNum = parseFloat(row.change.replace(/[^\d.-]/g, ''));
+                    const isUp = changeNum > 0;
+                    const isDown = changeNum < 0;
+                    
+                    node.classList.remove('up', 'down');
+                    if (isUp) node.classList.add('up');
+                    else if (isDown) node.classList.add('down');
+
+                    const cleanChange = row.change.replace(/[+-\s]/g, '');
+                    const arrow = isUp ? '▲ +' : (isDown ? '▼ -' : '');
+                    
+                    node.textContent = `${arrow}${cleanChange} (${row.changePct})`;
+                });
             });
+
+            if (hasUpdates) {
+                localStorage.setItem('marketTickerCache', JSON.stringify(cachedData));
+            }
+        }
+
+        // Instantly load cached data on page load to prevent flashes of "--"
+        function initTickerFromCache() {
+            const cachedData = JSON.parse(localStorage.getItem('marketTickerCache') || '{}');
+            const dataRows = Object.values(cachedData);
+            if (dataRows.length > 0) {
+                updateTickerUI(dataRows);
+            }
+        }
+        initTickerFromCache();
+
+        function pollLiveMarketData() {
+            fetch(CSV_URL)
+                .then(response => {
+                    if (!response.ok) throw new Error("Network response was not ok");
+                    return response.text();
+                })
+                .then(csvText => {
+                    const lines = csvText.trim().split('\n');
+                    const dataRows = [];
+                    for(let i = 1; i < lines.length; i++) {
+                        let cols = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                        cols = cols.map(c => c.replace(/^"|"$/g, '').trim());
+                        
+                        if (cols.length >= 5) {
+                            dataRows.push({
+                                id: cols[0],
+                                price: cols[2],
+                                change: cols[3],
+                                changePct: cols[4]
+                            });
+                        }
+                    }
+                    updateTickerUI(dataRows);
+                })
+                .catch(error => {
+                    console.error('Ticker update failed, retrying next cycle:', error);
+                });
+        }
+
+        // Initial pull + poll every 5 minutes
+        pollLiveMarketData();
+        setInterval(pollLiveMarketData, 5 * 60 * 1000);
 
         function closeModal(e) {
             const modal = document.getElementById('modal');
