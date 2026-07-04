@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Edition</title>
+    <!-- Prevent browsers from caching the page so you always see today's version -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!-- Auto-reload the tab every 1 hour (3600 seconds) in case they leave it open -->
+    <meta http-equiv="refresh" content="3600">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS VARIABLES
+           ======================================== */
+        :root {
+            --magenta: #ff477e;
+            --orange: #ff9f1c;
+            --yellow: #ffd166;
+            --sausage: #b33939;
+            --black: #111;
+            /* Responsive: box size adapts to viewport */
+            --box-size: min(85vw, 85vh, 600px);
+        }
+        
+        /* ========================================
+           BASE RESET
+           ======================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            background-color: #f0f0f0;
+            background-image: radial-gradient(#ccc 15%, transparent 16%), radial-gradient(#ccc 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            font-family: 'Patrick Hand', cursive;
+            color: var(--black);
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+           THERMAL RECEIPT STYLES
+           ======================================== */
+        .receipt-container {
+            width: min(90vw, 400px);
+            margin: 60px auto 100px auto;
+            background: #fffdf5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1), 0 0 40px rgba(0,0,0,0.05) inset;
+            border-top: 10px solid #d32f2f;
+            padding: 30px 20px;
+            font-family: 'Courier New', Courier, monospace; /* Dot matrix/receipt look */
+            color: #333;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Zig-zag bottom edge */
+        .receipt-container::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: linear-gradient(-45deg, transparent 33.33%, #fffdf5 33.33%, #fffdf5 66.66%, transparent 66.66%),
+                        linear-gradient(45deg, transparent 33.33%, #fffdf5 33.33%, #fffdf5 66.66%, transparent 66.66%);
+            background-size: 15px 30px;
+            background-position: 0 100%;
+            filter: drop-shadow(0 4px 3px rgba(0,0,0,0.1));
+        }
+
+        .receipt-header, .receipt-footer {
+            text-align: center;
+        }
+
+        .receipt-header h2 {
+            margin: 0;
+            font-size: 1.5em;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .receipt-divider {
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 15px 0;
+            opacity: 0.6;
+        }
+
+        .receipt-paper-title {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-top: 25px;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .receipt-item {
+            margin-bottom: 12px;
+            line-height: 1.4;
+            display: flex;
+            align-items: flex-start;
+            font-size: 0.9em;
+        }
+
+        .receipt-item::before {
+            content: '- ';
+            margin-right: 5px;
+        }
+
+        /* ========================================
+           GSAP SCROLL TRACK & PINNED SCENE
+           ======================================== */
+        .gsap-track {
+            height: 500vh;
+            width: 100%;
+        }
+
+        .pinned-scene {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            perspective: 2500px;
+        }
+
+        /* ========================================
+           MASTER BOX CONTAINER
+           Uses --box-size for responsive scaling.
+           ======================================== */
+        .master-box-container {
+            position: relative;
+            width: var(--box-size);
+            aspect-ratio: 1 / 1;
+            transform-style: preserve-3d;
+            transform: scale(0.7) rotateX(15deg);
+        }
+
+        /* ========================================
+           BOX PARTS (lid + bottom)
+           ======================================== */
+        .box-part {
+            
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform-style: preserve-3d;
+        }
+
+        .box-bottom-img 
+        {
+            background-image: url('box_bottom.png');
+            z-index: 1;
+        }
+
+        .box-lid-img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url('box_lid.png');
+            z-index: 10;
+            transform-origin: center center;
+            transform: translateZ(0px);
+            transform-style: preserve-3d;
+            /* Strong, realistic black shadow falling to the right/bottom as it lifts */
+            filter: drop-shadow(30px 20px 25px rgba(0,0,0,0.85));
+            overflow: hidden;
+        }
+
+        /* ========================================
+           DATE RIBBON (on the lid)
+           ======================================== */
+        .sticky-note-date 
+        {
+            position: absolute;
+            bottom: 28%;
+            right: 5%;
+            width: 42%;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 13%) 100%, 13% 100%);
+            text-align: center;
+            background: #f4d03f;
+            padding: clamp(2px, 0.8%, 5px) 0;
+            border-top: clamp(2px, 0.6%, 4px) solid #111;
+            border-bottom: clamp(2px, 0.6%, 4px) solid #111;
+            border-left: none;
+            border-right: none;
+            font-size: clamp(8px, 2.8vw, 16px);
+            font-weight: bold;
+            color: #111;
+            transform: rotate(-45deg) translateZ(1px);
+            z-index: 25;
+            white-space: nowrap;
+            text-transform: uppercase;
+            font-family: monospace, sans-serif;
+        }
+
+        /* ========================================
+           PIZZA CONTENT WRAPPER
+           GSAP animates opacity + brightness on this.
+           ======================================== */
+        .pizza-content-wrapper 
+        {
+            position: absolute;
+            top: 5%; left: 5%;
+            width: 90%; height: 90%;
+            transform-origin: center center;
+            z-index: 2;
+            opacity: 1; /* Always visible beneath the lid */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+        }
+
+        /* ========================================
+           PIZZA SCALE LIMITER
+           ======================================== */
+        .pizza-scale-limiter 
+        {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ========================================
+           PIZZA WRAPPER
+           Width 55% of content area. Aspect ratio 3:4.
+           ALL children use % positioning relative to THIS.
+           ======================================== */
+        .pizza-wrapper 
+        {
+            position: relative;
+            width: 55%;
+            aspect-ratio: 3 / 4;
+        }
+
+        /* ========================================
+           PIZZA SVG
+           ======================================== */
+        .slice-outline 
+        {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            filter: drop-shadow(4px 4px 0px var(--magenta)) drop-shadow(-3px -3px 0px var(--orange));
+        }
+
+        /* ========================================
+           TOPPINGS CONTAINER
+           ======================================== */
+        .toppings 
+        {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 3;
+        }
+
+        /* ========================================
+           INDIVIDUAL TOPPINGS
+           76px / 300px = 25.3%
+           ======================================== */
+        a.topping {
+            position: absolute;
+            width: 22%;
+            aspect-ratio: 1 / 1;
+            border: clamp(2px, 0.6vw, 4px) solid var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            text-decoration: none;
+            color: var(--black);
+            font-size: clamp(9px, 3vw, 16px);
+            font-weight: bold;
+            line-height: 1.1;
+            background-color: #fff;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: clamp(2px, 0.5vw, 4px) clamp(2px, 0.5vw, 4px) 0px var(--black);
+        }
+
+        .t-et   { top: 18%;  left: 22%;  transform: rotate(-5deg);  border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; }
+        .t-bs   { top: 20%;  left: 54%;  transform: rotate(8deg);   border-radius: 60% 40% 45% 55% / 40% 60% 45% 55%; }
+        .t-fe   { top: 40%;  left: 25%;  transform: rotate(-10deg); border-radius: 55% 45% 40% 60% / 60% 40% 55% 45%; }
+        .t-mint { top: 42%;  left: 52%;  transform: rotate(4deg);   border-radius: 45% 55% 60% 40% / 45% 55% 40% 60%; }
+        .t-en   { top: 62%;  left: 38%;  transform: rotate(-3deg);  border-radius: 50% 50% 45% 55% / 55% 45% 50% 50%; background-color: #fff3e0; }
+
+        a.topping:hover {
+            transform: scale(1.2) rotate(0deg);
+            box-shadow: 6px 6px 0px var(--black), -3px -3px 0px var(--magenta);
+            z-index: 10;
+            background-color: #d14343;
+        }
+
+        /* ========================================
+           MARKET SACHET BUTTON (REDESIGNED)
+           ======================================== */
+        .sachet-btn 
+        {
+            position: absolute;
+            top: 5%;
+            right: -5%;
+            width: 30%;
+            aspect-ratio: 2 / 1;
+            /* Premium golden/metallic gradient */
+            background: linear-gradient(135deg, #ffd700 25%, #fff8b0 40%, #ff8c00 55%, #ffd700 100%);
+            background-size: 300% 300%;
+            border: clamp(1px, 0.3vw, 2px) solid #000;
+            border-radius: clamp(4px, 1vw, 8px);
+            /* Comic shadow but slightly softer */
+            box-shadow: clamp(2px, 0.4vw, 4px) clamp(2px, 0.4vw, 4px) 0px rgba(0, 0, 0, 0.8);
+            color: #000 !important; /* Force pure black text */
+            font-size: calc(var(--box-size) * 0.02); /* Much smaller, responsive to the box */
+            font-weight: bold; /* Changed from 900 which made it too fat */
+            text-transform: uppercase;
+            letter-spacing: 0px; /* Removed letter spacing to save width */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transform: rotate(20deg);
+            z-index: 5;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
+            
+            /* Continuous metallic shine and pulsing energy */
+            animation: 
+                sachet-shine 3s ease infinite, 
+                sachet-pulse 2s infinite alternate;
+        }
+
+        /* The zig-zag/crimped edges of a sachet packet */
+        .sachet-btn::before, .sachet-btn::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 100%;
+            background: transparent;
+            border-left: 2px dashed rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+        .sachet-btn::before { left: 2px; }
+        .sachet-btn::after { right: 2px; }
+
+        .sachet-btn:hover {
+            transform: rotate(20deg) scale(1.15) translate(-2px, -2px);
+            box-shadow: clamp(4px, 0.8vw, 8px) clamp(4px, 0.8vw, 8px) 0px #000;
+            /* Make it shine faster on hover */
+            animation: sachet-shine 1s linear infinite;
+        }
+
+        @keyframes sachet-shine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes sachet-pulse {
+            0% { transform: rotate(20deg) scale(1); }
+            100% { transform: rotate(23deg) scale(1.05); }
+        }
+
+        /* ========================================
+           SCROLL DOWN HINT
+           ======================================== */
+        .scroll-down-hint {
+            position: absolute;
+            bottom: clamp(15px, 4vh, 40px);
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(16px, 3vw, 24px);
+            font-weight: bold;
+            color: var(--black);
+            animation: bounce 1.5s infinite;
+            z-index: 50;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 15px); }
+        }
+
+        /* ========================================
+           WALKING BABY SPRITE
+           ======================================== */
+        .animated-container {
+            position: absolute;
+            bottom: 0;
+            left: -15%;
+            width: 80%;
+            height: 25%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .animated-walker {
+            position: absolute;
+            bottom: -5%;
+            animation: walk-across 12s linear infinite;
+        }
+
+        @keyframes walk-across {
+            0%   { left: 10%; }
+            100% { left: 110%; }
+        }
+
+        .baby-sprite {
+            width: clamp(40px, 18%, 100px);
+            height: auto;
+            filter: drop-shadow(2px 0 0 var(--black)) drop-shadow(-2px 0 0 var(--black)) drop-shadow(0 2px 0 var(--black)) drop-shadow(0 -2px 0 var(--black));
+            transform: translateY(-20px);
+            overflow: visible;
+        }
+
+        @keyframes swing-leg-r { 0%, 100% { transform: rotate(-30deg); } 50% { transform: rotate(30deg); } }
+        @keyframes swing-leg-l { 0%, 100% { transform: rotate(30deg); } 50% { transform: rotate(-30deg); } }
+        @keyframes swing-arm-r { 0%, 100% { transform: rotate(30deg); } 50% { transform: rotate(-30deg); } }
+        @keyframes swing-arm-l { 0%, 100% { transform: rotate(-30deg); } 50% { transform: rotate(30deg); } }
+        @keyframes bob-body { 0%, 50%, 100% { transform: translateY(0); } 25%, 75% { transform: translateY(-2px); } }
+
+        .leg-front { animation: swing-leg-r 1s infinite ease-in-out; }
+        .leg-back  { animation: swing-leg-l 1s infinite ease-in-out; }
+        .arm-front { animation: swing-arm-r 1s infinite ease-in-out; }
+        .arm-back  { animation: swing-arm-l 1s infinite ease-in-out; }
+        .walker-group { animation: bob-body 1s infinite ease-in-out; }
+
+        /* ========================================
+           SPEECH BUBBLES
+           ======================================== */
+        .speech-container {
+            position: absolute;
+            top: -65px;
+            left: 20px;
+        }
+
+        .bubble {
+            position: absolute;
+            top: 0; left: 0;
+            font-family: 'Patrick Hand', cursive;
+            font-size: clamp(10px, 3vw, 16px);
+            font-weight: bold;
+            color: var(--black);
+            background: #fff;
+            padding: 2px 10px;
+            border: 2px solid var(--black);
+            border-radius: 12px;
+            opacity: 0;
+            white-space: nowrap;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        .bubble::after {
+            content: ''; position: absolute; bottom: -6px; left: 10px;
+            border-width: 6px 6px 0 0; border-style: solid; border-color: var(--black) transparent transparent transparent;
+        }
+        .bubble::before {
+            content: ''; position: absolute; bottom: -3px; left: 11px;
+            border-width: 4px 4px 0 0; border-style: solid; border-color: #fff transparent transparent transparent; z-index: 1;
+        }
+
+        .b1 { animation: say1 12s infinite; }
+        .b2 { animation: say2 12s infinite; }
+        .b3 { animation: say3 12s infinite; color: #d32f2f; }
+
+        @keyframes say1 { 0%, 25% { opacity: 0; transform: scale(0.8); } 28%, 38% { opacity: 1; transform: scale(1); } 41%, 100% { opacity: 0; transform: scale(0.8); } }
+        @keyframes say2 { 0%, 41% { opacity: 0; transform: scale(0.8); } 44%, 55% { opacity: 1; transform: scale(1); } 58%, 100% { opacity: 0; transform: scale(0.8); } }
+        @keyframes say3 { 0%, 58% { opacity: 0; transform: scale(0.8); } 61%, 72% { opacity: 1; transform: scale(1); } 75%, 100% { opacity: 0; transform: scale(0.8); } }
+
+        /* ========================================
+           CLIPBOARD MODAL
+           ======================================== */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none; justify-content: center; align-items: center;
+            z-index: 100; opacity: 0; transition: opacity 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active { display: flex; opacity: 1; }
+        
+        .clipboard {
+            position: relative;
+            background: #8b5a2b;
+            width: 90%; max-width: 500px;
+            padding: 40px 20px 20px 20px;
+            border-radius: 10px;
+            border: 4px solid var(--black);
+            box-shadow: 10px 10px 0px var(--black);
+            transform: translateY(50px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .clipboard { transform: translateY(0); }
+
+        .clip {
+            position: absolute;
+            top: -15px; left: 50%; transform: translateX(-50%);
+            width: 120px; height: 40px;
+            background: #ccc;
+            border: 4px solid var(--black);
+            border-radius: 4px;
+            box-shadow: 6px 6px 0px var(--black);
+        }
+        
+        .gold-sticker {
+            margin-top: 15px;
+            background: linear-gradient(45deg, #ffd700, #ffdf00, #d4af37, #ffd700);
+            background-size: 300% 300%;
+            border: 3px solid var(--black);
+            padding: 10px 20px;
+            font-size: clamp(16px, 4vw, 24px);
+            font-weight: bold;
+            color: var(--black);
+            text-align: center;
+            box-shadow: 4px 4px 0px var(--black);
+            animation: glitter 3s ease infinite;
+            display: none;
+        }
+        
+        @keyframes glitter {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .paper {
+            background: #fff;
+            padding: 15px;
+            border: 2px solid var(--black);
+            min-height: 200px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .paper img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            border: 2px solid #333;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -20px; right: -20px;
+            width: 40px; height: 40px;
+            background: var(--magenta);
+            color: #fff;
+            border: 3px solid var(--black);
+            border-radius: 50%;
+            font-size: 20px; font-weight: bold;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px var(--black);
+            font-family: 'Patrick Hand', cursive;
+        }
+        .modal-close:hover { transform: scale(1.1); }
+
+        /* ========================================
+           QUIZ STICKY BILL
+           ======================================== */
+        .quiz-container {
+            width: 85%;
+            max-width: 450px;
+            margin: 30px auto 10px auto;
+            background: #fff8b0;
+            border: 2px solid var(--black);
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.8);
+            transform: rotate(-1.5deg);
+            padding: 20px;
+            font-family: 'Patrick Hand', cursive;
+            position: relative;
+            z-index: 5;
+        }
+
+        .quiz-header {
+            font-size: 1.6em;
+            font-weight: bold;
+            border-bottom: 2px dashed var(--black);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .quiz-slider {
+            position: relative;
+            min-height: 250px;
+        }
+
+        .quiz-question {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .quiz-question.active {
+            display: block;
+        }
+
+        .quiz-q-text {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: white;
+            border: 2px solid var(--black);
+            padding: 10px;
+            margin-bottom: 10px;
+            font-family: inherit;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+
+        .quiz-option:hover:not(:disabled) {
+            background: #f0f0f0;
+            transform: translateX(2px);
+        }
+
+        .quiz-option.correct {
+            background: #a8e6cf;
+            border-color: #27ae60;
+        }
+
+        .quiz-option.wrong {
+            background: #ffaaaa;
+            border-color: #c0392b;
+        }
+
+        .quiz-explanation {
+            display: none;
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: #444;
+            background: rgba(255,255,255,0.6);
+            padding: 10px;
+            border: 1px dashed #333;
+            border-radius: 4px;
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            border-top: 2px dashed var(--black);
+            padding-top: 15px;
+        }
+
+        .quiz-btn {
+            background: var(--blue);
+            color: white;
+            border: 2px solid var(--black);
+            padding: 5px 20px;
+            font-family: inherit;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px var(--black);
+            border-radius: 5px;
+            transition: transform 0.1s;
+        }
+        
+        .quiz-btn:active:not(:disabled) {
+            transform: translateY(2px);
+            box-shadow: 0px 0px 0px var(--black);
+        }
+        
+        .quiz-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            color: #666;
+            border-color: #999;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========================================
+           HYDRATION TOAST
+           ======================================== */
+        .toast-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .toast-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .toast-popup {
+            background-color: var(--magenta);
+            color: #fff;
+            padding: 15px 30px;
+            border: 3px solid var(--black);
+            border-radius: 8px;
+            font-size: clamp(16px, 4vw, 24px);
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 4px 4px 0px var(--orange), 8px 8px 0px var(--black);
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .toast-overlay.visible .toast-popup {
+            transform: scale(1);
+        }
+
+        /* ========================================
+           LEGACY STYLES (kept for compatibility)
+           ======================================== */
+        .old-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        h1 {
+            position: relative;
+            font-size: clamp(20px, 4vw, 32px);
+            margin-top: 40px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            background: #fff;
+            padding: 8px 20px;
+            border: 3px solid var(--black);
+            box-shadow: 3px 3px 0px var(--magenta), -3px -3px 0px var(--orange), 6px 6px 0px var(--black);
+        }
+
+        .comic-sticker {
+            position: absolute;
+            top: 10px;
+            left: -10px;
+            width: 80px;
+            height: 80px;
+            background-color: var(--yellow);
+            border: 4px dashed var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--black);
+            transform: rotate(-15deg);
+            box-shadow: 4px 4px 0px var(--magenta);
+            z-index: 20;
+            line-height: 1.1;
+            letter-spacing: 1px;
+            text-transform: none;
+        }
+        
+        .extras {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            z-index: 10;
+        }
+
+        .extra-btn {
+            font-family: 'Patrick Hand', cursive;
+            font-size: clamp(16px, 3vw, 26px);
+            font-weight: bold;
+            background: #fff;
+            border: 3px solid var(--black);
+            padding: 10px 30px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--magenta), -2px -2px 0px var(--orange), 6px 6px 0px var(--black);
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .extra-btn:hover {
+            transform: translate(-2px, -2px) scale(1.05);
+            box-shadow: 6px 6px 0px var(--magenta), -4px -4px 0px var(--orange), 8px 8px 0px var(--black);
+        }
+
+        .extra-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--black);
+        }
+
+        /* ========================================
+           MARKET TICKER SYSTEM (PINNED - COMIC THEME)
+           ======================================== */
+        .market-ticker-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 35px;
+            background: var(--black);
+            border-bottom: 2px solid #333;
+            z-index: 9999;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85em;
+            color: #fff;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .market-ticker-track {
+            display: flex;
+            white-space: nowrap;
+            will-change: transform;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            animation: ticker 50s linear infinite;
+        }
+
+        .market-ticker-track:hover {
+            animation-play-state: paused;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            font-weight: bold;
+        }
+
+        .ticker-name {
+            color: #aaa;
+            margin-right: 8px;
+            text-transform: uppercase;
+        }
+
+        .ticker-value {
+            color: #fff;
+            margin-right: 8px;
+        }
+
+        .ticker-change {
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .ticker-change.up {
+            color: #4caf50;
+        }
+
+        .ticker-change.down {
+            color: #f44336;
+        }
+
+        .ticker-separator {
+            color: #444;
+            margin-left: 25px;
+        }
+
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+    </style>
+
+    <!-- GSAP, ScrollTrigger, & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+</head>
+<body style="display: flex; flex-direction: column; align-items: center; padding-top: 35px;">
+    <!-- Market Ticker -->
+    <div class="market-ticker-container">
+        <div class="market-ticker-track" id="market-ticker">
+            <div class="ticker-item"><span class="ticker-name">Nifty 50</span><span class="ticker-value" data-ticker-val="NSEI">--</span><span class="ticker-change" data-ticker-change="NSEI">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Sensex</span><span class="ticker-value" data-ticker-val="BSESN">--</span><span class="ticker-change" data-ticker-change="BSESN">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">USD/INR</span><span class="ticker-value" data-ticker-val="USDINR" data-prefix="₹">--</span><span class="ticker-change" data-ticker-change="USDINR">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Brent Crude</span><span class="ticker-value" data-ticker-val="BZF" data-prefix="$">--</span><span class="ticker-change" data-ticker-change="BZF">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">S&P 500</span><span class="ticker-value" data-ticker-val="GSPC">--</span><span class="ticker-change" data-ticker-change="GSPC">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">US 10Y Yield</span><span class="ticker-value" data-ticker-val="TNX">--</span><span class="ticker-change" data-ticker-change="TNX">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">VIX</span><span class="ticker-value" data-ticker-val="VIX" data-prefix="$">--</span><span class="ticker-change" data-ticker-change="VIX">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Gold (1g)</span><span class="ticker-value" data-ticker-val="GCF" data-prefix="₹">--</span><span class="ticker-change" data-ticker-change="GCF">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Moody's</span><span class="ticker-value" data-ticker-val="MCO" data-prefix="$">--</span><span class="ticker-change" data-ticker-change="MCO">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Bank of America</span><span class="ticker-value" data-ticker-val="BAC" data-prefix="$">--</span><span class="ticker-change" data-ticker-change="BAC">--</span></div>
+        </div>
+    </div>
+
+    <!-- Hydration Reminder Overlay -->
+    <div id="hydration-overlay" class="toast-overlay">
+        <div class="toast-popup">WAIT DEEPTI! Make sure you hydrate before reading.</div>
+    </div>
+
+    <!-- TOP HEADLINES RECEIPT -->
+    <div id="receipt-container" class="receipt-container">
+        <div class="receipt-header">
+            <h2>TODAY'S HEADLINES</h2>
+            <p id="receipt-date"></p>
+        </div>
+        <div class="receipt-divider">****************************************</div>
+        <div id="receipt-content">Loading today's headlines...</div>
+        <div class="receipt-divider">****************************************</div>
+        <div class="receipt-footer">
+            <p>Thank you for subscribing!</p>
+            <p>↓ Scroll down for your pizza ↓</p>
+        </div>
+    </div>
+    </div>
+
+    <!-- DAILY QUIZ STICKY BILL -->
+    <div id="quiz-container" class="quiz-container">
+        <div class="quiz-header">
+            <span>MBA Pop Quiz 📈</span>
+            <span id="quiz-counter">Loading...</span>
+        </div>
+        <div id="quiz-slider" class="quiz-slider">
+            <div style="text-align:center; padding-top: 50px;">Fetching today's brain-teasers...</div>
+        </div>
+        <div class="quiz-controls">
+            <button id="quiz-prev" class="quiz-btn" disabled>← Prev</button>
+            <button id="quiz-next" class="quiz-btn">Next →</button>
+        </div>
+    </div>
+    
+    <div class="gsap-track">
+        <div class="pinned-scene">
+            <div class="master-box-container">
+                <div class="box-part box-bottom-img"></div>
+                
+                <div class="pizza-content-wrapper" id="pizza-contents">
+                    <div class="pizza-scale-limiter">
+
+                        <div class="pizza-wrapper">
+                            <!-- RESTORED SMOOTH SVG PIZZA WITH FULL COLORS! -->
+                            <svg class="slice-outline" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.3));">
+                                <!-- Cheese Body -->
+                                <path d="M 15 45 Q 150 10 285 45 Q 295 55 285 65 L 175 365 Q 150 390 125 365 L 15 65 Q 5 55 15 45 Z" fill="#fdfbf5" stroke="#111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <!-- Crust Edge -->
+                                <path d="M 15 45 Q 150 10 285 45 Q 295 55 285 65 L 265 60 Q 150 25 35 60 Z" fill="#e8dac5" stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                <!-- Cheese Detail Line -->
+                                <path d="M 25 70 Q 150 35 275 70" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+                                <!-- Sketchy detail lines -->
+                                <path d="M 40 70 Q 45 80 40 90 M 260 70 Q 255 80 260 90 M 150 370 L 150 380 M 140 372 L 142 376 M 160 372 L 158 376 M 50 160 L 55 165 M 240 180 L 235 185 M 150 190 Q 155 200 150 210" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" />
+                            </svg>
+
+                            <!-- Smooth Curvy Toppings (Colors in CSS) -->
+                            <div class="toppings">
+                                <a href="et.pdf" class="topping t-et">Eco<br>Times</a>
+                                <a href="bs.pdf" class="topping t-bs">Biz<br>Std</a>
+                                <a href="fe.pdf" class="topping t-fe">Fin<br>Exp</a>
+                                <a href="mint.pdf" class="topping t-mint">Mint</a>
+                                <a href="eenadu.pdf" class="topping t-en">Eenadu</a>
+                            </div>
+
+                            <!-- ORIGINAL ANIMATED BABY SPRITE -->
+                            <div class="animated-container">
+                                <div class="animated-walker">
+                                    <div class="speech-container">
+                                        <div class="bubble b1">PIHHH</div>
+                                        <div class="bubble b2">PIHHH</div>
+                                        <div class="bubble b3">DEEPTI!</div>
+                                    </div>
+                                    <svg class="baby-sprite" viewBox="0 0 40 40" width="100" height="100" shape-rendering="crispEdges">
+                                        <g class="walker-group">
+                                            <g class="arm-back" style="transform-origin: 19px 24px;">
+                                                <rect x="17" y="24" width="4" height="6" fill="#dfaa77"/>
+                                                <rect x="17" y="30" width="4" height="2" fill="#dfaa77"/>
+                                            </g>
+                                            <g class="leg-back" style="transform-origin: 21px 30px;">
+                                                <rect x="19" y="30" width="4" height="6" fill="#dfaa77"/>
+                                                <rect x="19" y="36" width="6" height="2" fill="#dfaa77"/>
+                                            </g>
+                                            <g class="torso-head">
+                                                <rect x="16" y="8" width="10" height="4" fill="#654321"/>
+                                                <rect x="14" y="10" width="2" height="4" fill="#654321"/>
+                                                <rect x="26" y="10" width="2" height="2" fill="#654321"/>
+                                                
+                                                <rect x="16" y="12" width="10" height="10" fill="#ffcc99"/>
+                                                <rect x="26" y="14" width="2" height="6" fill="#ffcc99"/>
+                                                
+                                                <rect x="23" y="14" width="2" height="2" fill="#000"/>
+                                                
+                                                <rect x="16" y="22" width="10" height="8" fill="#fff"/>
+                                                <rect x="14" y="22" width="2" height="6" fill="#fff"/>
+                                                <rect x="26" y="22" width="2" height="4" fill="#fff"/>
+                                                
+                                                <rect x="16" y="30" width="10" height="2" fill="#ccc"/>
+                                            </g>
+                                            <g class="leg-front" style="transform-origin: 24px 30px;">
+                                                <rect x="22" y="30" width="4" height="6" fill="#ffcc99"/>
+                                                <rect x="22" y="36" width="6" height="2" fill="#ffcc99"/>
+                                            </g>
+                                            <g class="arm-front" style="transform-origin: 23px 24px;">
+                                                <rect x="21" y="24" width="4" height="6" fill="#ffcc99"/>
+                                                <rect x="21" y="30" width="4" height="2" fill="#ffcc99"/>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- SACHET MARKET BUTTON -->
+                            <button class="sachet-btn" onclick="openModal()">MARKET</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TOP BOX (LID) -->
+                <div class="box-part box-lid-img">
+                    <div id="date-header" class="sticky-note-date">
+                        <span id="date-text"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-down-hint">↓ Scroll to slide lid ↓</div>
+        </div>
+    </div>
+<!-- Clipboard Modal -->
+    <div id="modal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="clipboard" onclick="event.stopPropagation()">
+            <div class="clip"></div>
+            <button class="modal-close close-btn" onclick="closeModal(event)">X</button>
+            <div class="paper">
+                <img src="market_box.png" alt="Market data will appear here after the 8:15 AM cloud run!" onerror="this.onerror=null; this.src=''; this.alt='Market data will appear here tomorrow at 8:15 AM after the cloud script runs!'; this.style.border='none';">
+                <!-- Glittery Gold Sticker -->
+                <div id="gold-rate-display" class="gold-sticker">Loading Gold Rate...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const options = { weekday: 'long', month: 'long', day: 'numeric' };
+        document.getElementById('date-text').innerText = new Date().toLocaleDateString('en-US', options);
+
+        // Force browser to fetch the absolute latest PDFs and Images by appending a timestamp
+        const cacheBuster = '?v=' + new Date().getTime();
+        document.querySelectorAll('.topping').forEach(link => {
+            link.href = link.getAttribute('href') + cacheBuster;
+        });
+        const marketImg = document.querySelector('.paper img');
+        if (marketImg) {
+            marketImg.src = marketImg.getAttribute('src').split('?')[0] + cacheBuster;
+        }
+
+        // Smooth Hydration Popup Logic
+        window.addEventListener('DOMContentLoaded', () => {
+            const toastOverlay = document.getElementById('hydration-overlay');
+            if (toastOverlay) {
+                setTimeout(() => {
+                    toastOverlay.classList.add('visible');
+                }, 300);
+
+                setTimeout(() => {
+                    toastOverlay.classList.remove('visible');
+                    setTimeout(() => {
+                        toastOverlay.style.display = 'none';
+                    }, 400); 
+                }, 4300);
+            }
+        });
+
+        function openModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+            
+            fetch('gold_rate.json' + cacheBuster)
+                .then(response => response.json())
+                .then(data => {
+                    const goldSticker = document.getElementById('gold-rate-display');
+                    goldSticker.innerHTML = `🪙 24K Gold: ${data.rate} / gm`;
+                    goldSticker.style.display = 'block';
+                })
+                .catch(err => console.error("Could not fetch gold rate", err));
+        }
+
+        // ==========================================
+        // DYNAMIC CLIENT-SIDE TICKER (Google Sheets)
+        // ==========================================
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2ZyIXY5fgZSLN1rPQTIB4yw8LA99laMVJnT8eEyMAxhcBXznBsV91HmgS2RwylgYEAK-Mq4rf0JYb/pub?gid=1159062743&single=true&output=csv';
+
+        // Duplicate the ticker track content once so it loops seamlessly in CSS marquee
+        const tickerTrack = document.getElementById('market-ticker');
+        tickerTrack.innerHTML += tickerTrack.innerHTML;
+
+        function updateTickerUI(dataRows) {
+            const cachedData = JSON.parse(localStorage.getItem('marketTickerCache') || '{}');
+            let hasUpdates = false;
+
+            dataRows.forEach(row => {
+                // Ignore temporary "Loading..." from Google Sheets if we have cached data
+                if (row.price.includes('Loading') || row.change.includes('Loading')) {
+                    if (cachedData[row.id]) {
+                        row = cachedData[row.id]; // Fallback to cache
+                    } else {
+                        return; // Do nothing if no cache available
+                    }
+                } else {
+                    cachedData[row.id] = row;
+                    hasUpdates = true;
+                }
+
+                const valNodes = document.querySelectorAll(`[data-ticker-val="${row.id}"]`);
+                const changeNodes = document.querySelectorAll(`[data-ticker-change="${row.id}"]`);
+
+                valNodes.forEach(node => {
+                    const prefix = node.getAttribute('data-prefix') || '';
+                    node.textContent = prefix + row.price;
+                });
+
+                changeNodes.forEach(node => {
+                    const changeNum = parseFloat(row.change.replace(/[^\d.-]/g, ''));
+                    const isUp = changeNum > 0;
+                    const isDown = changeNum < 0;
+                    
+                    node.classList.remove('up', 'down');
+                    if (isUp) node.classList.add('up');
+                    else if (isDown) node.classList.add('down');
+
+                    const cleanChange = row.change.replace(/[+-\s]/g, '');
+                    const arrow = isUp ? '▲ +' : (isDown ? '▼ -' : '');
+                    
+                    node.textContent = `${arrow}${cleanChange} (${row.changePct})`;
+                });
+            });
+
+            if (hasUpdates) {
+                localStorage.setItem('marketTickerCache', JSON.stringify(cachedData));
+            }
+        }
+
+        // Instantly load cached data on page load to prevent flashes of "--"
+        function initTickerFromCache() {
+            const cachedData = JSON.parse(localStorage.getItem('marketTickerCache') || '{}');
+            const dataRows = Object.values(cachedData);
+            if (dataRows.length > 0) {
+                updateTickerUI(dataRows);
+            }
+        }
+        initTickerFromCache();
+
+        function pollLiveMarketData() {
+            fetch(CSV_URL)
+                .then(response => {
+                    if (!response.ok) throw new Error("Network response was not ok");
+                    return response.text();
+                })
+                .then(csvText => {
+                    const lines = csvText.trim().split('\n');
+                    const dataRows = [];
+                    for(let i = 1; i < lines.length; i++) {
+                        let cols = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                        cols = cols.map(c => c.replace(/^"|"$/g, '').trim());
+                        
+                        if (cols.length >= 5) {
+                            dataRows.push({
+                                id: cols[0],
+                                price: cols[2],
+                                change: cols[3],
+                                changePct: cols[4]
+                            });
+                        }
+                    }
+                    updateTickerUI(dataRows);
+                })
+                .catch(error => {
+                    console.error('Ticker update failed, retrying next cycle:', error);
+                });
+        }
+
+        // Initial pull + poll every 5 minutes
+        pollLiveMarketData();
+        setInterval(pollLiveMarketData, 5 * 60 * 1000);
+
+        // ==========================================
+        // QUIZ LOGIC
+        // ==========================================
+        let quizData = [];
+        let currentQuestion = 0;
+
+        fetch('quiz.json' + cacheBuster)
+            .then(response => response.json())
+            .then(data => {
+                quizData = data;
+                renderQuiz();
+            })
+            .catch(error => {
+                console.error("Error loading quiz:", error);
+                document.getElementById('quiz-slider').innerHTML = "<div style='text-align:center; padding-top:50px; color:red;'>Quiz failed to load or hasn't been generated yet today.</div>";
+            });
+
+        function renderQuiz() {
+            if (!quizData || quizData.length === 0) return;
+            
+            const slider = document.getElementById('quiz-slider');
+            slider.innerHTML = '';
+            
+            quizData.forEach((q, qIndex) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = `quiz-question ${qIndex === currentQuestion ? 'active' : ''}`;
+                qDiv.id = `q-${qIndex}`;
+                
+                let optionsHtml = '';
+                q.options.forEach((opt, oIndex) => {
+                    optionsHtml += `<button class="quiz-option" onclick="selectAnswer(${qIndex}, ${oIndex}, ${q.answerIndex})">${opt}</button>`;
+                });
+
+                qDiv.innerHTML = `
+                    <div class="quiz-q-text">Q${qIndex + 1}. ${q.question}</div>
+                    ${optionsHtml}
+                    <div id="exp-${qIndex}" class="quiz-explanation">
+                        <strong>Explanation:</strong> ${q.explanation}
+                    </div>
+                `;
+                slider.appendChild(qDiv);
+            });
+            
+            updateQuizUI();
+        }
+
+        // Must expose globally for inline onclick
+        window.selectAnswer = function(qIndex, selectedIdx, correctIdx) {
+            const qDiv = document.getElementById(`q-${qIndex}`);
+            const buttons = qDiv.querySelectorAll('.quiz-option');
+            
+            // Disable all buttons for this question
+            buttons.forEach(btn => btn.disabled = true);
+            
+            if (selectedIdx === correctIdx) {
+                buttons[selectedIdx].classList.add('correct');
+            } else {
+                buttons[selectedIdx].classList.add('wrong');
+                buttons[correctIdx].classList.add('correct');
+            }
+            
+            // Show explanation
+            document.getElementById(`exp-${qIndex}`).style.display = 'block';
+        };
+
+        function updateQuizUI() {
+            document.getElementById('quiz-counter').textContent = `${currentQuestion + 1}/${quizData.length}`;
+            
+            document.querySelectorAll('.quiz-question').forEach((q, idx) => {
+                q.classList.toggle('active', idx === currentQuestion);
+            });
+            
+            document.getElementById('quiz-prev').disabled = (currentQuestion === 0);
+            document.getElementById('quiz-next').disabled = (currentQuestion === quizData.length - 1);
+        }
+
+        document.getElementById('quiz-prev').addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                updateQuizUI();
+            }
+        });
+
+        document.getElementById('quiz-next').addEventListener('click', () => {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                updateQuizUI();
+            }
+        });
+
+        function closeModal(e) {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+    </script>
+    <script>
+
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            smooth: true,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Scroll hint fade logic
+        ScrollTrigger.create({
+            trigger: ".gsap-track",
+            start: "top 50%", 
+            onEnter: () => gsap.to(".scroll-down-hint", { opacity: 0, duration: 0.3 }),
+            onLeaveBack: () => gsap.to(".scroll-down-hint", { opacity: 1, duration: 0.3 })
+        });
+
+        // ==========================================
+        // FETCH HEADLINES FOR RECEIPT
+        // ==========================================
+        fetch('headlines.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('receipt-content');
+                container.innerHTML = '';
+                
+                let currentPaper = '';
+                
+                data.forEach(item => {
+                    if (item.paper !== currentPaper) {
+                        currentPaper = item.paper;
+                        const paperTitle = document.createElement('div');
+                        paperTitle.className = 'receipt-paper-title';
+                        paperTitle.textContent = currentPaper;
+                        container.appendChild(paperTitle);
+                    }
+                    
+                    const headline = document.createElement('div');
+                    headline.className = 'receipt-item';
+                    headline.textContent = item.title;
+                    container.appendChild(headline);
+                });
+                
+                // Set today's date
+                const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+                document.getElementById('receipt-date').textContent = new Date().toLocaleDateString('en-US', options);
+            })
+            .catch(error => {
+                document.getElementById('receipt-content').innerHTML = '<p><i>Fresh headlines are being baked...</i></p>';
+                console.error('Error fetching headlines:', error);
+            });
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".gsap-track",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1.5,
+                pin: ".pinned-scene"
+            }
+        });
+
+        // Responsive scale targets
+        const isMobile = window.innerWidth < 600;
+        const finalScale = isMobile ? 1.6 : 1.5;
+
+        // Continuous fluid zoom and rotation for the entire box
+        tl.to(".master-box-container", {
+            scale: finalScale,
+            rotateX: 0,
+            duration: 10,
+            ease: "power2.inOut" 
+        }, 0);
+
+        tl.to(".scroll-down-hint", {
+            opacity: 0,
+            duration: 1.5
+        }, 0);
+
+        tl.to(".box-lid-img", {
+            z: 150, 
+            xPercent: -105, 
+            yPercent: 5, 
+            rotationZ: -8, 
+            rotationY: 10,
+            duration: 6,
+            ease: "power2.inOut" 
+        }, 0); 
+        
+        // Note: .pizza-content-wrapper no longer needs an opacity/brightness animation,
+        // it simply sits under the lid and lets the realistic drop-shadow cast over it.
+
+    </script>
+</body>
+</html>

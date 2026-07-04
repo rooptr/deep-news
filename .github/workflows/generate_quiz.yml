@@ -2,7 +2,7 @@ name: Daily Quiz Generator
 
 on:
   schedule:
-    # 00:00 UTC is 05:30 AM IST (Runs before the papers deploy)
+    # 00:00 UTC is 05:30 AM IST (Runs well before the papers deploy at 9:00 AM IST)
     - cron: '0 0 * * *'
   workflow_dispatch: # Allows manual trigger
 

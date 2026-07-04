@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Edition</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="refresh" content="3600">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --magenta: #ff477e;
+            --orange: #ff9f1c;
+            --yellow: #ffd166;
+            --black: #111;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body, html {
+            margin: 0; padding: 0; min-height: 100%;
+            background-color: #f0f0f0;
+            background-image: radial-gradient(#ccc 15%, transparent 16%), radial-gradient(#ccc 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            font-family: 'Patrick Hand', cursive;
+            color: var(--black);
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+           MARKET TICKER (UNTOUCHED)
+           ======================================== */
+        .market-ticker-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 35px;
+            background: var(--black); border-bottom: 2px solid #333;
+            z-index: 9999; overflow: hidden; display: flex; align-items: center;
+            font-family: 'Courier New', Courier, monospace; font-size: 0.85em;
+            color: #fff; letter-spacing: 0.5px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.5);
+        }
+        .market-ticker-track {
+            display: flex; white-space: nowrap; will-change: transform;
+            transform: translateZ(0); backface-visibility: hidden;
+            animation: ticker 50s linear infinite;
+        }
+        .market-ticker-track:hover { animation-play-state: paused; }
+        .ticker-item { display: flex; align-items: center; padding: 0 30px; font-weight: bold; }
+        .ticker-name { color: #aaa; margin-right: 8px; text-transform: uppercase; }
+        .ticker-value { color: #fff; margin-right: 8px; }
+        .ticker-change { font-size: 0.95em; display: flex; align-items: center; gap: 4px; }
+        .ticker-change.up { color: #4caf50; }
+        .ticker-change.down { color: #f44336; }
+        .ticker-separator { color: #444; margin-left: 25px; }
+        @keyframes ticker {
+            0% { transform: translate3d(0,0,0); }
+            100% { transform: translate3d(-50%,0,0); }
+        }
+
+        /* ========================================
+           MAIN CONTENT AREA
+           ======================================== */
+        .main-content {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 50px 15px; min-height: 100vh;
+            max-width: 500px; margin: 0 auto;
+            gap: 12px;
+        }
+
+        /* ========================================
+           DATE HEADER
+           ======================================== */
+        .date-header {
+            font-size: clamp(14px, 3.5vw, 20px);
+            font-weight: bold; text-align: center;
+            background: #fff; padding: 6px 20px;
+            border: 2px solid var(--black);
+            box-shadow: 3px 3px 0px var(--magenta), -2px -2px 0px var(--orange), 5px 5px 0px var(--black);
+            letter-spacing: 1px; text-transform: uppercase;
+        }
+
+        /* ========================================
+           STICKY BILL BUTTON (shared)
+           ======================================== */
+        .sticky-btn {
+            display: block; width: 100%;
+            font-family: 'Patrick Hand', cursive;
+            font-size: clamp(18px, 4vw, 26px);
+            font-weight: bold; text-align: center;
+            background: #fff; color: var(--black);
+            border: 3px solid var(--black);
+            padding: 14px 20px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--black);
+            transition: all 0.15s ease;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        .sticky-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--black);
+        }
+        .sticky-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px var(--black);
+        }
+
+        /* Headlines - large, standout */
+        .headlines-container {
+            position: relative;
+            width: 100%;
+        }
+        @font-face {
+            font-family: 'TheSignature';
+            src: url('Thesignature.ttf') format('truetype'),
+                 url('Thesignature.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        .deeptis-signature-container {
+            position: absolute;
+            left: -50px;
+            top: -20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: rotate(-15deg);
+            z-index: 10;
+            pointer-events: none;
+            line-height: 0.7;
+        }
+        @media (max-width: 600px) {
+            .deeptis-signature-container {
+                left: -10px;
+                top: -35px;
+            }
+        }
+        .deeptis-name {
+            font-family: 'TheSignature', cursive;
+            font-size: clamp(38px, 9vw, 54px);
+            color: var(--);
+            white-space: nowrap;
+            text-shadow: 2px 2px 0px #fff, -1px -1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff;
+        }
+        .deeptis-sub {
+            font-family: 'Patrick Hand', cursive;
+            font-size: clamp(12px, 3vw, 16px);
+            color: var(--black);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            margin-top: -8px;
+            text-shadow: 1px 1px 0px #fff, -1px -1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff;
+        }
+        .btn-headlines {
+            background: #fff8b0;
+            font-size: clamp(22px, 5vw, 32px);
+            padding: 18px 20px;
+        }
+
+        /* Newspaper link buttons */
+        .newspaper-stack {
+            display: flex; flex-direction: column;
+            width: 100%; gap: 8px;
+        }
+        .newspaper-stack .sticky-btn {
+            font-size: clamp(16px, 3.5vw, 22px);
+            padding: 12px 20px;
+        }
+
+        /* Quiz + Market row */
+        .action-row {
+            display: flex; width: 100%; gap: 10px;
+        }
+        .action-row .sticky-btn { flex: 1; }
+
+        .btn-quiz { background: #e8f5e9; }
+
+        /* Glittery Market button */
+        .btn-market {
+            background: linear-gradient(135deg, #ffd700 25%, #fff8b0 40%, #ff8c00 55%, #ffd700 100%);
+            background-size: 300% 300%;
+            animation: glitter 3s ease infinite;
+            position: relative; overflow: hidden;
+        }
+        .btn-market::after {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.6) 50%, transparent 60%);
+            animation: shine-sweep 2.5s ease-in-out infinite;
+        }
+        @keyframes glitter {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes shine-sweep {
+            0% { transform: translateX(-100%) rotate(25deg); }
+            100% { transform: translateX(100%) rotate(25deg); }
+        }
+
+        /* ========================================
+           HEADLINES RECEIPT MODAL
+           ======================================== */
+        .receipt-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+            display: none; justify-content: flex-start; align-items: center;
+            z-index: 5000;
+        }
+        .receipt-overlay.active { display: flex; }
+
+        .receipt-track {
+            display: flex; gap: 20px;
+            overflow-x: auto; scroll-snap-type: x mandatory;
+            padding: 20px 40px; width: 100%; align-items: center; box-sizing: border-box;
+        }
+        .receipt-container {
+            flex: 0 0 85%; max-width: 420px; scroll-snap-align: center;
+            background: #fffdf5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1), 0 0 40px rgba(0,0,0,0.05) inset;
+            border-top: 10px solid #d32f2f;
+            padding: 30px 20px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #333; position: relative; max-height: 80vh; overflow-y: auto;
+        }
+        .receipt-container::after {
+            content: ''; position: absolute; bottom: -15px; left: 0;
+            width: 100%; height: 15px;
+            background: linear-gradient(-45deg, transparent 33.33%, #fffdf5 33.33%, #fffdf5 66.66%, transparent 66.66%),
+                        linear-gradient(45deg, transparent 33.33%, #fffdf5 33.33%, #fffdf5 66.66%, transparent 66.66%);
+            background-size: 15px 30px; background-position: 0 100%;
+        }
+        .receipt-close {
+            position: absolute; top: 15px; right: 15px; z-index: 5001;
+            width: 32px; height: 32px; background: var(--magenta); color: #fff;
+            border: 2px solid var(--black); border-radius: 50%;
+            font-size: 16px; font-weight: bold; cursor: pointer;
+            font-family: 'Patrick Hand', cursive;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .receipt-header, .receipt-footer { text-align: center; }
+        .receipt-header h2 { margin: 0; font-size: 1.5em; letter-spacing: 2px; }
+        .receipt-divider { text-align: center; overflow: hidden; white-space: nowrap; margin: 15px 0; opacity: 0.6; }
+        .receipt-paper-title { font-weight: bold; text-decoration: underline; margin-top: 25px; margin-bottom: 8px; font-size: 1.1em; }
+        .receipt-item { margin-bottom: 12px; line-height: 1.4; display: flex; align-items: flex-start; font-size: 0.9em; }
+        .receipt-item::before { content: '- '; margin-right: 5px; }
+
+        /* ========================================
+           CLIPBOARD MODAL (MARKET)
+           ======================================== */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none; justify-content: center; align-items: center;
+            z-index: 5000; opacity: 0; transition: opacity 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .clipboard {
+            position: relative; background: #8b5a2b;
+            width: 90%; max-width: 500px;
+            padding: 40px 20px 20px 20px; border-radius: 10px;
+            border: 4px solid var(--black);
+            box-shadow: 10px 10px 0px var(--black);
+            transform: translateY(50px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .modal-overlay.active .clipboard { transform: translateY(0); }
+        .clip {
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            width: 120px; height: 40px; background: #ccc;
+            border: 4px solid var(--black); border-radius: 4px;
+            box-shadow: 6px 6px 0px var(--black);
+        }
+        .gold-sticker {
+            margin-top: 15px;
+            background: linear-gradient(45deg, #ffd700, #ffdf00, #d4af37, #ffd700);
+            background-size: 300% 300%;
+            border: 3px solid var(--black); padding: 10px 20px;
+            font-size: clamp(16px, 4vw, 24px); font-weight: bold;
+            color: var(--black); text-align: center;
+            box-shadow: 4px 4px 0px var(--black);
+            animation: glitter 3s ease infinite; display: none;
+        }
+        .paper {
+            background: #fff; padding: 15px; border: 2px solid var(--black);
+            min-height: 200px; box-shadow: 3px 3px 10px rgba(0,0,0,0.2); text-align: center;
+        }
+        .paper img { max-width: 100%; height: auto; object-fit: contain; border: 2px solid #333; }
+        .modal-close {
+            position: absolute; top: -20px; right: -20px;
+            width: 40px; height: 40px; background: var(--magenta); color: #fff;
+            border: 3px solid var(--black); border-radius: 50%;
+            font-size: 20px; font-weight: bold; cursor: pointer;
+            box-shadow: 2px 2px 0px var(--black); font-family: 'Patrick Hand', cursive;
+        }
+
+        /* ========================================
+           QUIZ SECTION (CLEAN, COMPACT)
+           ======================================== */
+        .quiz-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+            display: none; justify-content: center; align-items: flex-start;
+            z-index: 6000; overflow-y: auto; padding: 60px 15px 30px 15px;
+        }
+        .quiz-overlay.active { display: flex; }
+
+        .quiz-section {
+            width: 100%; max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .quiz-close {
+            position: absolute; top: -15px; right: -10px;
+            width: 32px; height: 32px; background: var(--magenta); color: #fff;
+            border: 2px solid var(--black); border-radius: 50%;
+            font-size: 16px; font-weight: bold; cursor: pointer;
+            font-family: 'Patrick Hand', cursive;
+            display: flex; align-items: center; justify-content: center; z-index: 10;
+        }
+
+        .quiz-filter-row {
+            display: flex; gap: 6px; margin-bottom: 10px;
+        }
+        .quiz-filter-btn {
+            font-family: 'Patrick Hand', cursive;
+            font-size: clamp(14px, 3vw, 18px);
+            font-weight: bold; padding: 6px 18px;
+            border: 2px solid var(--black);
+            cursor: pointer; transition: all 0.15s;
+            background: #eee; color: var(--black);
+            box-shadow: 2px 2px 0px var(--black);
+        }
+        .quiz-filter-btn.active {
+            background: var(--black); color: #fff;
+        }
+        .quiz-filter-btn:hover:not(.active) {
+            background: #ddd;
+        }
+
+        .quiz-card {
+            background: #fff; border: 2px solid #ddd;
+            border-radius: 8px; padding: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .quiz-header {
+            font-size: 1.3em; font-weight: bold;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 12px; padding-bottom: 6px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .quiz-question { display: none; animation: fadeIn 0.25s ease; }
+        .quiz-question.active { display: block; }
+
+        .quiz-q-text {
+            font-size: 1.15em; margin-bottom: 12px;
+            font-weight: bold; line-height: 1.3;
+        }
+
+        .quiz-option {
+            display: block; width: 100%; text-align: left;
+            background: #f9f9f9; border: 2px solid #ddd;
+            padding: 10px 12px; margin-bottom: 8px;
+            font-family: inherit; font-size: 1em;
+            cursor: pointer; transition: all 0.15s;
+            border-radius: 6px;
+        }
+        .quiz-option:hover:not(:disabled) { background: #f0f0f0; border-color: #bbb; }
+        .quiz-option.correct { background: #d4edda; border-color: #27ae60; }
+        .quiz-option.wrong { background: #f8d7da; border-color: #c0392b; }
+
+        .quiz-explanation {
+            display: none; margin-top: 12px;
+            font-size: 0.95em; color: #444;
+            background: #f8f9fa; padding: 12px;
+            border: 1px solid #e0e0e0; border-radius: 6px;
+            line-height: 1.5;
+        }
+
+        .quiz-controls {
+            display: flex; justify-content: space-between;
+            margin-top: 15px; border-top: 1px solid #eee; padding-top: 12px;
+        }
+        .quiz-btn {
+            background: var(--black); color: #fff;
+            border: 2px solid var(--black); padding: 6px 22px;
+            font-family: inherit; font-size: 1.1em;
+            cursor: pointer; border-radius: 6px;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+            transition: transform 0.1s;
+        }
+        .quiz-btn:active:not(:disabled) { transform: translateY(2px); box-shadow: none; }
+        .quiz-btn:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; color: #888; border-color: #ccc; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========================================
+           FIXED BABY SPRITE
+           ======================================== */
+        .baby-fixed-container {
+            position: fixed; bottom: 0; left: 0;
+            width: 100%; height: 120px;
+            pointer-events: none; z-index: 4999;
+        }
+        .animated-walker {
+            position: absolute; bottom: 0;
+            animation: walk-across 30s linear infinite; pointer-events: auto;
+        }
+        @keyframes walk-across {
+            0% { left: -10%; }
+            100% { left: 110%; }
+        }
+        .baby-sprite {
+            width: clamp(50px, 15vw, 80px); height: auto;
+            filter: drop-shadow(2px 0 0 var(--black)) drop-shadow(-2px 0 0 var(--black))
+                    drop-shadow(0 2px 0 var(--black)) drop-shadow(0 -2px 0 var(--black));
+            overflow: visible;
+            pointer-events: auto;
+        }
+        .speech-container { position: absolute; top: -35px; left: 15px; }
+
+        @keyframes swing-leg-r { 0%, 100% { transform: rotate(-30deg); } 50% { transform: rotate(30deg); } }
+        @keyframes swing-leg-l { 0%, 100% { transform: rotate(30deg); } 50% { transform: rotate(-30deg); } }
+        @keyframes swing-arm-r { 0%, 100% { transform: rotate(30deg); } 50% { transform: rotate(-30deg); } }
+        @keyframes swing-arm-l { 0%, 100% { transform: rotate(-30deg); } 50% { transform: rotate(30deg); } }
+        @keyframes bob-body { 0%, 50%, 100% { transform: translateY(0); } 25%, 75% { transform: translateY(-2px); } }
+
+        .leg-front { animation: swing-leg-r 1s infinite ease-in-out; transform-box: view-box; }
+        .leg-back  { animation: swing-leg-l 1s infinite ease-in-out; transform-box: view-box; }
+        .arm-front { animation: swing-arm-r 1s infinite ease-in-out; transform-box: view-box; }
+        .arm-back  { animation: swing-arm-l 1s infinite ease-in-out; transform-box: view-box; }
+        .walker-group { animation: bob-body 1s infinite ease-in-out; }
+        .bubble {
+            font-family: 'Patrick Hand', cursive;
+            font-size: clamp(12px, 3.5vw, 16px); font-weight: bold;
+            color: var(--black); background: #fff;
+            padding: 4px 10px; border: 2px solid var(--black);
+            border-radius: 10px; white-space: nowrap;
+            display: none;
+        }
+        .bubble::after {
+            content: ''; position: absolute; bottom: -5px; left: 8px;
+            border-width: 5px 5px 0 0; border-style: solid;
+            border-color: var(--black) transparent transparent transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- Market Ticker -->
+    <div class="market-ticker-container">
+        <div class="market-ticker-track" id="market-ticker">
+            <div class="ticker-item"><span class="ticker-name">Nifty 50</span><span class="ticker-value" data-ticker-val="NSEI">--</span><span class="ticker-change" data-ticker-change="NSEI">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Sensex</span><span class="ticker-value" data-ticker-val="BSESN">--</span><span class="ticker-change" data-ticker-change="BSESN">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">USD/INR</span><span class="ticker-value" data-ticker-val="USDINR" data-prefix="₹">--</span><span class="ticker-change" data-ticker-change="USDINR">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Brent Crude</span><span class="ticker-value" data-ticker-val="BZF" data-prefix="$">--</span><span class="ticker-change" data-ticker-change="BZF">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">S&P 500</span><span class="ticker-value" data-ticker-val="GSPC">--</span><span class="ticker-change" data-ticker-change="GSPC">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">US 10Y Yield</span><span class="ticker-value" data-ticker-val="TNX">--</span><span class="ticker-change" data-ticker-change="TNX">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">VIX</span><span class="ticker-value" data-ticker-val="VIX" data-prefix="$">--</span><span class="ticker-change" data-ticker-change="VIX">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Gold (1g)</span><span class="ticker-value" data-ticker-val="GCF" data-prefix="₹">--</span><span class="ticker-change" data-ticker-change="GCF">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Moody's</span><span class="ticker-value" data-ticker-val="MCO" data-prefix="$">--</span><span class="ticker-change" data-ticker-change="MCO">--</span><span class="ticker-separator">•</span></div>
+            <div class="ticker-item"><span class="ticker-name">Bank of America</span><span class="ticker-value" data-ticker-val="BAC" data-prefix="$">--</span><span class="ticker-change" data-ticker-change="BAC">--</span></div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- Date Header -->
+        <div id="date-header" class="date-header"></div>
+
+        <!-- Headlines Button Wrapper -->
+        <div class="headlines-container">
+            <div class="deeptis-signature-container">
+                <span class="deeptis-name">Deepti's</span>
+            </div>
+            <button class="sticky-btn btn-headlines" onclick="openHeadlines()">📰 Headlines</button>
+        </div>
+
+        <!-- Quiz + Market Row -->
+        <div class="action-row">
+            <button class="sticky-btn btn-quiz" onclick="openQuiz()">📝 Quiz</button>
+            <button class="sticky-btn btn-market" onclick="openModal()">💰 Market</button>
+        </div>
+
+        <!-- Newspaper Buttons (Vertical) -->
+        <div class="newspaper-stack">
+            <a href="et.pdf" class="sticky-btn">Economic Times</a>
+            <a href="bs.pdf" class="sticky-btn">Business Standard</a>
+            <a href="fe.pdf" class="sticky-btn">Financial Express</a>
+            <a href="mint.pdf" class="sticky-btn">Mint</a>
+            <a href="eenadu.pdf" class="sticky-btn" style="background:#fff3e0;">Eenadu</a>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div id="quiz-overlay" class="quiz-overlay" onclick="closeQuiz(event)">
+        <div class="quiz-section" id="quiz-section" onclick="event.stopPropagation()">
+            <div class="quiz-filter-row">
+                <button class="quiz-filter-btn active" data-filter="all" onclick="filterQuiz('all')">All</button>
+                <button class="quiz-filter-btn" data-filter="news" onclick="filterQuiz('news')">News</button>
+                <button class="quiz-filter-btn" data-filter="apti" onclick="filterQuiz('apti')">Apti</button>
+            </div>
+            <div class="quiz-card" style="position: relative;">
+                <button class="quiz-close" onclick="closeQuiz(event)">✕</button>
+                <div class="quiz-header">
+                    <span>MBA Pop Quiz 📈</span>
+                    <span id="quiz-counter">Loading...</span>
+                </div>
+                <div id="quiz-slider" class="quiz-slider">
+                    <div style="text-align:center; padding: 40px 0; color:#888;">Fetching today's brain-teasers...</div>
+                </div>
+                <div class="quiz-controls">
+                    <button id="quiz-prev" class="quiz-btn" disabled>← Prev</button>
+                    <button id="quiz-next" class="quiz-btn">Next →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Headlines Receipt Modal -->
+    <div id="receipt-overlay" class="receipt-overlay" onclick="closeHeadlines(event)">
+        <button class="receipt-close" onclick="closeHeadlines(event)">✕</button>
+        <div class="receipt-track" id="receipt-track" onclick="event.stopPropagation()">
+            <!-- Receipts generated by JS -->
+        </div>
+    </div>
+
+    <!-- Clipboard Modal (Market) -->
+    <div id="modal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="clipboard" onclick="event.stopPropagation()">
+            <div class="clip"></div>
+            <button class="modal-close" onclick="closeModal(event)">X</button>
+            <div class="paper">
+                <img src="market_box.png" alt="Market data loading..." onerror="this.onerror=null; this.src=''; this.alt='Market data will appear after the cloud run!'; this.style.border='none';">
+                <div id="gold-rate-display" class="gold-sticker">Loading Gold Rate...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed Baby Sprite -->
+    <div class="baby-fixed-container">
+        <div class="animated-walker" onclick="babyClicked(event)" style="cursor:pointer;">
+            <div class="speech-container">
+                <div class="bubble" id="baby-bubble">PIHHH</div>
+            </div>
+            <svg class="baby-sprite" viewBox="0 0 40 40" width="100" height="100" shape-rendering="crispEdges">
+                <g class="walker-group">
+                    <g class="arm-back" style="transform-origin: 19px 24px;">
+                        <rect x="17" y="24" width="4" height="6" fill="#dfaa77"/>
+                        <rect x="17" y="30" width="4" height="2" fill="#dfaa77"/>
+                    </g>
+                    <g class="leg-back" style="transform-origin: 21px 30px;">
+                        <rect x="19" y="30" width="4" height="6" fill="#dfaa77"/>
+                        <rect x="19" y="36" width="6" height="2" fill="#dfaa77"/>
+                    </g>
+                    <g class="torso-head">
+                        <rect x="16" y="8" width="10" height="4" fill="#654321"/>
+                        <rect x="14" y="10" width="2" height="4" fill="#654321"/>
+                        <rect x="26" y="10" width="2" height="2" fill="#654321"/>
+                        
+                        <rect x="16" y="12" width="10" height="10" fill="#ffcc99"/>
+                        <rect x="26" y="14" width="2" height="6" fill="#ffcc99"/>
+                        
+                        <rect x="23" y="14" width="2" height="2" fill="#000"/>
+                        
+                        <rect x="16" y="22" width="10" height="8" fill="#fff"/>
+                        <rect x="14" y="22" width="2" height="6" fill="#fff"/>
+                        <rect x="26" y="22" width="2" height="4" fill="#fff"/>
+                        
+                        <rect x="16" y="30" width="10" height="2" fill="#ccc"/>
+                    </g>
+                    <g class="leg-front" style="transform-origin: 24px 30px;">
+                        <rect x="22" y="30" width="4" height="6" fill="#ffcc99"/>
+                        <rect x="22" y="36" width="6" height="2" fill="#ffcc99"/>
+                    </g>
+                    <g class="arm-front" style="transform-origin: 23px 24px;">
+                        <rect x="21" y="24" width="4" height="6" fill="#ffcc99"/>
+                        <rect x="21" y="30" width="4" height="2" fill="#ffcc99"/>
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+    <script>
+        // ==========================================
+        // DATE & CACHE BUSTER
+        // ==========================================
+        const cacheBuster = '?v=' + new Date().getTime();
+        const options = { weekday: 'long', month: 'long', day: 'numeric' };
+        document.getElementById('date-header').innerText = new Date().toLocaleDateString('en-US', options);
+
+        // Cache-bust newspaper links
+        document.querySelectorAll('.newspaper-stack .sticky-btn').forEach(link => {
+            link.href = link.getAttribute('href') + cacheBuster;
+        });
+        // Cache-bust market image
+        const marketImg = document.querySelector('.paper img');
+        if (marketImg) marketImg.src = marketImg.getAttribute('src').split('?')[0] + cacheBuster;
+
+        // ==========================================
+        // HEADLINES MODAL
+        // ==========================================
+        function openHeadlines() {
+            document.getElementById('receipt-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeHeadlines(e) {
+            document.getElementById('receipt-overlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        fetch('headlines.json')
+            .then(r => r.json())
+            .then(data => {
+                const track = document.getElementById('receipt-track');
+                track.innerHTML = '';
+                
+                const grouped = {};
+                data.forEach(item => {
+                    if (item.title.split(' ').length > 6) {
+                        if (!grouped[item.paper]) grouped[item.paper] = [];
+                        grouped[item.paper].push(item);
+                    }
+                });
+
+                for (const paper in grouped) {
+                    const rc = document.createElement('div');
+                    rc.className = 'receipt-container';
+                    
+                    const header = document.createElement('div');
+                    header.className = 'receipt-header';
+                    header.innerHTML = `<h2>${paper}</h2><p class="receipt-date"></p>`;
+                    rc.appendChild(header);
+                    
+                    const div1 = document.createElement('div');
+                    div1.className = 'receipt-divider';
+                    div1.textContent = '****************************************';
+                    rc.appendChild(div1);
+
+                    const itemsToShow = grouped[paper].slice(0, 15);
+                    itemsToShow.forEach(item => {
+                        const h = document.createElement('div');
+                        h.className = 'receipt-item';
+                        h.textContent = item.title;
+                        rc.appendChild(h);
+                    });
+                    
+                    const div2 = document.createElement('div');
+                    div2.className = 'receipt-divider';
+                    div2.textContent = '****************************************';
+                    rc.appendChild(div2);
+
+                    const footer = document.createElement('div');
+                    footer.className = 'receipt-footer';
+                    footer.innerHTML = '<p>Thank you for subscribing!</p>';
+                    rc.appendChild(footer);
+
+                    track.appendChild(rc);
+                }
+                const opts = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+                const dateStr = new Date().toLocaleDateString('en-US', opts);
+                document.querySelectorAll('.receipt-date').forEach(el => el.textContent = dateStr);
+            })
+            .catch(() => {
+                document.getElementById('receipt-track').innerHTML = '<p style="color:white; margin: 20px;"><i>Fresh headlines are being baked...</i></p>';
+            });
+
+        // ==========================================
+        // MARKET MODAL
+        // ==========================================
+        function openModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+            fetch('gold_rate.json' + cacheBuster)
+                .then(r => r.json())
+                .then(data => {
+                    const gs = document.getElementById('gold-rate-display');
+                    gs.innerHTML = `🪙 24K Gold: ${data.rate} / gm`;
+                    gs.style.display = 'block';
+                }).catch(() => {});
+        }
+        function closeModal(e) {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        // ==========================================
+        // MARKET TICKER (Google Sheets)
+        // ==========================================
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2ZyIXY5fgZSLN1rPQTIB4yw8LA99laMVJnT8eEyMAxhcBXznBsV91HmgS2RwylgYEAK-Mq4rf0JYb/pub?gid=1159062743&single=true&output=csv';
+        const tickerTrack = document.getElementById('market-ticker');
+        tickerTrack.innerHTML += tickerTrack.innerHTML;
+
+        function updateTickerUI(dataRows) {
+            const cachedData = JSON.parse(localStorage.getItem('marketTickerCache') || '{}');
+            let hasUpdates = false;
+            dataRows.forEach(row => {
+                if (row.price.includes('Loading') || row.change.includes('Loading')) {
+                    if (cachedData[row.id]) row = cachedData[row.id];
+                    else return;
+                } else { cachedData[row.id] = row; hasUpdates = true; }
+                document.querySelectorAll(`[data-ticker-val="${row.id}"]`).forEach(node => {
+                    node.textContent = (node.getAttribute('data-prefix') || '') + row.price;
+                });
+                document.querySelectorAll(`[data-ticker-change="${row.id}"]`).forEach(node => {
+                    const changeNum = parseFloat(row.change.replace(/[^\d.-]/g, ''));
+                    node.classList.remove('up', 'down');
+                    if (changeNum > 0) node.classList.add('up');
+                    else if (changeNum < 0) node.classList.add('down');
+                    const clean = row.change.replace(/[+-\s]/g, '');
+                    const arrow = changeNum > 0 ? '▲ +' : (changeNum < 0 ? '▼ -' : '');
+                    node.textContent = `${arrow}${clean} (${row.changePct})`;
+                });
+            });
+            if (hasUpdates) localStorage.setItem('marketTickerCache', JSON.stringify(cachedData));
+        }
+
+        (function initCache() {
+            const d = Object.values(JSON.parse(localStorage.getItem('marketTickerCache') || '{}'));
+            if (d.length > 0) updateTickerUI(d);
+        })();
+
+        function pollLiveMarketData() {
+            fetch(CSV_URL).then(r => r.text()).then(csv => {
+                const lines = csv.trim().split('\n');
+                const rows = [];
+                for (let i = 1; i < lines.length; i++) {
+                    let cols = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    cols = cols.map(c => c.replace(/^"|"$/g, '').trim());
+                    if (cols.length >= 5) rows.push({ id: cols[0], price: cols[2], change: cols[3], changePct: cols[4] });
+                }
+                updateTickerUI(rows);
+            }).catch(() => {});
+        }
+        pollLiveMarketData();
+        setInterval(pollLiveMarketData, 5 * 60 * 1000);
+
+        // ==========================================
+        // QUIZ LOGIC (with News/Apti filter & Modal)
+        // ==========================================
+        function openQuiz() {
+            document.getElementById('quiz-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeQuiz(e) {
+            document.getElementById('quiz-overlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        let allQuizData = [];
+        let filteredQuizData = [];
+        let currentQuestion = 0;
+        let currentFilter = 'all';
+
+        fetch('quiz.json' + cacheBuster)
+            .then(r => r.json())
+            .then(data => {
+                allQuizData = data;
+                filterQuiz('all');
+            })
+            .catch(() => {
+                document.getElementById('quiz-slider').innerHTML = "<div style='text-align:center;padding:40px 0;color:red;'>Quiz hasn't been generated yet today.</div>";
+            });
+
+        function filterQuiz(type) {
+            currentFilter = type;
+            currentQuestion = 0;
+
+            // Update filter button states
+            document.querySelectorAll('.quiz-filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === type);
+            });
+
+            // Filter data
+            if (type === 'all') filteredQuizData = allQuizData;
+            else filteredQuizData = allQuizData.filter(q => q.type === type);
+
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            if (!filteredQuizData || filteredQuizData.length === 0) {
+                document.getElementById('quiz-slider').innerHTML = "<div style='text-align:center;padding:40px 0;color:#888;'>No questions in this category.</div>";
+                document.getElementById('quiz-counter').textContent = '0/0';
+                return;
+            }
+            const slider = document.getElementById('quiz-slider');
+            slider.innerHTML = '';
+
+            filteredQuizData.forEach((q, qIndex) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = `quiz-question ${qIndex === currentQuestion ? 'active' : ''}`;
+                qDiv.id = `q-${qIndex}`;
+
+                let optsHtml = '';
+                q.options.forEach((opt, oIndex) => {
+                    optsHtml += `<button class="quiz-option" onclick="selectAnswer(${qIndex}, ${oIndex}, ${q.answerIndex})">${opt}</button>`;
+                });
+
+                qDiv.innerHTML = `
+                    <div class="quiz-q-text">Q${qIndex + 1}. ${q.question}</div>
+                    ${optsHtml}
+                    <div id="exp-${qIndex}" class="quiz-explanation">
+                        <strong>Explanation:</strong> ${q.explanation}
+                    </div>
+                `;
+                slider.appendChild(qDiv);
+            });
+            updateQuizUI();
+        }
+
+        window.selectAnswer = function(qIndex, selectedIdx, correctIdx) {
+            const qDiv = document.getElementById(`q-${qIndex}`);
+            const buttons = qDiv.querySelectorAll('.quiz-option');
+            buttons.forEach(btn => btn.disabled = true);
+            if (selectedIdx === correctIdx) buttons[selectedIdx].classList.add('correct');
+            else { buttons[selectedIdx].classList.add('wrong'); buttons[correctIdx].classList.add('correct'); }
+            document.getElementById(`exp-${qIndex}`).style.display = 'block';
+        };
+
+        function updateQuizUI() {
+            document.getElementById('quiz-counter').textContent = `${currentQuestion + 1}/${filteredQuizData.length}`;
+            document.querySelectorAll('.quiz-question').forEach((q, idx) => {
+                q.classList.toggle('active', idx === currentQuestion);
+            });
+            document.getElementById('quiz-prev').disabled = (currentQuestion === 0);
+            document.getElementById('quiz-next').disabled = (currentQuestion === filteredQuizData.length - 1);
+        }
+
+        document.getElementById('quiz-prev').addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                updateQuizUI();
+                document.getElementById('quiz-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+        document.getElementById('quiz-next').addEventListener('click', () => {
+            if (currentQuestion < filteredQuizData.length - 1) {
+                currentQuestion++;
+                updateQuizUI();
+                document.getElementById('quiz-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+        // ==========================================
+        // BABY DIALOGUE SYSTEM
+        // ==========================================
+        const bubble = document.getElementById('baby-bubble');
+        const standardSequence = ["PIHH", "PIHHH", "PIHHHHH"];
+        const randomPhrases = ["hydrate pihh", "did you eat pihh"];
+        let seqIndex = 0;
+        let isInterrupting = false;
+
+        function updateBabyDialogue() {
+            if (isInterrupting) return;
+            
+            let text = "";
+            if (Math.random() < 0.2) {
+                text = randomPhrases[Math.floor(Math.random() * randomPhrases.length)];
+            } else {
+                text = standardSequence[seqIndex];
+                seqIndex = (seqIndex + 1) % standardSequence.length;
+            }
+            
+            bubble.textContent = text;
+            bubble.style.display = 'block';
+            
+            setTimeout(() => {
+                if (!isInterrupting) bubble.style.display = 'none';
+            }, 1500);
+        }
+
+        setInterval(updateBabyDialogue, 3500);
+
+        window.babyClicked = function(e) {
+            console.log("Baby clicked/tapped");
+            e.stopPropagation();
+            isInterrupting = true;
+            bubble.textContent = "uwa uwa";
+            bubble.style.color = "#ff7f7f"; // Pale Red
+            bubble.style.display = 'block';
+            
+            setTimeout(() => {
+                bubble.style.display = 'none';
+                bubble.style.color = "var(--black)";
+                isInterrupting = false;
+            }, 2500);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+ID,Name,Price,Change,ChangePct
+NSEI,Nifty 50,24272.95,97.25,+0.40%
+BSESN,Sensex,77799.98,297.86,+0.38%
+USDINR,USD/INR,95.3385185,Loading...,Loading...
+BZF,Brent Crude,Loading...,Loading...,Loading...
+GSPC,S&P 500,7483.24,0.01,+0.00%
+TNX,US 10Y Yield,44.85,0.1,+0.22%
+VIX,VIX,15.93,-0.66,-3.98%
+GCF,Gold (1g),Loading...,0,+4.51%
+MCO,Moody's,490.51,22.13,+4.72%
+BAC,Bank of America,58.73,0.37,+0.63%
