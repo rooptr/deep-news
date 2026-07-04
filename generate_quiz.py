@@ -240,9 +240,9 @@ def generate_quiz(headlines_data):
        - entertainment
        - local events
        - international diplomacy without business impact
-    2. Select the top 10 most complex financial events from the remaining list. (CRITICAL: Do NOT individually evaluate or score headlines in your reasoning steps. Simply select the 10 best).
+    2. Select the top 20 most complex financial events from the remaining list. (CRITICAL: Do NOT individually evaluate or score headlines in your reasoning steps. Simply select the 20 best).
     3. Selection Criteria: Only select headlines that have massive Strategic Importance, Market Impact, and MBA Learning Value. Quality takes priority over quantity.
-    4. If fewer than 10 headlines contain enough context to generate genuinely challenging reasoning questions, generate fewer questions rather than lowering the quality.
+    4. If fewer than 20 headlines contain enough context to generate genuinely challenging reasoning questions, generate fewer questions rather than lowering the quality.
     5. Generate one multiple-choice question per selected headline.
 
     QUESTION REQUIREMENTS
