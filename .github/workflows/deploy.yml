@@ -6,7 +6,7 @@ on:
       - main
   schedule:
     # 03:30 UTC is 09:00 AM IST
-    - cron: '30 3 * * *'
+    - cron: '45 0 * * *'
   workflow_dispatch: # Allows you to manually trigger it anytime
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
