@@ -335,25 +335,25 @@ def generate_quiz(headlines_data):
     random_seed = random.randint(10000, 99999)
     prompt2 = f"""
     ROLE
-    You are an elite MBA placement interview coach preparing candidates for Tier-1 consulting, investment banking, and private equity roles.
+    You are an elite MBA placement interview coach preparing candidates for Tier-1 finance roles at firms like Moody's, Oxane Partners, and Goldman Sachs.
     OBJECTIVE
     Generate a 20-question multiple-choice aptitude test.
     RANDOMIZATION SEED: {random_seed}
     
     DIFFICULTY & QUALITY REQUIREMENTS
-    - Make all questions Easy.
-    - Focus exclusively on Financial Awareness, Current Affairs, and General Knowledge (GK) about finance.
-    - Questions should cover: Finance Aptitude, Ratios, DCF Modeling, Financial Awareness, and General Awareness in the context of recent Current Affairs (like questions asked in MBA interviews).
+    - Make all questions Easy but highly relevant to what every finance student should know.
+    - Focus on Financial Awareness, Current Affairs, and General Knowledge (GK) about the financial world.
+    - Include questions about regulatory bodies like RBI and SEBI, current interest rates, and recent financial facts.
+    - Include fundamental finance aptitude topics such as cash flow, DCF modeling, financial ratios, and Excel.
+    - DO NOT make the questions too complex; they should test foundational knowledge expected in early MBA interviews.
     - DO NOT start the explanation with "This question tests..." or similar robotic phrasing. Write it naturally.
     - Include a very short "Exam Takeaway" at the very end of the explanation summarizing the key learning point.
     
     DISTRIBUTION (20 Questions Total)
     The quiz should be a diverse mix covering these specific topics:
-    - Current Affairs in Finance & Economy
-    - DCF Modeling & Valuation Basics
-    - Financial Ratios & Mechanics
-    - Financial Awareness & GK
-    - General Awareness (Finance-focused)
+    - Current Financial Affairs, Facts, RBI & SEBI updates, and interest rates.
+    - Foundational DCF Modeling, Valuation Basics, & Cash Flow.
+    - Financial Ratios, Mechanics, & Advanced Excel.
     
     OUTPUT FORMAT
     Output strictly as a JSON array of objects with the exact same format:
