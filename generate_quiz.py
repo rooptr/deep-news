@@ -246,8 +246,8 @@ def generate_quiz(headlines_data):
     5. Generate one multiple-choice question per selected headline.
 
     QUESTION REQUIREMENTS
-    - Every question MUST require strategic reasoning, financial analysis, or inference.
-    - Difficulty requirements: Create a balanced mix of Easy, Medium, and Hard questions.
+    - Every question MUST require strategic reasoning, financial analysis, or inference based on current affairs.
+    - Difficulty requirements: Make all questions Easy. Focus heavily on General Financial Awareness and Current Affairs.
     - Each question must primarily test ONE MBA domain: Corporate Finance, Strategy, Macroeconomics, Operations, Marketing, Economics, Accounting, Business Analytics, Organizational Behaviour, Risk Management, M&A, Supply Chain.
     - Explanation must include: 1. Why the correct answer is correct. 2. Why the other options are incorrect. 3. The core concept being tested. Maximum 120 words.
     - Include a very short "Exam Takeaway" at the very end of the explanation summarizing the key learning point.
@@ -341,18 +341,19 @@ def generate_quiz(headlines_data):
     RANDOMIZATION SEED: {random_seed}
     
     DIFFICULTY & QUALITY REQUIREMENTS
-    - Create a balanced mix of Easy, Medium, and Hard questions.
-    - Include General Awareness and Financial Awareness, but NEVER ask basic, definition-based questions (e.g., "What is the role of the RBI?", "What is a balance sheet?").
+    - Make all questions Easy.
+    - Focus exclusively on Financial Awareness, Current Affairs, and General Knowledge (GK) about finance.
+    - Questions should cover: Finance Aptitude, Ratios, DCF Modeling, Financial Awareness, and General Awareness in the context of recent Current Affairs (like questions asked in MBA interviews).
     - DO NOT start the explanation with "This question tests..." or similar robotic phrasing. Write it naturally.
     - Include a very short "Exam Takeaway" at the very end of the explanation summarizing the key learning point.
     
     DISTRIBUTION (20 Questions Total)
     The quiz should be a diverse mix covering these specific topics:
-    - Guesstimates & Logical Aptitude
-    - DCF Modeling, Valuation & Ratios
-    - Advanced Excel & Financial Mechanics
-    - Corporate Finance & Accounting
-    - General Awareness & Market Dynamics
+    - Current Affairs in Finance & Economy
+    - DCF Modeling & Valuation Basics
+    - Financial Ratios & Mechanics
+    - Financial Awareness & GK
+    - General Awareness (Finance-focused)
     
     OUTPUT FORMAT
     Output strictly as a JSON array of objects with the exact same format:
