@@ -1,0 +1,386 @@
+[
+  {
+    "question": "Given the escalating West Asia conflict and fears of the Strait of Hormuz closure, oil prices are projected to reach $150. For an oil-importing economy like India, what is the most direct macroeconomic transmission channel through which this supply shock will impact the domestic currency and equity markets?",
+    "options": [
+      "Improvement in capital account surplus due to speculative foreign portfolio inflows chasing higher domestic yields.",
+      "Widening of the current account deficit leading to rupee depreciation, which increases imported inflation and compresses corporate profit margins.",
+      "A shift in the central bank's policy toward aggressive monetary easing to stimulate domestic consumption.",
+      "Immediate expansion of fiscal deficit leading to an automatic appreciation of the real exchange rate through government spending."
+    ],
+    "answerIndex": 1,
+    "explanation": "The correct option is B. An oil price spike dramatically increases India's import bill, widening the current account deficit. This drives demand for US dollars, depreciating the rupee. A weaker rupee exacerbates imported inflation, driving up input costs and squeezing corporate margins, which depresses equity valuations. Option A is incorrect because capital outflows typically occur during geopolitical stress. Option C is incorrect because central banks raise rates to fight inflation rather than ease them. Option D is incorrect as fiscal expansion under supply shocks worsens inflation and rarely causes structural currency appreciation. This tests the macroeconomic transmission of supply shocks. Exam Takeaway: Geopolitical energy shocks deteriorate the current account balance of oil-importing nations, depressing both currency and equity markets.",
+    "type": "news"
+  },
+  {
+    "question": "With Indian trade routes shifting from traditional Western corridors to Oman, Singapore, and Tanzania due to the West Asia conflict, how should an Indian multinational firm adjust its supply chain risk management strategy?",
+    "options": [
+      "Concentrate all shipping contracts with a single global carrier to maximize volume discounts and bargaining power.",
+      "Transition from a 'just-in-time' inventory model to a 'just-in-case' model with decentralized safety stock near emerging hub ports.",
+      "Maintain existing routes and absorb the higher insurance premiums to avoid the structural costs of switching partners.",
+      "Hedge against trade disruptions by shifting entirely to air freight for heavy bulk industrial commodities."
+    ],
+    "answerIndex": 1,
+    "explanation": "The correct option is B. Geopolitical disruption of traditional trade lanes requires supply chain resilience. Decentralizing inventory and shifting to a 'just-in-case' approach using regional hubs like Oman or Singapore mitigates transit delay risks. Option A increases single-point-of-failure risk. Option C exposes the firm to severe operational bottlenecks. Option D is financially unviable because heavy bulk commodities cannot be economically transported via air. This tests supply chain risk management. Exam Takeaway: Geopolitical trade route shifts require transitioning from hyper-efficient 'just-in-time' models to resilient 'just-in-case' inventory strategies.",
+    "type": "news"
+  },
+  {
+    "question": "HDFC Bank reported a Q1 update showing advances grew by 15.4% while deposits grew by 13.0%. If this trend of credit growth outpacing deposit growth persists over multiple quarters, what is the most likely structural risk to the bank's balance sheet?",
+    "options": [
+      "A significant decline in the bank's Capital Adequacy Ratio (CAR) below regulatory minimums.",
+      "A rise in the credit-to-deposit (CD) ratio, leading to liquidity strain and upward pressure on cost of funds to attract deposits.",
+      "An automatic increase in the statutory liquidity ratio (SLR) requirements by the central bank.",
+      "A decrease in net interest margins due to an excess of idle, non-earning cash reserves."
+    ],
+    "answerIndex": 1,
+    "explanation": "The correct option is B. When loan growth (advances) consistently outpaces deposit growth, the credit-to-deposit (CD) ratio rises. This strains liquidity, forcing the bank to compete aggressively for deposits by raising interest rates, which increases its cost of funds and can compress net interest margins. Option A is incorrect because CAR is managed via capital raising, not just credit-deposit gaps. Option C is incorrect as SLR is set by regulators, not determined by individual bank ratios. Option D is incorrect because the bank has less idle cash, not more. This tests bank balance sheet management. Exam Takeaway: Credit growth consistently outpacing deposit growth raises the CD ratio, increasing liquidity risk and funding costs.",
+    "type": "news"
+  },
+  {
+    "question": "Fast-moving consumer goods (FMCG) firms are reporting strong Q1 performance driven by price hikes and steady demand. From a microeconomic perspective, what does this trend indicate about the price elasticity of demand for their products?",
+    "options": [
+      "Demand is perfectly elastic, allowing firms to change prices without affecting quantity demanded.",
+      "Demand is relatively inelastic, meaning the percentage reduction in quantity demanded is less than the percentage increase in price.",
+      "Demand is unit elastic, meaning total revenue remains completely unchanged after the price hikes.",
+      "Demand is highly elastic, indicating that consumers are highly sensitive to price changes but buy more due to income effects."
+    ],
+    "answerIndex": 1,
+    "explanation": "The correct option is B. If FMCG firms can successfully implement price hikes while maintaining steady demand (and thus increasing revenues), the price elasticity of demand is relatively inelastic (|Ed| < 1). Consumers continue to purchase these daily essentials despite higher prices. Option A is incorrect because perfect elasticity would mean demand drops to zero with any price hike. Option C is incorrect because revenues increased rather than staying flat. Option D is incorrect because high elasticity would cause a sharp drop in volumes following price hikes. This tests price elasticity of demand. Exam Takeaway: The ability to raise prices without a significant drop in volume demonstrates low price elasticity of demand.",
+    "type": "news"
+  },
+  {
+    "question": "According to Deloitte, Japanese enterprises are accelerating the growth of Global Capability Centers (GCCs) in India. From a corporate strategy perspective, what is the primary driver for a foreign firm transitioning from outsourcing to establishing a captive GCC?",
+    "options": [
+      "Eliminating all operational risks by shifting legal liabilities to third-party vendors.",
+      "Securing greater control over proprietary technology, data security, and direct talent alignment with parent company culture.",
+      "Minimizing initial capital expenditure and avoiding long-term strategic commitments in the host country.",
+      "Bypassing local labor regulations and tax compliance requirements in the home country."
+    ],
+    "answerIndex": 1,
+    "explanation": "The correct option is B. Unlike third-party outsourcing, a Global Capability Center (GCC) is a captive unit owned by the parent company. This structure offers superior control over intellectual property, data security, and organizational culture, enabling high-value R&D. Option A is incorrect because GCCs internalize operational and legal risks. Option C is incorrect because GCCs require higher upfront capital expenditure than outsourcing. Option D is incorrect because GCCs do not exempt parent companies from home-country tax compliance. This tests corporate strategy and international business. Exam Takeaway: Captive GCCs are preferred over outsourcing when strategic control of intellectual property and talent alignment are paramount.",
+    "type": "news"
+  },
+  {
+    "question": "Sony is reportedly planning to transition away from physical game discs for PlayStation, moving entirely to digital distribution. From a strategic and microeconomic perspective, what is the primary economic driver and consequence of this shift?",
+    "options": [
+      "It eliminates secondary market trading (used games), allowing Sony and publishers to capture 100% of downstream transaction surplus.",
+      "It lowers the barriers to entry for independent developers, thereby decreasing Sony's overall platform royalty power.",
+      "It reduces working capital requirements but increases retail channel power due to digital shelf-space scarcity.",
+      "It shifts the pricing model from a high-margin fixed cost structure to a low-margin variable cost structure."
+    ],
+    "answerIndex": 0,
+    "explanation": "The correct option is A. Digital-only distribution eliminates physical media, effectively destroying the secondary (used) game market. This allows platform owners and publishers to eliminate peer-to-peer or retail-intermediated resale, capturing the entire economic surplus of game transactions. Option B is incorrect because digital gatekeeping actually increases Sony's platform royalty power. Option C is incorrect because digital distribution bypasses traditional retail channels, weakening retail power. Option D is incorrect because digital distribution actually increases operating leverage (high fixed development costs, near-zero variable distribution costs). Concept: Channel control and secondary market elimination. Exam Takeaway: Eliminating physical distribution channels allows platform monopolists to destroy secondary markets and capture total consumer surplus.",
+    "type": "news"
+  },
+  {
+    "question": "The National Stock Exchange (NSE) of India is planning an IPO with no promoter and no fresh issue of shares, listing on its rival exchange, the BSE. What is the corporate governance and strategic rationale behind this unique structure?",
+    "options": [
+      "The lack of a promoter structure is designed to dilute retail voting power to protect the exchange from hostile takeovers.",
+      "Listing on a rival exchange is legally mandated to manage conflict of interest, while the offer-for-sale (OFS) structure provides liquidity to existing institutional shareholders without diluting equity.",
+      "The absence of a fresh issue indicates that the NSE has reached its maximum capital expenditure capacity and has zero growth prospects.",
+      "Listing on the BSE is a tactical move to artificially inflate the valuation of BSE's own stock through cross-holdings."
+    ],
+    "answerIndex": 1,
+    "explanation": "The correct option is B. Regulatory frameworks require that an exchange cannot list on itself to prevent conflicts of interest (hence listing on rival BSE). Because there is no promoter and no fresh issue, the IPO is entirely an Offer for Sale (OFS), allowing long-term institutional investors to exit or monetize their stakes without diluting equity or bringing unnecessary cash onto an already cash-rich balance sheet. Option A is incorrect because a widely-held non-promoter structure actually increases vulnerability to hostile actions if not regulated. Option C is incorrect because a lack of fresh issue indicates self-sufficiency, not zero growth. Option D is incorrect because listing does not imply cross-holding. Concept: Listing regulations and capital structure. Exam Takeaway: Cross-listing on competitor exchanges resolves self-regulatory conflicts of interest in financial market infrastructure.",
+    "type": "news"
+  },
+  {
+    "question": "Air India recently cut its fuel surcharge on select routes to Europe, North America, and Australia. In the context of airline economics and yield management, what does this move primarily signal?",
+    "options": [
+      "An increase in the price elasticity of demand on long-haul routes, forcing the airline to pass on fuel cost savings to maintain load factors.",
+      "A transition from dynamic pricing to a fixed-tariff pricing model to capture corporate travel market share.",
+      "A strategic decision to operate below marginal cost to drive low-cost carriers out of the long-haul market.",
+      "A response to a regulatory price ceiling imposed on international airfares by civil aviation authorities."
+    ],
+    "answerIndex": 0,
+    "explanation": "The correct option is A. Fuel surcharges are flexible pricing mechanisms used to manage volatility. When demand becomes highly price-elastic due to intense competition or economic cooling, airlines must lower these surcharges to pass on fuel savings, thereby stimulating demand and maintaining high load factors (capacity utilization). Option B is incorrect because airlines rely heavily on dynamic yield management, not fixed tariffs. Option C is incorrect because operating below marginal cost is unsustainable and unlikely on highly competitive long-haul routes. Option D is incorrect because international long-haul fares are generally market-determined, not capped by price ceilings. Concept: Price elasticity of demand and yield management. Exam Takeaway: Flexible surcharges allow firms to dynamically adjust pricing in response to shifts in consumer price sensitivity and input costs.",
+    "type": "news"
+  },
+  {
+    "question": "According to TransUnion CIBIL, business loans to individual entrepreneurs are outpacing entity-level credit growth. What is the key risk management implication of this trend for commercial banks?",
+    "options": [
+      "An increase in systemic risk due to the lack of personal guarantees on entrepreneur loans.",
+      "A higher correlation between personal credit profiles and business default rates, complicating traditional corporate underwriting.",
+      "A decline in net interest margins due to the low-yield nature of entrepreneurial credit compared to corporate credit.",
+      "An under-allocation of capital under Basel III norms due to lower risk-weights assigned to individual borrowers."
+    ],
+    "answerIndex": 1,
+    "explanation": "The correct option is B. When loans are extended directly to individual entrepreneurs rather than structured corporate entities, the boundary between personal finance and business operations blurs. Banks must evaluate the personal creditworthiness of the individual, as personal financial distress highly correlates with business default. Option A is incorrect because entrepreneurs typically have personal liability, unlike limited-liability corporate entities. Option C is incorrect because entrepreneurial loans usually command higher interest rates (risk premiums) than corporate credit. Option D is incorrect because individual business loans often carry higher risk weights under Basel III due to higher historical default rates. Concept: Credit risk assessment and underwriting. Exam Takeaway: Co-mingled personal and business risks require lenders to integrate consumer and commercial credit underwriting frameworks.",
+    "type": "news"
+  },
+  {
+    "question": "As global markets outperform India, financial advisors are recommending a 70:30 India-global portfolio. From a Modern Portfolio Theory (MPT) perspective, what is the primary mathematical justification for this asset allocation?",
+    "options": [
+      "It guarantees a higher absolute return than a 100% Indian equity portfolio under all market conditions.",
+      "It shifts the investor's portfolio to the left of the minimum-variance portfolio on the efficient frontier.",
+      "It exploits the imperfect correlation between Indian and global equity markets to optimize the portfolio's Sharpe ratio.",
+      "It eliminates systematic risk through geographic diversification, leaving only idiosyncratic risk."
+    ],
+    "answerIndex": 2,
+    "explanation": "The correct option is C. Modern Portfolio Theory states that diversifying across assets with imperfect correlations shifts the efficient frontier upward and to the left, reducing overall portfolio variance for a given level of expected return and thereby improving the Sharpe ratio. Option A is incorrect because diversification does not guarantee higher absolute returns, especially in strong bull markets. Option B is incorrect because the goal is to find an optimal risk-adjusted return on the efficient frontier, not necessarily the absolute minimum-variance portfolio. Option D is incorrect because geographic diversification reduces idiosyncratic (country-specific) risk, but systematic (global market) risk can never be eliminated. Concept: Modern Portfolio Theory and diversification. Exam Takeaway: International diversification optimizes the Sharpe ratio by exploiting imperfect asset correlations to reduce portfolio variance.",
+    "type": "news"
+  },
+  {
+    "question": "Nestle India's shares surged near a 52-week high after declaring a special dividend. From a corporate finance perspective, how does the market view a special dividend compared to an increase in regular dividends?",
+    "options": [
+      "A special dividend signals a permanent increase in the company's future free cash flows and earnings power.",
+      "A special dividend is viewed as a non-recurring distribution of excess cash, avoiding the 'dividend stickiness' trap.",
+      "A special dividend increases the firm's cost of equity by signaling a lack of profitable reinvestment opportunities.",
+      "A special dividend is preferred by institutional investors because it is completely tax-exempt compared to ordinary dividends."
+    ],
+    "answerIndex": 1,
+    "explanation": "The correct option is B. Regular dividends are 'sticky' because cutting them sends a strong negative signal to the market. Declaring a 'special' dividend allows a cash-rich firm like Nestle to return one-off excess capital to shareholders without committing to a permanently higher payout ratio. Option A is incorrect because regular dividends, not special dividends, signal permanent cash flow increases. Option C is incorrect because returning cash does not inherently increase the cost of equity, though it may signal fewer immediate high-growth projects. Option D is incorrect because special dividends are generally taxed similarly to ordinary dividends under modern tax codes. Concept: Dividend signaling theory. Exam Takeaway: Special dividends offer corporate financial flexibility by distributing excess cash without creating long-term payout expectations.",
+    "type": "news"
+  },
+  {
+    "question": "India's Services Purchasing Managers' Index (PMI) recently eased to a 17-month low. As a macroeconomic analyst, how should you interpret this indicator in relation to GDP growth and monetary policy?",
+    "options": [
+      "A lower PMI indicates immediate economic contraction, meaning GDP growth has turned negative.",
+      "The PMI is a lagging indicator, meaning the service sector slowdown has already been fully priced into GDP figures.",
+      "The PMI is a leading indicator; a reading above 50 still denotes expansion, but at a slower rate, suggesting cooling inflationary pressures.",
+      "The decline in PMI will immediately force the central bank to lower the cash reserve ratio (CRR) to inject liquidity."
+    ],
+    "answerIndex": 2,
+    "explanation": "The correct option is C. PMI is a diffusion index and a leading economic indicator. A reading above 50 indicates that the services sector is still expanding, but a drop to a 17-month low means the rate of expansion is decelerating. This cooling suggests that demand-pull inflation may ease, giving the central bank room to consider a more dovish stance. Option A is incorrect because contraction only occurs when PMI drops below 50. Option B is incorrect because PMI is a leading, not lagging, indicator. Option D is incorrect because central banks do not adjust monetary policy tools based on a single month's PMI deceleration. Concept: Macroeconomic indicators and monetary policy. Exam Takeaway: PMI readings above 50 indicate expansion; a declining trend above 50 signals slowing growth momentum and cooling inflation.",
+    "type": "news"
+  },
+  {
+    "question": "You are estimating the annual market size for premium leather smartphone cases in London. Given a London population of 9 million, an average smartphone penetration of 80%, a premium tier segment representing 15% of smartphone users, an average case replacement cycle of 1.5 years, and an average retail price of \u00a340 per case, which of the following is the most accurate estimate for the annual market size?",
+    "options": [
+      "\u00a311.52 million",
+      "\u00a317.28 million",
+      "\u00a328.80 million",
+      "\u00a343.20 million"
+    ],
+    "answerIndex": 2,
+    "explanation": "To find the annual market size, calculate the total addressable users: 9,000,000 population * 80% smartphone penetration = 7,200,000 smartphone users. The premium segment is 15% of this, which equals 1,080,000 premium users. Since the replacement cycle is 1.5 years, the number of cases purchased annually is 1,080,000 / 1.5 = 720,000 cases per year. At \u00a340 per case, the annual market value is 720,000 * \u00a340 = \u00a328,800,000 or \u00a328.80 million. Exam Takeaway: In market sizing, always convert the replacement frequency into an annualized rate before applying the unit price.",
+    "type": "apti"
+  },
+  {
+    "question": "A leveraged buyout (LBO) sponsor acquires a target company at an Enterprise Value of $1.2 billion, utilizing 60% debt and 40% equity. Over a 5-year holding period, the company pays down $300 million of the debt using generated cash flow, while the Enterprise Value grows to $1.5 billion due to EBITDA expansion. If the sponsor exits the investment at year 5, what is the multiple on invested capital (MoIC) for the sponsor's equity?",
+    "options": [
+      "1.88x",
+      "2.00x",
+      "2.13x",
+      "2.25x"
+    ],
+    "answerIndex": 3,
+    "explanation": "Initially, the sponsor invests 40% of the $1.2 billion Enterprise Value as equity, which is $480 million. The remaining $720 million is funded with debt. At exit, the Enterprise Value is $1.5 billion. The remaining debt is the initial $720 million minus the $300 million paid down, which equals $420 million. The ending equity value is Exit Enterprise Value ($1.5 billion) minus Ending Debt ($420 million), which equals $1.08 billion. The Multiple on Invested Capital (MoIC) is Ending Equity Value / Beginning Equity Value = $1,080 million / $480 million = 2.25x. Exam Takeaway: Sponsor returns in an LBO are driven by a combination of operating growth, multiple expansion, and the compounding effect of debt paydown increasing ending equity value.",
+    "type": "apti"
+  },
+  {
+    "question": "Company A has a Beta of 1.2, the risk-free rate is 3%, and the market risk premium is 6%. Company A is financed with 70% equity and 30% debt. Its pre-tax cost of debt is 5%, and the marginal corporate tax rate is 25%. What is Company A's Weighted Average Cost of Capital (WACC)?",
+    "options": [
+      "7.92%",
+      "8.27%",
+      "8.49%",
+      "9.15%"
+    ],
+    "answerIndex": 1,
+    "explanation": "First, calculate the cost of equity using CAPM: Cost of Equity = Risk-free Rate + (Beta * Market Risk Premium) = 3% + (1.2 * 6%) = 10.2%. Next, calculate the after-tax cost of debt: After-tax Cost of Debt = Pre-tax Cost of Debt * (1 - Tax Rate) = 5% * (1 - 0.25) = 3.75%. Finally, calculate WACC: WACC = (Weight of Equity * Cost of Equity) + (Weight of Debt * After-tax Cost of Debt) = (0.70 * 10.2%) + (0.30 * 3.75%) = 7.14% + 1.125% = 8.265%, which rounds to 8.27%. Exam Takeaway: Always remember to tax-shield the cost of debt when calculating WACC, as interest expenses are tax-deductible.",
+    "type": "apti"
+  },
+  {
+    "question": "In Microsoft Excel, you are writing a complex financial formula. You need to look up a value in a dynamic matrix where the column index might change based on user input. Which of the following formula combinations is the most robust, computationally efficient, and less prone to breaking when columns are inserted or deleted in the source sheet?",
+    "options": [
+      "VLOOKUP with a nested COLUMN function",
+      "INDEX and MATCH with MATCH looking up both row and column criteria",
+      "OFFSET and MATCH with a hardcoded height and width",
+      "HLOOKUP combined with a nested VLOOKUP"
+    ],
+    "answerIndex": 1,
+    "explanation": "INDEX and MATCH used in a two-way lookup (row and column) is the most robust and computationally efficient method. Unlike VLOOKUP, which requires a hardcoded or dynamic column index number and can break when columns are inserted or deleted, INDEX uses direct cell references that Excel automatically updates. OFFSET is a volatile function that recalculates every time any cell in the workbook changes, making it highly inefficient for large financial models. Exam Takeaway: Avoid volatile functions like OFFSET and rigid functions like VLOOKUP in institutional-grade financial models; opt for INDEX-MATCH-MATCH instead.",
+    "type": "apti"
+  },
+  {
+    "question": "During a period of rising prices (inflation), which of the following statements correctly describes the impact on a company's financial statements when using the LIFO (Last-In, First-Out) inventory valuation method compared to FIFO (First-In, First-Out)?",
+    "options": [
+      "LIFO results in lower Cost of Goods Sold (COGS), higher ending inventory, and higher net income.",
+      "LIFO results in higher Cost of Goods Sold (COGS), higher ending inventory, and lower net income.",
+      "LIFO results in higher Cost of Goods Sold (COGS), lower ending inventory, and lower net income.",
+      "LIFO results in lower Cost of Goods Sold (COGS), lower ending inventory, and higher net income."
+    ],
+    "answerIndex": 2,
+    "explanation": "Under inflation, newer inventory costs more than older inventory. LIFO assigns the most recent (higher) costs to Cost of Goods Sold (COGS), resulting in a higher COGS and consequently lower net income. This also means the older, lower costs remain in ending inventory on the balance sheet, resulting in a lower ending inventory value. This lower net income reduces income tax liabilities, which is why some firms prefer LIFO for tax purposes. Exam Takeaway: LIFO during inflation matches current higher costs with current revenues, reducing reported profits but improving cash flow through lower taxes.",
+    "type": "apti"
+  },
+  {
+    "question": "A private equity firm is evaluating a potential target. The target company has a high operating leverage. What does this imply about the company's risk and return profile under different macroeconomic scenarios?",
+    "options": [
+      "A small percentage change in revenue will result in a proportionately smaller change in operating income, making the firm low-risk.",
+      "A small percentage change in revenue will result in a proportionately larger change in operating income, amplifying both upside and downside performance.",
+      "Operating leverage has no impact on operating income variability; it only affects the interest expense on debt.",
+      "High operating leverage guarantees high profit margins regardless of revenue fluctuations because fixed costs are low."
+    ],
+    "answerIndex": 1,
+    "explanation": "Operating leverage is driven by the proportion of fixed costs to variable costs in a company's cost structure. High operating leverage means a company has high fixed costs and low variable costs. Once the break-even point is passed, most of the incremental revenue flows directly to operating income (EBIT), leading to rapid margin expansion. Conversely, if revenue declines, EBIT drops precipitously because the fixed costs cannot be easily scaled down. This amplifies business risk. Exam Takeaway: High operating leverage acts as a double-edged sword, magnifying earnings growth during expansions and accelerating losses during downturns.",
+    "type": "apti"
+  },
+  {
+    "question": "Which of the following macroeconomic actions by a central bank is most likely to cause a yield curve inversion, and what is the market's typical interpretation of such an event?",
+    "options": [
+      "Aggressive cutting of short-term interest rates to stimulate growth; interpreted as a sign of impending hyperinflation.",
+      "Aggressive raising of short-term interest rates to combat inflation; interpreted as a signal of an impending economic slowdown or recession.",
+      "Purchasing long-term government bonds through quantitative easing; interpreted as a sign of robust fiscal health.",
+      "Lowering the reserve requirement ratio for commercial banks; interpreted as a contractionary signal."
+    ],
+    "answerIndex": 1,
+    "explanation": "A yield curve inverts when short-term interest rates become higher than long-term rates. This typically happens when a central bank aggressively raises short-term policy rates to cool down an overheating economy and combat inflation. Investors buy long-term bonds as a safe haven, expecting lower future economic growth and inflation, which drives long-term yields down. Historically, an inverted yield curve has been a highly reliable leading indicator of an impending recession. Exam Takeaway: An inverted yield curve indicates that investors expect future economic weakness and subsequent rate cuts by the central bank.",
+    "type": "apti"
+  },
+  {
+    "question": "A company has an Enterprise Value (EV) of $500 million, Cash of $50 million, Total Debt of $200 million, and Non-controlling interests of $10 million. If the company has 10 million diluted shares outstanding, what is its implied share price?",
+    "options": [
+      "$34.00",
+      "$35.00",
+      "$36.00",
+      "$64.00"
+    ],
+    "answerIndex": 0,
+    "explanation": "To find the implied share price, we must first calculate the Equity Value from the Enterprise Value (EV). The formula is: Equity Value = EV - Debt + Cash - Non-controlling interests (and other non-operating liabilities). Equity Value = $500 million - $200 million + $50 million - $10 million = $340 million. Implied Share Price = Equity Value / Diluted Shares Outstanding = $340 million / 10 million shares = $34.00. Exam Takeaway: Always bridge correctly from Enterprise Value to Equity Value by subtracting debt-like items and adding cash-like assets before dividing by shares.",
+    "type": "apti"
+  },
+  {
+    "question": "If a company increases its accounts payable days outstanding (DPO) while keeping its inventory days outstanding (DIO) and accounts receivable days outstanding (DSO) constant, what is the impact on its Cash Conversion Cycle (CCC) and operating cash flow?",
+    "options": [
+      "The CCC increases, and operating cash flow decreases.",
+      "The CCC decreases, and operating cash flow increases.",
+      "The CCC remains unchanged, but operating cash flow increases due to working capital optimization.",
+      "The CCC decreases, but operating cash flow decreases due to supplier friction."
+    ],
+    "answerIndex": 1,
+    "explanation": "The Cash Conversion Cycle formula is CCC = DIO + DSO - DPO. Increasing Days Payable Outstanding (DPO) means the company is taking longer to pay its suppliers, which directly reduces the CCC (making the cycle shorter and more efficient). Because the company is holding onto cash longer instead of paying suppliers immediately, cash outflow is delayed, which increases operating cash flow in the short term. Exam Takeaway: Extending supplier payment terms (higher DPO) acts as a source of cash, shortening the cash conversion cycle and boosting operating cash flow.",
+    "type": "apti"
+  },
+  {
+    "question": "You are reviewing a company's cash flow statement. The company reports a net income of $100 million. During the year, depreciation and amortization were $15 million, accounts receivable increased by $10 million, inventory decreased by $5 million, and accounts payable decreased by $8 million. Assuming no other adjustments, what is the cash flow from operating activities?",
+    "options": [
+      "$92 million",
+      "$102 million",
+      "$108 million",
+      "$122 million"
+    ],
+    "answerIndex": 1,
+    "explanation": "To calculate Cash Flow from Operating Activities using the indirect method: Start with Net Income ($100M). Add back non-cash expenses: Depreciation & Amortization (+$15M). Adjust for changes in working capital: An increase in Accounts Receivable is a cash outflow (-$10M); a decrease in Inventory is a cash inflow (+$5M); a decrease in Accounts Payable is a cash outflow (-$8M). Total Operating Cash Flow = $100M + $15M - $10M + $5M - $8M = $102 million. Exam Takeaway: Increases in operating assets use cash, while increases in operating liabilities source cash on the cash flow statement.",
+    "type": "apti"
+  },
+  {
+    "question": "A stock has a payout ratio of 40% and a Return on Equity (ROE) of 15%. If the risk-free rate is 4%, the equity risk premium is 5%, and the stock's beta is 1.2, what is the implied price-to-earnings (P/E) multiple of the stock using the Gordon Growth Model?",
+    "options": [
+      "10.0x",
+      "13.3x",
+      "16.7x",
+      "40.0x"
+    ],
+    "answerIndex": 3,
+    "explanation": "Using the Gordon Growth Model, the justified forward P/E is P/E = Payout Ratio / (r - g). First, calculate the required rate of return (r) using CAPM: r = Rf + Beta * ERP = 4% + 1.2 * 5% = 10%. Next, calculate the sustainable growth rate (g): g = ROE * (1 - Payout Ratio) = 15% * (1 - 0.40) = 9%. Now plug these into the P/E formula: P/E = 0.40 / (0.10 - 0.09) = 0.40 / 0.01 = 40.0x. Exam Takeaway: The justified P/E multiple is highly sensitive to the spread between the required return and the sustainable growth rate.",
+    "type": "apti"
+  },
+  {
+    "question": "In the context of corporate restructuring, what is the structural difference between a 'Spin-off' and a 'Carve-out'?",
+    "options": [
+      "A spin-off involves selling shares to the public for cash, while a carve-out distributes shares to existing shareholders.",
+      "A spin-off creates a new independent company by distributing shares to existing shareholders on a pro-rata basis without raising new capital, whereas a carve-out involves selling a minority stake in a subsidiary to public investors to raise cash.",
+      "A spin-off is always taxable to the parent company, whereas a carve-out is always tax-free.",
+      "A spin-off involves the complete liquidation of the parent entity, whereas a carve-out maintains the parent entity intact."
+    ],
+    "answerIndex": 1,
+    "explanation": "A spin-off is a tax-free transaction where a parent company distributes 100% of its ownership in a subsidiary to its existing shareholders. No cash changes hands, and no new capital is raised. A carve-out (or equity carve-out) is an initial public offering (IPO) of a minority interest in a subsidiary. The parent company sells shares to new public investors, thereby raising cash for either the parent or the subsidiary. Exam Takeaway: Use a spin-off to separate business units cleanly without tax consequences; use a carve-out to raise capital and establish a market valuation for a subsidiary.",
+    "type": "apti"
+  },
+  {
+    "question": "Which of the following describes the 'J-Curve' effect in the context of Private Equity fund returns?",
+    "options": [
+      "The tendency of private equity investments to lose value in the first few years due to management fees and investment write-downs, before generating positive returns as investments mature.",
+      "The rapid rise in portfolio valuation immediately after investment, followed by a long plateau.",
+      "The cyclical nature of buyout returns matching public market indices with a lagged effect.",
+      "The mathematical relationship where fund performance is inversely proportional to the vintage year's total capital raised."
+    ],
+    "answerIndex": 0,
+    "explanation": "The J-Curve effect refers to the typical trajectory of a private equity fund's net asset value and cumulative returns over its life cycle. In the early years, the fund experiences negative returns because of upfront management fees, transaction costs, and early write-downs of underperforming assets before value-creation strategies take effect. As the investments mature, undergo operational improvements, and are eventually exited, the fund's returns rise steeply, forming a 'J' shape. Exam Takeaway: LPs must expect negative returns and cash outflows in the early years of a private equity fund before harvesting gains.",
+    "type": "apti"
+  },
+  {
+    "question": "Under what condition will the Unlevered Free Cash Flow (FCFF) of a company be exactly equal to its Levered Free Cash Flow (FCFE)?",
+    "options": [
+      "When the company has a constant debt-to-equity ratio.",
+      "When the company is entirely equity-financed (has zero debt) and has no interest-bearing liabilities.",
+      "When the company's interest expense is fully offset by tax shields.",
+      "When the company's capital expenditures equal its depreciation and amortization."
+    ],
+    "answerIndex": 1,
+    "explanation": "FCFF represents the cash flow available to all capital providers (both debt and equity), while FCFE represents the cash flow available only to equity holders after meeting all debt obligations (interest payments, debt issuance, and principal repayments). If a company has zero debt and no interest-bearing liabilities, there are no debt servicing obligations, making FCFF and FCFE identical. Exam Takeaway: The fundamental difference between levered and unlevered cash flows lies entirely in the cash flows associated with debt financing.",
+    "type": "apti"
+  },
+  {
+    "question": "A firm has a current ratio of 2.5x and a quick ratio of 1.2x. If its current liabilities are $100 million and it has no prepaid expenses, what is the value of its inventory?",
+    "options": [
+      "$100 million",
+      "$120 million",
+      "$130 million",
+      "$250 million"
+    ],
+    "answerIndex": 2,
+    "explanation": "Current Ratio = Current Assets / Current Liabilities. Given a current ratio of 2.5x and current liabilities of $100 million, Current Assets = 2.5 * $100 million = $250 million. Quick Ratio = (Current Assets - Inventory) / Current Liabilities. Given a quick ratio of 1.2x, Quick Assets (Current Assets - Inventory) = 1.2 * $100 million = $120 million. Therefore, Inventory = Current Assets ($250 million) - Quick Assets ($120 million) = $130 million. Exam Takeaway: The spread between the current ratio and the quick ratio highlights the proportion of current assets tied up in illiquid inventory.",
+    "type": "apti"
+  },
+  {
+    "question": "In corporate valuation, why is the Terminal Value in a Multi-Stage Discounted Cash Flow (DCF) model typically calculated using a normalized mid-year discounting convention if the discrete period is also discounted using mid-year convention?",
+    "options": [
+      "To artificially inflate the valuation of the target company to please sell-side clients.",
+      "To assume that all terminal cash flows occur precisely on the final day of the projection period.",
+      "To maintain consistency in the assumption that cash flows are generated evenly throughout the year, preventing a mismatch in cash flow timing assumptions.",
+      "Because the Excel NPV function cannot handle year-end discounting conventions."
+    ],
+    "answerIndex": 2,
+    "explanation": "If the discrete projection period uses a mid-year discounting convention (assuming cash flows are received evenly throughout the year rather than entirely at year-end), the Terminal Value calculation must also reflect this timing assumption. If you discount the Terminal Value using a year-end convention while the discrete period uses mid-year, you create a cash flow timing mismatch that undervalues the terminal period. Exam Takeaway: Consistency in timing assumptions across both discrete and terminal periods is critical to avoiding structural errors in DCF models.",
+    "type": "apti"
+  },
+  {
+    "question": "Company X is acquiring Company Y in an all-stock transaction. Company X has a P/E multiple of 20x and Company Y has a P/E multiple of 15x. Assuming no synergies and no transaction premium, what will be the immediate impact on the pro-forma Earnings Per Share (EPS) of Company X?",
+    "options": [
+      "The transaction will be dilutive to Company X's EPS.",
+      "The transaction will be accretive to Company X's EPS.",
+      "The transaction will have zero impact on Company X's EPS.",
+      "The impact cannot be determined without knowing the absolute net income of both companies."
+    ],
+    "answerIndex": 1,
+    "explanation": "In an all-stock transaction, when an acquirer with a higher P/E multiple buys a target with a lower P/E multiple, the transaction is mathematically accretive to the acquirer's EPS. This is because the acquirer is effectively exchanging its highly-valued shares for more earnings per share from the target than it has to issue. No synergies or premiums are required for this basic mathematical accretion to occur. Exam Takeaway: High-P/E companies can use their expensive stock as a 'currency' to buy lower-P/E assets, boosting their EPS mechanically.",
+    "type": "apti"
+  },
+  {
+    "question": "In quantitative finance and portfolio management, what does a negative covariance between two assets in a two-asset portfolio imply about the portfolio's total variance?",
+    "options": [
+      "It guarantees that the portfolio's total variance will be zero.",
+      "It reduces the portfolio's total variance below the weighted average of the individual asset variances, enhancing diversification benefits.",
+      "It increases the portfolio's total variance because negative numbers squared become positive in the variance formula.",
+      "It has no impact on the portfolio's variance, as variance only depends on individual asset standard deviations."
+    ],
+    "answerIndex": 1,
+    "explanation": "The formula for the variance of a two-asset portfolio is: Var(P) = (w1^2 * s1^2) + (w2^2 * s2^2) + (2 * w1 * w2 * Cov1,2). If the covariance (Cov1,2) is negative, the third term in the equation becomes negative, subtracting from the sum of the weighted individual variances. This reduces the overall portfolio variance, demonstrating the mathematical power of diversification. Exam Takeaway: Combining assets with negative or low covariance allows investors to construct portfolios with lower risk than any of the individual assets.",
+    "type": "apti"
+  },
+  {
+    "question": "Which of the following accounting treatments is correct regarding the capitalization of research and development (R&D) costs under IFRS compared to US GAAP?",
+    "options": [
+      "Both IFRS and US GAAP require all R&D costs to be fully expensed as incurred.",
+      "Both IFRS and US GAAP allow for the capitalization of both research and development costs once technical feasibility is met.",
+      "IFRS allows for the capitalization of development costs if specific criteria (such as technical feasibility) are met, while US GAAP generally requires all R&D costs to be expensed as incurred (with limited exceptions).",
+      "US GAAP allows for the capitalization of research costs, while IFRS requires them to be expensed."
+    ],
+    "answerIndex": 2,
+    "explanation": "Under US GAAP, virtually all R&D costs must be expensed immediately as incurred (except for internal-use software and certain web development costs). Under IFRS, there is a clear distinction between the 'research' phase (which must always be expensed) and the 'development' phase. Development costs can be capitalized as intangible assets if the company can demonstrate technical feasibility, intention to complete, ability to use or sell, and probable future economic benefits. Exam Takeaway: IFRS provides management with more reporting flexibility and potentially higher asset values through development cost capitalization compared to the conservative expensing rules of US GAAP.",
+    "type": "apti"
+  },
+  {
+    "question": "A hedge fund is executing a 'merger arbitrage' strategy on a announced cash acquisition where Company A is buying Company B for $50 per share. Currently, Company B is trading at $47 per share. What is the primary risk that the hedge fund is underwriting by buying Company B's stock at $47?",
+    "options": [
+      "Interest rate risk, as rising rates will decrease the present value of the cash payout.",
+      "Deal breakage risk, where the transaction fails to close due to regulatory hurdles, shareholder rejection, or financing failure, causing Company B's stock to plummet.",
+      "Market risk of Company A's stock declining, which will directly reduce the cash offer price.",
+      "Liquidity risk, because cash acquisitions are settled in illiquid private equity units."
+    ],
+    "answerIndex": 1,
+    "explanation": "In a cash-for-stock merger arbitrage strategy, the arbitrageur buys the target's stock below the acquisition price to capture the spread (the $3 difference). The primary risk is 'deal risk' or 'breakage risk.' If the merger falls through due to antitrust issues, failure to get shareholder approval, or financing issues, the target's stock price will typically crash back to its pre-announcement trading level, resulting in a substantial loss that dwarfs the potential $3 gain. Exam Takeaway: Merger arbitrage is asymmetric; it offers small, steady gains if deals close, but exposes the investor to large losses if a deal breaks.",
+    "type": "apti"
+  }
+]
