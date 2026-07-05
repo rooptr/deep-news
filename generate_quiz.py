@@ -247,7 +247,8 @@ def generate_quiz(headlines_data):
 
     QUESTION REQUIREMENTS
     - Every question MUST require strategic reasoning, financial analysis, or inference based on current affairs.
-    - Difficulty requirements: Make all questions Easy. Focus heavily on General Financial Awareness and Current Affairs.
+    - The questions should sound like realistic Tier-1 finance interview questions (e.g. Goldman Sachs, Moody's, Oxane). Do not make them sound stupid or overly simple.
+    - Difficulty requirements: A mix of mostly Medium to Difficult questions, with a few Easy questions.
     - Each question must primarily test ONE MBA domain: Corporate Finance, Strategy, Macroeconomics, Operations, Marketing, Economics, Accounting, Business Analytics, Organizational Behaviour, Risk Management, M&A, Supply Chain.
     - Explanation must include: 1. Why the correct answer is correct. 2. Why the other options are incorrect. 3. The core concept being tested. Maximum 120 words.
     - Include a very short "Exam Takeaway" at the very end of the explanation summarizing the key learning point.
