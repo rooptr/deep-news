@@ -6,12 +6,14 @@ import json
 import warnings
 from bs4 import XMLParsedAsHTMLWarning
 
+import urllib.parse
+
 warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
 papers = {
     "et.pdf": "https://dailyepaper.in/economic-times-newspaper-today-2026/",
     "bs.pdf": "https://dailyepaper.in/business-standard-epaper-feb-2026/",
-    "fe.pdf": "https://dailyepaper.in/financial-express-newspaper-free-download-2026/",
+    "fe.pdf": "https://www.careerswave.in/the-financial-express-epaper-pdf-free-download/",
     "mint.pdf": "https://dailyepaper.in/live-mint-epaper-feb-2026/",
     "eenadu.pdf": "https://dailyepaper.in/eenadu-epaper-free-download-2026/"
 }
@@ -19,8 +21,9 @@ papers = {
 def fetch_paper(filename, url):
     print(f"\nFetching {filename} from {url} ...")
     
+    domain = urllib.parse.urlparse(url).netloc
     slug = url.strip('/').split('/')[-1]
-    api_url = f"https://dailyepaper.in/wp-json/wp/v2/posts?slug={slug}"
+    api_url = f"https://{domain}/wp-json/wp/v2/posts?slug={slug}"
     
     req = urllib.request.Request(api_url, headers={'User-Agent': 'Mozilla/5.0'})
     try:
@@ -36,6 +39,14 @@ def fetch_paper(filename, url):
                 drive_link = a['href']
                 break
                 
+        # FALLBACK: If WP-JSON fails (like careerswave.in), scrape raw HTML for dates
+        if not drive_link:
+            raw_req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            raw_html = urllib.request.urlopen(raw_req).read().decode('utf-8', errors='ignore')
+            matches = re.findall(r'(\d{2}-\d{2}-\d{4}).*?(https://drive\.google\.com/[^\s"\'<>]+)', raw_html, re.DOTALL)
+            if matches:
+                drive_link = matches[0][1]
+
         if drive_link:
             match = re.search(r'/d/([a-zA-Z0-9_-]+)', drive_link)
             if match:

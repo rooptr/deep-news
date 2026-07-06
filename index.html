@@ -808,7 +808,10 @@
                 });
 
                 qDiv.innerHTML = `
-                    <div class="quiz-q-text">Q${qIndex + 1}. ${q.question}</div>
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 12px;">
+                        <div class="quiz-q-text" style="margin-bottom:0;">Q${qIndex + 1}. ${q.question}</div>
+                        <button id="add-flashcard-${qIndex}" onclick="addToFlashcards(${qIndex})" style="background:#ffdd00; border:2px solid black; padding:4px 8px; font-weight:bold; cursor:pointer; font-family:inherit; flex-shrink:0; margin-left:12px; box-shadow:2px 2px 0px rgba(0,0,0,1);">+ Flashcard</button>
+                    </div>
                     ${optsHtml}
                     <div id="exp-${qIndex}" class="quiz-explanation">
                         <strong>Explanation:</strong> ${q.explanation}
@@ -826,6 +829,36 @@
             if (selectedIdx === correctIdx) buttons[selectedIdx].classList.add('correct');
             else { buttons[selectedIdx].classList.add('wrong'); buttons[correctIdx].classList.add('correct'); }
             document.getElementById(`exp-${qIndex}`).style.display = 'block';
+        };
+
+        window.addToFlashcards = function(qIndex) {
+            const q = filteredQuizData[qIndex];
+            const btn = document.getElementById(`add-flashcard-${qIndex}`);
+            if (btn) btn.innerHTML = "Saving...";
+            
+            const cardData = {
+                id: "card_" + Date.now() + "_" + Math.floor(Math.random()*1000),
+                category: q.type ? q.type.toUpperCase() + " QUIZ" : "DAILY QUIZ",
+                question: q.question,
+                answer: q.options[q.answerIndex],
+                explanation: q.explanation || "",
+                source: q.source || "Daily Newspaper"
+            };
+
+            fetch('https://script.google.com/macros/s/AKfycbyerLC0EU-OiK_nncqf9IHWGJk0yaU47XlTO9_nuZ_5qRFqiyxrrvpqPx4ay8Clhilc/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify(cardData)
+            })
+            .then(() => {
+                if (btn) {
+                    btn.innerHTML = "✓ Saved";
+                    btn.style.background = "#d4edda";
+                }
+            })
+            .catch(() => {
+                if (btn) btn.innerHTML = "❌ Failed";
+            });
         };
 
         function updateQuizUI() {
