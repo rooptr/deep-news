@@ -5,7 +5,6 @@ import os
 import json
 import warnings
 from bs4 import XMLParsedAsHTMLWarning
-import gdown
 
 warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
@@ -46,7 +45,7 @@ def fetch_paper(filename, url):
                 file_id = match.group(1)
                 direct_url = f"https://drive.google.com/uc?export=download&id={file_id}"
                 print(f"Downloading {filename}...")
-                gdown.download(direct_url, filename, quiet=False)
+                urllib.request.urlretrieve(direct_url, filename)
                 size = os.path.getsize(filename)
                 print(f"Success! Downloaded {filename} ({size / 1024 / 1024:.2f} MB)")
             else:
