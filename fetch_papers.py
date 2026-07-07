@@ -14,7 +14,7 @@ warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 papers = {
     "et.pdf": "https://dailyepaper.in/economic-times-newspaper-today-2026/",
     "bs.pdf": "https://dailyepaper.in/business-standard-epaper-feb-2026/",
-    "fe.pdf": "https://www.careerswave.in/the-financial-express-epaper-pdf-free-download/",
+    "fe.pdf": "https://dailyepaper.in/financial-express-newspaper-free-download-2026/",
     "mint.pdf": "https://dailyepaper.in/live-mint-epaper-feb-2026/",
     "eenadu.pdf": "https://dailyepaper.in/eenadu-epaper-free-download-2026/"
 }
