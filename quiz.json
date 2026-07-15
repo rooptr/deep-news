@@ -1,362 +1,386 @@
 [
   {
-    "question": "A major Indian auto ancillary firm is trading at a steep conglomerate discount relative to its pure-play competitors. The board proposes a demerger to unlock shareholder value. From a Corporate Finance perspective, what is the primary mechanism through which this demerger is expected to eliminate the trading discount?",
+    "question": "A leading Indian auto ancillary firm is trading at a steep valuation discount compared to its peers. The board is considering a demerger to unlock shareholder value. From a Corporate Finance perspective, what is the primary mechanism through which a demerger typically eliminates a conglomerate discount?",
     "options": [
-      "By automatically lowering the combined entity's cost of debt due to reduced operational scale.",
-      "By allowing the market to value each distinct business unit independently, eliminating cross-subsidization and attracting sector-specific investors.",
-      "By shifting retained earnings from the slower-growing unit to the faster-growing unit to artificially boost EPS.",
-      "By creating a double-taxation shield on future inter-corporate dividend transfers between the split entities."
+      "It automatically increases the combined debt capacity of the separate entities.",
+      "It allows investors to value distinct business segments independently, eliminating cross-subsidization concerns.",
+      "It guarantees immediate tax-free cash distribution to all existing shareholders.",
+      "It eliminates the need for capital expenditure in the lower-performing business division."
     ],
     "answerIndex": 1,
-    "explanation": "A demerger addresses a conglomerate discount by separating distinct business segments. This allows the market to value each business on its own merits, using sector-specific multiples rather than a blended, discounted rate. It also resolves asymmetric information, eliminates inefficient internal cross-subsidization, and allows targeted, sector-specific institutional investors to allocate capital directly to their preferred business model. Option A is incorrect because scale reduction typically increases the cost of debt. Option C is incorrect as earnings shifting does not justify a structural valuation rerating. Option D is incorrect because demergers do not inherently create unique inter-corporate dividend tax shields. Concept tested: Conglomerate Discount and Value Creation via Corporate Restructuring. Exam Takeaway: Demergers unlock value by eliminating cross-subsidies and aligning businesses with sector-specific investor bases.",
+    "explanation": "A demerger eliminates the conglomerate discount by providing pure-play investment options. This allows the market to value each business segment independently based on its specific risk-return profile, removing the drag of cross-subsidization where cash flows from a high-performing unit are used to fund a lower-performing one. Option A is incorrect because separating entities often reduces individual debt capacity. Option C is incorrect because demergers do not guarantee cash distributions. Option D is incorrect because capital expenditure needs depend on operations, not corporate structure. Exam Takeaway: Demergers unlock value by eliminating cross-subsidization and allowing distinct valuation metrics for pure-play entities.",
     "type": "news"
   },
   {
-    "question": "A wealth advisor recommends a 70:30 India-global multi-asset portfolio. From a modern portfolio theory (MPT) perspective, what is the primary structural benefit of introducing a 30% global allocation into a predominantly Indian domestic equity portfolio?",
+    "question": "Kaynes has plunged 43.5% from its October peak and is trading nearly 26% below its 200-day Simple Moving Average (SMA). A technical analyst suggests a tactical rebound based on mean reversion. Under the concept of mean reversion in Business Analytics and quantitative trading, what does this setup imply?",
     "options": [
-      "It guarantees higher absolute returns because international markets systematically outperform emerging markets over any given time horizon.",
-      "It shifts the portfolio's efficient frontier upward and to the left by capturing low-correlation assets and mitigating country-specific risk.",
-      "It eliminates systematic risk entirely by hedging against currency depreciation of the Indian Rupee.",
-      "It lowers transaction costs and operational overhead relative to holding a purely domestic portfolio."
+      "The asset's price is mathematically guaranteed to return to its 200-day SMA within the next trading cycle.",
+      "Extreme price deviations from a long-term average tend to be temporary, suggesting an increased probability of a corrective move back toward the average.",
+      "The asset has entered a permanent structural downtrend, making the 200-day SMA irrelevant.",
+      "The asset's volatility will drop to zero as the price stabilizes at the current level."
     ],
     "answerIndex": 1,
-    "explanation": "According to Modern Portfolio Theory, introducing assets with low correlation to an existing portfolio shifts the efficient frontier upward and to the left. This optimization improves the portfolio's Sharpe ratio by reducing non-systematic, country-specific risk while maintaining or improving risk-adjusted returns. Option A is incorrect because global diversification does not guarantee higher absolute returns. Option C is incorrect because systematic risk cannot be entirely eliminated through asset diversification. Option D is incorrect because international investing typically carries higher transaction and compliance costs. Concept tested: Portfolio Diversification and the Efficient Frontier. Exam Takeaway: Geographic diversification optimizes risk-adjusted returns by exploiting low asset correlations across international boundaries.",
+    "explanation": "Mean reversion is a financial theory suggesting that asset prices and historical returns eventually revert to their long-term mean or average. Trading 26% below the 200-day SMA represents an extreme deviation, indicating an increased statistical probability of a corrective bounce, though it is not a guarantee (making Option A incorrect). Option C is incorrect because mean reversion assumes the average remains a valid anchor. Option D is incorrect because volatility rarely drops to zero during sharp price corrections. Exam Takeaway: Mean reversion strategies exploit extreme price deviations from long-term averages to capture short-term corrective trends.",
     "type": "news"
   },
   {
-    "question": "Nuvama initiates coverage on Vedanta Aluminium, projecting a significant stock rally driven by sharp debt reduction. If the company uses its free cash flow to equity (FCFE) to aggressively pay down outstanding debt, how will this capital allocation decision impact the firm's cost of capital and equity valuation?",
+    "question": "Groww's parent company reported a 94.44% year-on-year jump in consolidated net profit to Rs 735 crore for Q1, driven by traction in newer products and client additions. In Accounting and Corporate Finance, if a high-growth financial platform rapidly expands its product suite, which of the following risks is most critical to monitor regarding earnings quality?",
     "options": [
-      "It will permanently decrease the cost of equity by removing the financial distress premium, regardless of the target capital structure.",
-      "It will shift the capital structure toward equity, potentially increasing the Weighted Average Cost of Capital (WACC) if the cost of debt is lower than the cost of equity, while lowering financial risk.",
-      "It will increase the tax shield benefits, thereby lowering the WACC and directly boosting the firm's enterprise value.",
-      "It will reduce the cost of debt to zero, resulting in a capital structure optimized solely for growth."
+      "An increase in the cash conversion cycle due to physical inventory holding costs.",
+      "The capitalization of customer acquisition costs (CAC) inflating short-term operating profits.",
+      "A decline in nominal revenue due to high customer retention rates.",
+      "An automatic reduction in regulatory capital requirements as transaction volumes grow."
     ],
     "answerIndex": 1,
-    "explanation": "As a firm pays down debt, its leverage decreases, reducing its financial risk and its cost of equity (beta decreases). However, because debt is cheaper than equity and carries a tax shield, reducing leverage shifts the capital structure weight toward more expensive equity. This can increase the WACC if the firm moves away from its optimal capital structure. Option A is incorrect because the cost of equity does not decrease linearly without limit. Option C is incorrect because paying down debt reduces interest expenses, which decreases the interest tax shield. Option D is incorrect because the cost of debt can never reach zero. Concept tested: Capital Structure Theory and WACC. Exam Takeaway: Debt reduction lowers financial distress risk but reduces tax shield benefits, directly impacting the WACC.",
+    "explanation": "For rapidly growing digital fintech platforms, earnings quality can be artificially inflated if customer acquisition costs (CAC) are aggressively capitalized as intangible assets rather than expensed immediately. Expensing CAC hurts short-term profits but reflects conservative accounting. Option A is incorrect because digital platforms do not hold physical inventory. Option C is incorrect because high retention rates typically support revenue growth. Option D is incorrect because higher volumes usually increase operational and regulatory capital requirements. Exam Takeaway: High earnings growth in digital platforms must be audited for aggressive capitalization of customer acquisition and software development costs.",
     "type": "news"
   },
   {
-    "question": "An academic paper argues that India's Finance Minister must rethink the medium-term debt-to-GDP target, suggesting that the tax-to-GDP ratio is a better measure of structural fiscal health. Why is a rising tax-to-GDP ratio considered a more reliable indicator of structural economic improvement than a simple reduction in the debt-to-GDP ratio?",
+    "question": "The US has reinstated a blockade on Iran and proposed a 20% charge on cargo passing through the Strait of Hormuz. From a Risk Management and Supply Chain perspective, how should global maritime shipping firms hedge against this geopolitical disruption?",
     "options": [
-      "A rising tax-to-GDP ratio indicates a shrinking informal economy and broadening tax base, whereas debt-to-GDP can be artificially lowered by high inflation.",
-      "A higher tax-to-GDP ratio automatically reduces the sovereign cost of borrowing to zero by eliminating the need for deficit financing.",
-      "Debt-to-GDP ratios do not account for external debt, while tax-to-GDP ratios capture all foreign direct investment flows.",
-      "A rising tax-to-GDP ratio guarantees that the government will run a fiscal surplus in the immediate fiscal year."
-    ],
-    "answerIndex": 0,
-    "explanation": "A rising tax-to-GDP ratio reflects structural improvements such as formalization of the economy, wider tax compliance, and efficient tax administration. Conversely, the debt-to-GDP ratio can be distorted in the short term; for instance, high nominal GDP growth driven by inflation (the 'denominator effect') can artificially lower the ratio without any real improvement in fiscal discipline. Option B is incorrect because borrowing costs do not drop to zero. Option C is incorrect because debt-to-GDP does account for total sovereign debt, and tax-to-GDP does not measure FDI. Option D is incorrect because a high tax-to-GDP ratio does not guarantee a fiscal surplus if government spending is also high. Concept tested: Fiscal Policy and Macroeconomic Indicators. Exam Takeaway: Tax-to-GDP ratios reflect structural economic formalization, whereas debt-to-GDP can be distorted by nominal inflationary shocks.",
-    "type": "news"
-  },
-  {
-    "question": "Tata Consultancy Services (TCS) announces a leadership revamp and the creation of new specialized business groups. From an Operations and Strategy perspective, what is the primary organizational risk associated with transitioning from a highly centralized structure to decentralized, customer-centric business groups?",
-    "options": [
-      "An immediate increase in systemic financial leverage due to debt restructuring across new divisions.",
-      "The creation of operational silos, leading to duplication of resources, loss of economies of scale, and fragmented client messaging.",
-      "A mandatory transition from a flat organizational hierarchy to a strict, multi-layered bureaucratic matrix.",
-      "The complete elimination of the firm's core technological competencies due to divisional specialization."
+      "By shifting entirely to spot-rate contracts for all future freight shipments.",
+      "By utilizing alternative transit routes and purchasing war risk insurance surcharges.",
+      "By eliminating fuel hedging programs to conserve immediate cash reserves.",
+      "By increasing inventory turnover ratios to zero to avoid holding buffer stock."
     ],
     "answerIndex": 1,
-    "explanation": "Transitioning to decentralized, specialized business units helps improve customer responsiveness and agility. However, the primary operational risk is the creation of silos. Different business groups may duplicate support functions (like HR, legal, or specialized tech teams), leading to higher overhead, loss of shared economies of scale, and inconsistent brand messaging to clients. Option A is incorrect because organizational restructuring does not inherently alter financial leverage. Option C is incorrect because decentralization typically aims to flatten hierarchies, not make them more bureaucratic. Option D is incorrect because core competencies are redistributed, not eliminated. Concept tested: Organizational Design and Structural Risk. Exam Takeaway: Decentralization enhances agility and customer focus but risks resource duplication and coordination silos.",
+    "explanation": "Reinstating blockades and imposing tariffs in critical choke points like the Strait of Hormuz increases transit risk. Firms hedge this by routing cargo through alternative channels (e.g., land bridges or longer sea routes) and purchasing specialized war risk insurance. Option A is incorrect because spot-rate exposure increases vulnerability to sudden rate spikes during crises. Option C is incorrect because fuel price volatility rises during geopolitical tensions, making fuel hedging more critical. Option D is incorrect because buffer stock must be increased, not eliminated, to handle supply chain delays. Exam Takeaway: Geopolitical choke-point disruptions require active route diversification and specialized insurance underwriting to mitigate supply chain shock.",
     "type": "news"
   },
   {
-    "question": "A sharp rise in Cairn India's stock price on the BSE in the final hour of trade due to rumored stake sale talks, contrasted with a 5.5% drop in potential buyer Vedanta's stock price on the LSE, illustrates which classic M&A phenomenon?",
+    "question": "India's government divestment has hit a four-year high amid war-led fiscal pressure. In Macroeconomics and Public Finance, what is the primary macroeconomic justification for a government to accelerate state-owned enterprise (SOE) divestment during periods of fiscal stress?",
     "options": [
-      "The Winner's Curse, where the bidding firm's shares fall due to anticipated overpayment and integration risks, while the target firm's shares rise.",
-      "Regulatory Arbitrage, where differing market hours between BSE and LSE create temporary mispricings.",
-      "The Liquidity Premium effect, where the larger float of the acquiring company absorbs the selling pressure.",
-      "Information Asymmetry, where domestic investors possess material non-public information that foreign investors lack."
-    ],
-    "answerIndex": 0,
-    "explanation": "This situation demonstrates 'The Winner's Curse' and typical M&A market reactions. Upon rumors of an acquisition, the target company's stock (Cairn India) typically rises because of the expected acquisition premium. Conversely, the acquiring company's stock (Vedanta) often falls because investors fear the acquirer will overpay, dilute current equity, or struggle with post-merger integration. Option B is incorrect as this is a fundamental valuation reaction, not structural regulatory arbitrage. Option C is incorrect because liquidity premiums do not explain opposing price directions. Option D is incorrect as the price moves reflect standard strategic market reactions to M&A rumors rather than geographical information asymmetry. Exam Takeaway: In M&A announcements, targets typically trade up on premium expectations, while acquirers often trade down due to overpayment risks.",
-    "type": "news"
-  },
-  {
-    "question": "Indian IT firms are currently facing a dual headwind: structural AI disruption and geopolitical risks in the Middle East (such as the US-Iran standoff near the Strait of Hormuz). From a strategic risk management perspective, how should an IT firm's treasury and strategy teams hedge these concurrent risks?",
-    "options": [
-      "Implement short-term currency derivatives to offset AI disruption while shifting IT delivery centers exclusively to Middle Eastern hubs.",
-      "Accelerate capital expenditure into proprietary generative AI IP to hedge technology disruption, while diversifying delivery centers geographically and stress-testing sovereign risk exposures.",
-      "Reduce R&D spending to conserve cash reserves for potential war-related supply chain disruptions in physical hardware.",
-      "Increase billing rates across all legacy application maintenance contracts to build an emergency geopolitical reserve fund."
+      "To permanently eliminate the national debt through one-time asset sales.",
+      "To bridge fiscal deficits without triggering inflationary pressures associated with excessive sovereign debt monetization.",
+      "To artificially strengthen the domestic currency by restricting foreign direct investment.",
+      "To reduce private sector participation in key strategic economic sectors."
     ],
     "answerIndex": 1,
-    "explanation": "To manage structural technology disruption and geopolitical risks simultaneously, a firm must pursue a dual strategy: offensive capital allocation to transform its product mix (AI IP) and defensive operational diversification (geographical delivery hedging and sovereign stress-testing). Option A is incorrect because moving delivery centers to the Middle East increases geopolitical risk exposure. Option C is incorrect because cutting R&D during an AI disruption cycle is strategic suicide. Option D is incorrect because raising legacy rates arbitrarily is commercially unviable in a competitive market. Exam Takeaway: Managing compound risks requires combining offensive technological adaptation with defensive operational diversification.",
+    "explanation": "During fiscal stress, governments accelerate divestment to raise non-debt capital receipts. This helps bridge the fiscal deficit without resorting to excessive market borrowing or central bank debt monetization (printing money), both of which can trigger inflation. Option A is incorrect because divestment proceeds are rarely large enough to permanently eliminate national debt. Option C is incorrect because divestments often attract foreign capital, which strengthens the currency rather than restricting FDI. Option D is incorrect because divestment increases private sector involvement. Exam Takeaway: Divestment serves as a non-inflationary tool to manage fiscal deficits during macroeconomic crises.",
     "type": "news"
   },
   {
-    "question": "In May, Foreign Portfolio Investors (FPIs) pulled out Rs 27,000 crore from Indian equities, citing global growth uncertainty, geopolitical tensions, and volatile crude oil prices. Under portfolio theory, what is the primary macroeconomic mechanism driving this emerging market capital flight?",
+    "question": "The Reserve Bank of India (RBI) Governor has urged commercial banks to leverage AI to cut costs and improve operational efficiency. From an Operations and Risk Management standpoint, what is a primary operational risk associated with integrating AI into core banking credit-scoring decisions?",
     "options": [
-      "An increase in global risk aversion (risk-off sentiment) raising the required risk premium for emerging market assets, leading investors to reallocate capital to safe-haven assets.",
-      "A sudden decline in the domestic cost of capital in India, rendering foreign investments less profitable on a relative basis.",
-      "A structural shift toward purchasing power parity that favors currencies tied directly to crude oil production over consumption economies.",
-      "The implementation of capital controls by emerging market central banks to artificially depress domestic equity valuations."
-    ],
-    "answerIndex": 0,
-    "explanation": "When global uncertainty and geopolitical risks rise, international investors exhibit 'risk-off' behavior. They demand higher risk premiums for emerging market assets, causing capital flight back to developed markets and safe-haven assets. Option B is incorrect because a lower domestic cost of capital would generally support equity valuations, not trigger capital flight. Option C is incorrect as short-term capital flight is driven by risk appetite and yield differentials, not long-term PPP adjustments. Option D is incorrect because India did not implement capital controls to depress its own markets. Exam Takeaway: Rising global volatility triggers risk-off behavior, driving capital out of emerging markets as investors demand higher risk premiums.",
-    "type": "news"
-  },
-  {
-    "question": "The Indian government plans to leverage AI and analytics to build a Statistical Business Register (SBR) for mapping supply chains and investment clusters. For this system to effectively guide multi-billion dollar logistics infrastructure investments, which data strategy concept is most critical?",
-    "options": [
-      "Unstructured data scraping from international trade portals to bypass local corporate filings.",
-      "Semantic interoperability and data harmonization across diverse public and private datasets to ensure a unified, clean source of truth.",
-      "Maximizing data silos to ensure that proprietary corporate supply chain secrets are legally protected from competitor analysis.",
-      "Using edge computing exclusively to process data at municipal checkpoints without central cloud aggregation."
+      "A complete elimination of credit defaults, leading to zero-yield loan portfolios.",
+      "Algorithmic bias and lack of explainability ('black box' risk) leading to regulatory non-compliance.",
+      "An increase in manual processing times for standard retail loan approvals.",
+      "The inability to process large unstructured datasets for risk assessment."
     ],
     "answerIndex": 1,
-    "explanation": "To map complex national supply chains, AI models require clean, standardized, and integrated data from various ministries, state departments, and corporate databases. Semantic interoperability and data harmonization ensure that diverse datasets can talk to each other, creating a reliable foundation for AI training and predictive analytics. Option A is incorrect because unstructured web scraping cannot replace structured, authoritative domestic registers. Option C is incorrect because data silos prevent the systemic mapping required for cluster analysis. Option D is incorrect because macro-level infrastructure planning requires centralized data aggregation and synthesis. Exam Takeaway: Effective AI-driven public policy and infrastructure planning require robust data harmonization and semantic interoperability across administrative silos.",
+    "explanation": "While AI improves efficiency, its use in credit scoring introduces 'black box' risk, where the underlying decision-making logic is opaque. This can lead to unintended algorithmic bias and non-compliance with fair lending regulations. Option A is incorrect because AI cannot completely eliminate default risk. Option C is incorrect because AI is designed to decrease, not increase, manual processing times. Option D is incorrect because processing unstructured data is a primary strength of AI systems. Exam Takeaway: Implementing AI in regulated financial operations requires balancing efficiency gains with model explainability and compliance risk management.",
     "type": "news"
   },
   {
-    "question": "The AI investment landscape exhibits a stark divide: Warren Buffett's Berkshire Hathaway has taken a major stake in Alphabet, while Michael Burry is actively shorting Nvidia and Palantir. From a corporate valuation perspective, what lies at the heart of this strategic disagreement?",
+    "question": "A domestic company with significant foreign currency-denominated debt experiences a sharp depreciation of its local currency (the Indian Rupee). Assuming the company does not hedge its foreign exchange risk and has no foreign currency revenue, what is the primary accounting impact on its financial statements?",
     "options": [
-      "Buffett is valuing companies based on current tangible book value, whereas Burry is valuing them using future option-pricing models.",
-      "Buffett views certain tech giants as possessing wide, defensive competitive moats with reasonable cash flow multiples, while Burry focuses on potential accounting overstatements and bubble-like valuations driven by non-recurring hardware demand.",
-      "Buffett is betting on immediate hardware monetization, while Burry believes software applications will capture 100% of the AI value chain.",
-      "The disagreement is purely based on liquidity constraints, where Berkshire is forced to buy mega-caps due to its cash pile, irrespective of valuation."
+      "An increase in operating profit (EBIT) due to inflation-linked domestic pricing power.",
+      "An immediate non-operating expense on the income statement due to the revaluation of the foreign debt liability.",
+      "A decrease in the balance sheet value of total liabilities because foreign debt becomes cheaper to service.",
+      "An increase in cash flows from financing activities due to favorable exchange rate translation."
     ],
     "answerIndex": 1,
-    "explanation": "The divide represents classic value investing versus contrarian short-selling. Buffett targets companies with sustainable competitive advantages (moats) like Alphabet's distribution and data ecosystem, trading at sustainable multiples. Burry focuses on systemic overvaluation, potential demand pull-forward (especially in hardware like Nvidia), and aggressive accounting practices during tech bubbles. Option A is incorrect because Alphabet's value is driven by intangible assets, not tangible book value. Option C is incorrect because Alphabet is primarily a software/platform play, not a hardware play. Option D is incorrect because it ignores Buffett's strict adherence to intrinsic value principles. Exam Takeaway: Tech cycles split value investors between those backing durable ecosystem moats and those shorting cyclical demand spikes and aggressive valuations.",
+    "explanation": "When the local currency depreciates, unhedged foreign currency liabilities must be revalued on the balance sheet at the new, higher exchange rate. According to accounting standards, this unrealized foreign exchange loss must be recognized as a non-operating expense on the income statement, reducing net profit. It does not affect EBIT directly as it is a non-operating item, nor does it decrease liabilities or increase financing cash flows. This tests Risk Management and Accounting. Exam Takeaway: Unhedged foreign debt exposes a firm to severe balance sheet translation risks and net income volatility when the home currency depreciates.",
     "type": "news"
   },
   {
-    "question": "Which of the following bodies is the primary regulator of the securities and commodity markets in India?",
+    "question": "Udaan secured $160 million in funding and simplified its capital structure. In corporate finance, what is the most strategic objective of simplifying a complex capital structure with multiple classes of shares or debt tranches prior to a major liquidity event like an IPO?",
+    "options": [
+      "To increase the cost of capital by introducing more restrictive debt covenants.",
+      "To align investor incentives, reduce governance friction, and make the company more attractive to public market investors.",
+      "To artificially inflate the book value of equity through accounting reclassifications.",
+      "To eliminate all voting rights for minority shareholders to centralize control."
+    ],
+    "answerIndex": 1,
+    "explanation": "Simplifying a capital structure reduces complexity, aligns the interests of various share classes, and eliminates legacy preferences that might deter new public investors. It improves corporate governance transparency, which is vital for an IPO. It does not increase the cost of capital or artificially inflate equity book value. This tests Corporate Finance and Strategy. Exam Takeaway: Capital structure simplification is a critical pre-IPO corporate action that reduces governance friction and enhances valuation by making the equity structure transparent to institutional investors.",
+    "type": "news"
+  },
+  {
+    "question": "Emcure Pharmaceuticals has acquired Gennova Biopharmaceuticals to make it a wholly owned subsidiary. From an M&A strategy perspective, what is the primary financial advantage of transitioning from a majority stake (control) to 100% ownership?",
+    "options": [
+      "It eliminates the need to consolidate Gennova's balance sheet under accounting standards.",
+      "It eliminates non-controlling interest (NCI) leakage, allowing Emcure to capture 100% of Gennova's net income and cash flows.",
+      "It decreases the overall tax rate of the parent company automatically.",
+      "It guarantees a lower cost of debt for the parent company regardless of market conditions."
+    ],
+    "answerIndex": 1,
+    "explanation": "Moving from a majority stake to 100% ownership eliminates the non-controlling interest (minority interest) on the income statement and balance sheet. This ensures that all future earnings, cash flows, and synergies generated by Gennova accrue entirely to Emcure's shareholders. It does not change consolidation requirements (which already applied under majority control) nor does it guarantee lower tax rates or debt costs. This tests M&A and Corporate Finance. Exam Takeaway: Achieving 100% ownership of a subsidiary eliminates non-controlling interest leakage, maximizing the parent's share of consolidated net income and operational synergies.",
+    "type": "news"
+  },
+  {
+    "question": "According to equity strategist Christopher Wood, inflation in India reflects fundamental growth dynamics. Under macroeconomic theory, which type of inflation is most closely aligned with strong fundamental economic growth and rising aggregate demand?",
+    "options": [
+      "Cost-push inflation driven by supply-chain bottlenecks and rising commodity import costs.",
+      "Demand-pull inflation driven by robust consumer spending, rising wages, and capacity utilization.",
+      "Stagflation characterized by stagnant output and high unemployment.",
+      "Hyperinflation caused by excessive expansion of the money supply without real output growth."
+    ],
+    "answerIndex": 1,
+    "explanation": "Demand-pull inflation occurs when aggregate demand outpaces aggregate supply, which is a natural byproduct of strong economic growth, rising employment, and robust consumer confidence. In contrast, cost-push inflation represents supply shocks, and stagflation represents economic malaise. This tests Macroeconomics. Exam Takeaway: Moderate demand-pull inflation is often a positive signal of an economy's fundamental growth momentum, indicating that consumer demand and investments are robust.",
+    "type": "news"
+  },
+  {
+    "question": "Bharti Airtel's chairman Sunil Mittal identified financial services, data, and cloud as the company's next growth drivers. From a corporate strategy perspective, what type of diversification is Airtel pursuing by leveraging its massive telecom subscriber base to sell financial services?",
+    "options": [
+      "Conglomerate diversification into entirely unrelated markets with no operational overlap.",
+      "Concentric (related) diversification leveraging a shared customer base and digital distribution infrastructure.",
+      "Horizontal integration to acquire direct telecommunication competitors.",
+      "Backward vertical integration to manufacture telecommunications hardware."
+    ],
+    "answerIndex": 1,
+    "explanation": "Airtel is leveraging its core asset\u2014its massive digital subscriber base and network infrastructure\u2014to cross-sell financial, data, and cloud services. This is concentric (or related-link) diversification, as it utilizes existing capabilities and distribution channels to enter adjacent markets, unlike unrelated conglomerate diversification. This tests Corporate Strategy. Exam Takeaway: Successful diversification often relies on leveraging core competencies, such as a proprietary distribution network or customer base, to capture higher-margin adjacent revenue streams.",
+    "type": "news"
+  },
+  {
+    "question": "Several international mutual funds in India have shut down fresh Systematic Investment Plans (SIPs). What is the primary regulatory or operational constraint that typically forces mutual funds to halt new inflows into foreign equities?",
+    "options": [
+      "A sudden decline in the performance of international stock markets.",
+      "Breaching industry-wide or fund-specific foreign investment limits set by the central bank or market regulator.",
+      "An increase in domestic transaction taxes on foreign equity purchases.",
+      "A strategic decision by international fund managers to lock out retail investors."
+    ],
+    "answerIndex": 1,
+    "explanation": "Indian mutual funds must halt fresh inflows into international schemes when they approach or breach the overall foreign investment limits set by the Reserve Bank of India (RBI) and SEBI. These limits restrict the total amount of outbound capital to manage foreign exchange reserves. It is not caused by market performance or transaction taxes. This tests Risk Management and Macroeconomics. Exam Takeaway: Regulatory caps on outbound capital flows can create operational bottlenecks for asset management companies, forcing them to restrict access to popular international investment products.",
+    "type": "news"
+  },
+  {
+    "question": "Which regulatory body in India is primarily responsible for regulating the securities market and protecting investor interests?",
     "options": [
       "Reserve Bank of India (RBI)",
       "Securities and Exchange Board of India (SEBI)",
-      "Insolvency and Bankruptcy Board of India (IBBI)",
-      "Insurance Regulatory and Development Authority (IRDAI)"
+      "Insurance Regulatory and Development Authority (IRDAI)",
+      "Pension Fund Regulatory and Development Authority (PFRDA)"
     ],
     "answerIndex": 1,
-    "explanation": "The Securities and Exchange Board of India (SEBI) is the dedicated regulatory body established to protect the interests of investors in securities and to promote and regulate the development of the securities market in India. The RBI regulates the banking system and monetary policy, while IBBI handles insolvency proceedings and IRDAI regulates the insurance sector. Exam Takeaway: SEBI is the apex watchdog for capital markets in India.",
+    "explanation": "The Securities and Exchange Board of India (SEBI) is the designated regulator for the securities and commodity markets in India. While the RBI oversees the banking system and monetary policy, SEBI ensures market integrity, transparency, and investor protection. Exam Takeaway: SEBI is the ultimate watchdog for stock exchanges and listed entities in India.",
     "type": "apti"
   },
   {
-    "question": "What is the policy rate used by the Reserve Bank of India (RBI) to lend short-term money to commercial banks against government securities?",
+    "question": "What is the term used for the interest rate at which the Reserve Bank of India (RBI) lends money to commercial banks in the event of any shortfall of funds?",
     "options": [
       "Reverse Repo Rate",
-      "Bank Rate",
       "Repo Rate",
-      "Marginal Standing Facility (MSF) Rate"
-    ],
-    "answerIndex": 2,
-    "explanation": "The Repo Rate (Repurchase Rate) is the key policy rate at which the RBI lends short-term funds to commercial banks when they face a shortage of liquidity. The Reverse Repo Rate is the rate at which RBI borrows from banks. Bank Rate and MSF are typically higher-rate windows for longer or urgent liquidity needs. Exam Takeaway: Repo Rate is the primary tool for RBI to control liquidity and inflation in the economy.",
-    "type": "apti"
-  },
-  {
-    "question": "Under which section of the Income Tax Act, 1961, can an individual claim a deduction of up to Rs. 1.5 lakh for investments in instruments like PPF, ELSS, and NSC?",
-    "options": [
-      "Section 80D",
-      "Section 80C",
-      "Section 80G",
-      "Section 24"
+      "Statutory Liquidity Ratio",
+      "Cash Reserve Ratio"
     ],
     "answerIndex": 1,
-    "explanation": "Section 80C is the most popular tax-saving section under the Indian Income Tax Act, allowing individuals to claim deductions up to Rs. 1.5 lakh per annum for specific investments like PPF, ELSS, NPS, and life insurance premiums. Section 80D is for medical insurance premiums, Section 80G is for donations, and Section 24 covers home loan interest. Exam Takeaway: Section 80C is the foundational tax-saving avenue for retail investors in India.",
+    "explanation": "The Repo Rate (Repurchase Option Rate) is the benchmark interest rate at which the central bank lends short-term money to commercial banks. Reverse Repo is the rate at which RBI borrows from banks. SLR and CRR are reserve requirements. Exam Takeaway: Repo rate changes are the primary tool for RBI to control inflation and liquidity in the economy.",
     "type": "apti"
   },
   {
-    "question": "In the context of the Indian banking system, what does the acronym 'NPA' stand for?",
+    "question": "Which of the following is considered a non-cash expense on the Income Statement and must be added back to net income when calculating operating cash flows?",
     "options": [
-      "Net Profit Asset",
-      "Non-Performing Asset",
-      "Nominal Principal Amount",
-      "National Portfolio Association"
-    ],
-    "answerIndex": 1,
-    "explanation": "An NPA or Non-Performing Asset refers to a classification for loans or advances that are in default or in arrears on scheduled payments of interest or principal, typically for a period of 90 days or more. Tracking NPAs is vital for assessing the health of commercial banks. Exam Takeaway: NPAs measure the asset quality and credit risk of a banking institution.",
-    "type": "apti"
-  },
-  {
-    "question": "Which global financial institution is headquartered in Washington, D.C., and focuses primarily on providing loans and grants to the governments of low- and middle-income countries for developmental projects?",
-    "options": [
-      "International Monetary Fund (IMF)",
-      "World Bank",
-      "Asian Development Bank (ADB)",
-      "New Development Bank (NDB)"
-    ],
-    "answerIndex": 1,
-    "explanation": "The World Bank's primary mission is to reduce global poverty by offering long-term developmental loans and grants to developing countries. While the IMF is also headquartered in Washington, D.C., it focuses on stabilizing the global monetary system and managing balance of payment crises. ADB is based in Manila, and NDB is based in Shanghai. Exam Takeaway: The World Bank funds long-term developmental infrastructure, whereas the IMF stabilizes international monetary issues.",
-    "type": "apti"
-  },
-  {
-    "question": "In a Discounted Cash Flow (DCF) model, what does the 'Terminal Value' represent?",
-    "options": [
-      "The value of the firm's cash flows during the explicit forecast period.",
-      "The value of the firm's cash flows beyond the explicit forecast period, assuming stable growth.",
-      "The liquidation value of the firm's physical assets.",
-      "The initial capital expenditure required to start the business."
-    ],
-    "answerIndex": 1,
-    "explanation": "Terminal Value captures the value of a business's expected cash flows beyond the explicit projection period (typically 5 to 10 years), assuming the business will continue to operate as a going concern at a stable growth rate indefinitely. It often accounts for a major portion of the total enterprise value in a DCF. Exam Takeaway: Terminal Value reflects the perpetual value of a firm beyond the near-term forecast horizon.",
-    "type": "apti"
-  },
-  {
-    "question": "Which of the following is considered a non-cash expense and must be added back to Net Income when calculating Cash Flow from Operations (CFO) using the indirect method?",
-    "options": [
-      "Capital Expenditure",
-      "Dividend Paid",
+      "Interest Expense",
+      "Salaries and Wages",
       "Depreciation and Amortization",
-      "Accounts Receivable"
+      "Income Taxes Paid"
     ],
     "answerIndex": 2,
-    "explanation": "Depreciation and Amortization is an accounting expense that reduces Net Income but does not involve an actual outflow of cash. Therefore, under the indirect method, it is added back to Net Income to determine the true Cash Flow from Operations. Capital Expenditures belong under Investing Activities, and Dividends Paid belong under Financing Activities. Exam Takeaway: Non-cash charges like depreciation are added back to Net Income to reconcile accounting profits with actual cash flows.",
+    "explanation": "Depreciation and Amortization are accounting allocations of an asset's cost over its useful life. No physical cash leaves the firm when these expenses are recorded, meaning they must be added back to net income to determine actual cash generated. Exam Takeaway: Always add back non-cash expenses like depreciation when transitioning from net income to operating cash flow.",
     "type": "apti"
   },
   {
-    "question": "If a company has a Cost of Equity of 12%, a Pre-tax Cost of Debt of 8%, a Tax Rate of 30%, and a Debt-to-Equity ratio of 1:1, what is its Weighted Average Cost of Capital (WACC)?",
-    "options": [
-      "10.0%",
-      "8.8%",
-      "9.2%",
-      "7.6%"
-    ],
-    "answerIndex": 1,
-    "explanation": "With a Debt-to-Equity ratio of 1:1, the weights of Debt and Equity are each 50% (0.5). The after-tax cost of debt is 8% * (1 - 0.30) = 5.6%. The Cost of Equity is 12%. Therefore, WACC = (0.5 * 12%) + (0.5 * 5.6%) = 6.0% + 2.8% = 8.8%. Exam Takeaway: WACC must always incorporate the tax shield benefit on the cost of debt.",
-    "type": "apti"
-  },
-  {
-    "question": "Which of the following cash flows is NOT included in the calculation of Free Cash Flow to Firm (FCFF)?",
-    "options": [
-      "Operating Cash Flow",
-      "Capital Expenditures",
-      "Interest Expenses (adjusted for taxes)",
-      "Dividends Paid to Common Shareholders"
-    ],
-    "answerIndex": 3,
-    "explanation": "FCFF represents the cash available to all capital providers (both debt and equity holders) after operating expenses, taxes, and capital investments have been met. Since dividends are a distribution of cash to equity holders, they are not subtracted when calculating the cash flow available to them. Exam Takeaway: FCFF is measured before any distributions to equity or debt providers are made.",
-    "type": "apti"
-  },
-  {
-    "question": "If a project has a Net Present Value (NPV) of exactly zero, what does this imply about its Internal Rate of Return (IRR)?",
-    "options": [
-      "The IRR is zero.",
-      "The IRR is equal to the project's discount rate.",
-      "The IRR is greater than the project's discount rate.",
-      "The project is generating negative cash flows."
-    ],
-    "answerIndex": 1,
-    "explanation": "The IRR is defined as the discount rate at which the Net Present Value (NPV) of a project's cash flows becomes exactly zero. Therefore, if the NPV is zero, the cost of capital or discount rate used is exactly equal to the IRR. Exam Takeaway: When NPV is zero, the project's rate of return exactly matches the required rate of return.",
-    "type": "apti"
-  },
-  {
-    "question": "Which of the following financial ratios is a pure measure of a company's short-term liquidity, excluding inventory from its current assets?",
-    "options": [
-      "Current Ratio",
-      "Quick Ratio (Acid-Test Ratio)",
-      "Debt-to-Equity Ratio",
-      "Return on Assets (ROA)"
-    ],
-    "answerIndex": 1,
-    "explanation": "The Quick Ratio (or Acid-Test Ratio) is calculated as (Current Assets - Inventory) / Current Liabilities. It excludes inventory because inventory can be difficult or slow to convert into cash quickly. The Current Ratio includes inventory, while Debt-to-Equity and ROA are solvency and profitability ratios, respectively. Exam Takeaway: The Quick Ratio provides a conservative look at a firm's immediate liquidity by ignoring less liquid inventories.",
-    "type": "apti"
-  },
-  {
-    "question": "In Microsoft Excel, which function should you use to find a value in the leftmost column of a table and return a value in the same row from a specified column?",
-    "options": [
-      "HLOOKUP",
-      "INDEX",
-      "VLOOKUP",
-      "MATCH"
-    ],
-    "answerIndex": 2,
-    "explanation": "VLOOKUP (Vertical Lookup) searches for a specified value in the first column of a table array and returns a value in the same row from another column in the table. HLOOKUP is for horizontal tables, and INDEX/MATCH is a combination of two functions rather than a single function designed specifically to find a value in the leftmost column. Exam Takeaway: VLOOKUP is the standard tool for vertical data retrieval across columns.",
-    "type": "apti"
-  },
-  {
-    "question": "What does a high Asset Turnover Ratio typically indicate about a business?",
-    "options": [
-      "The company is highly leveraged.",
-      "The company is efficient at generating revenue from its assets.",
-      "The company has high profit margins.",
-      "The company has a slow collection period for its accounts receivable."
-    ],
-    "answerIndex": 1,
-    "explanation": "The Asset Turnover Ratio (Revenue / Average Total Assets) measures how efficiently a company uses its assets to generate sales. A higher ratio indicates that the company is generating more revenue per dollar of assets owned. It does not measure leverage, profit margins, or collection efficiency directly. Exam Takeaway: Asset Turnover reflects the operational efficiency of a firm's asset base in driving top-line sales.",
-    "type": "apti"
-  },
-  {
-    "question": "Which Excel keyboard shortcut is used to absolute-reference a cell or range (toggling the dollar signs like $A$1) while writing a formula?",
+    "question": "In Microsoft Excel, which shortcut key is used to absolute-reference a cell (locking the row and column with $ signs) while writing a formula?",
     "options": [
       "F2",
       "F4",
       "F9",
-      "Ctrl + Shift + L"
+      "F11"
     ],
     "answerIndex": 1,
-    "explanation": "Pressing the F4 key while editing a cell reference in an Excel formula automatically inserts dollar signs ($) to lock the row and/or column, converting a relative reference to an absolute reference. F2 is used to edit a cell, F9 recalculates worksheets, and Ctrl+Shift+L toggles filters. Exam Takeaway: F4 is the essential shortcut for locking cell references in financial models.",
+    "explanation": "Pressing the F4 key while selecting a cell reference in an Excel formula automatically inserts dollar signs to lock the row and column (e.g., changing A1 to $A$1). F2 is used to edit a cell, F9 recalculates worksheets, and F11 creates a chart. Exam Takeaway: F4 is the essential shortcut for toggle-locking cell references in financial modeling.",
     "type": "apti"
   },
   {
-    "question": "If a company's Net Income is $50,000, its Total Assets are $500,000, and its Total Equity is $200,000, what is its Return on Equity (ROE)?",
+    "question": "If a company has a Current Ratio of 2.5 and a Quick Ratio of 0.8, what does this wide gap most likely indicate about the company's current assets?",
     "options": [
-      "10%",
-      "25%",
-      "40%",
-      "15%"
+      "The company has a very high level of cash.",
+      "The company has a high level of inventory.",
+      "The company has negligible accounts receivable.",
+      "The company has high long-term debt."
     ],
     "answerIndex": 1,
-    "explanation": "Return on Equity (ROE) is calculated as Net Income divided by Total Shareholders' Equity. Here, ROE = $50,000 / $200,000 = 0.25 or 25%. Dividing Net Income by Total Assets would yield the Return on Assets (ROA), which is 10%. Exam Takeaway: ROE measures the profitability of a business relative to the book value of shareholder capital.",
+    "explanation": "The Current Ratio includes inventory in its numerator, whereas the Quick Ratio excludes inventory because it is less liquid. A large discrepancy between these two ratios indicates that a significant portion of current assets is tied up in slow-moving inventory. Exam Takeaway: A high current-to-quick ratio gap points to potential inventory buildup or liquidity risk.",
     "type": "apti"
   },
   {
-    "question": "Which of the following describes the 'DuPont Analysis' framework for calculating Return on Equity (ROE)?",
+    "question": "Under a Discounted Cash Flow (DCF) framework, what happens to the present value of future cash flows if the discount rate (WACC) increases?",
     "options": [
-      "ROE = Gross Margin x Inventory Turnover x Leverage",
-      "ROE = Net Profit Margin x Asset Turnover x Equity Multiplier",
-      "ROE = Operating Margin x Quick Ratio x Debt Ratio",
-      "ROE = Dividend Yield x P/E Ratio x Capital Adequacy"
+      "The present value increases.",
+      "The present value decreases.",
+      "The present value remains unchanged.",
+      "The present value doubles."
     ],
     "answerIndex": 1,
-    "explanation": "The DuPont Analysis decomposes ROE into three key components to pinpoint what is driving the company's performance: Net Profit Margin (profitability), Asset Turnover (efficiency), and the Equity Multiplier (financial leverage). Multiplying these three metrics yields ROE. Exam Takeaway: DuPont Analysis helps analysts understand whether a company's ROE is driven by high profitability, asset efficiency, or aggressive leverage.",
+    "explanation": "The discount rate represents the required rate of return or hurdle rate. Because the discount rate sits in the denominator of the present value formula, a higher discount rate reduces the current value of future cash inflows. Exam Takeaway: Valuation and discount rates share an inverse relationship; higher risk or rates depress firm value.",
+    "type": "apti"
+  },
+  {
+    "question": "Which financial metric represents the total cash generated by a company's core business operations before capital expenditures and debt service?",
+    "options": [
+      "Free Cash Flow to Firm (FCFF)",
+      "Cash Flow from Operations (CFO)",
+      "Free Cash Flow to Equity (FCFE)",
+      "Net Income"
+    ],
+    "answerIndex": 1,
+    "explanation": "Cash Flow from Operations (CFO) measures the cash inflows and outflows directly resulting from a company's core operating activities. Free cash flows subtract capital expenditures, and net income includes non-cash items. Exam Takeaway: CFO is the purest indicator of a business's ability to sustain itself from its day-to-day operations.",
+    "type": "apti"
+  },
+  {
+    "question": "Which of the following Excel formulas is best suited to retrieve a value from a specific column in a table based on a matching key in the leftmost column?",
+    "options": [
+      "HLOOKUP",
+      "INDEX-MATCH",
+      "VLOOKUP",
+      "SUMIF"
+    ],
+    "answerIndex": 2,
+    "explanation": "VLOOKUP (Vertical Lookup) searches for a value in the first column of a table array and returns a value in the same row from a specified column. While INDEX-MATCH is more flexible, VLOOKUP is the standard tool designed specifically to search leftmost columns vertically. Exam Takeaway: VLOOKUP is the classic tool for vertical data retrieval in financial models.",
+    "type": "apti"
+  },
+  {
+    "question": "What does a high Price-to-Earnings (P/E) ratio relative to industry peers typically suggest about a company?",
+    "options": [
+      "Investors expect low growth in the future.",
+      "The stock is fundamentally undervalued.",
+      "Investors expect high earnings growth in the future.",
+      "The company has extremely high debt levels."
+    ],
+    "answerIndex": 2,
+    "explanation": "A high P/E ratio indicates that investors are willing to pay a premium today because they expect robust earnings growth from the company in the future. It can also sometimes indicate that a stock is overvalued. Exam Takeaway: High P/E ratios reflect optimistic market sentiment and strong growth expectations.",
+    "type": "apti"
+  },
+  {
+    "question": "Which of the following describes the 'Terminal Value' in a Discounted Cash Flow (DCF) valuation model?",
+    "options": [
+      "The total value of the firm's assets at liquidation.",
+      "The present value of cash flows during the explicit forecast period.",
+      "The estimated value of a business beyond the explicit forecast period.",
+      "The value of the firm's equity after paying off all debt."
+    ],
+    "answerIndex": 2,
+    "explanation": "Terminal Value captures the value of a business's expected cash flows beyond the explicit projection period (typically 5-10 years) under the assumption of stable, perpetual growth. Exam Takeaway: Terminal Value often accounts for 60% to 80% of a company's total DCF valuation.",
+    "type": "apti"
+  },
+  {
+    "question": "In India, which system or platform is used for real-time, instantaneous interbank electronic fund transfers available 24x7?",
+    "options": [
+      "NEFT",
+      "RTGS",
+      "IMPS",
+      "Cheque Truncation System"
+    ],
+    "answerIndex": 2,
+    "explanation": "Immediate Payment Service (IMPS) is an instant, 24x7 interbank electronic fund transfer service in India. While RTGS and NEFT are also electronic systems, IMPS was specifically built for immediate, round-the-clock retail transactions. Exam Takeaway: IMPS provides the foundation for instant retail digital payments across India.",
+    "type": "apti"
+  },
+  {
+    "question": "Which of the following ratios measures a firm's efficiency in using its assets to generate sales revenue?",
+    "options": [
+      "Asset Turnover Ratio",
+      "Return on Equity (ROE)",
+      "Gross Profit Margin",
+      "Debt-to-Equity Ratio"
+    ],
+    "answerIndex": 0,
+    "explanation": "The Asset Turnover Ratio (Sales divided by Average Total Assets) measures how effectively a company utilizes its asset base to generate top-line revenue. ROE measures profitability relative to equity, and gross margin measures pricing efficiency. Exam Takeaway: Asset Turnover is a vital component of efficiency analysis in DuPont modeling.",
+    "type": "apti"
+  },
+  {
+    "question": "If a company has a Net Profit Margin of 10%, Asset Turnover of 1.5, and an Equity Multiplier of 2.0, what is its Return on Equity (ROE) using the DuPont Analysis framework?",
+    "options": [
+      "15%",
+      "20%",
+      "30%",
+      "35%"
+    ],
+    "answerIndex": 2,
+    "explanation": "Under the DuPont framework, ROE is calculated as: Net Profit Margin x Asset Turnover x Equity Multiplier. Therefore, ROE = 10% x 1.5 x 2.0 = 30%. Exam Takeaway: DuPont analysis breaks down ROE into profitability, operating efficiency, and financial leverage.",
     "type": "apti"
   },
   {
     "question": "What is the primary difference between Enterprise Value (EV) and Equity Value?",
     "options": [
-      "Equity Value includes cash, while Enterprise Value does not.",
-      "Enterprise Value represents the value of the entire business to all capital providers, while Equity Value represents the value available only to shareholders.",
-      "Enterprise Value is always lower than Equity Value.",
-      "Equity Value includes debt, while Enterprise Value excludes it."
+      "Enterprise Value includes only the value of common stock.",
+      "Enterprise Value reflects the total value of the operating business to all capital providers, whereas Equity Value only represents the value to shareholders.",
+      "Equity Value includes net debt, while Enterprise Value excludes it.",
+      "There is no difference; they are synonymous terms."
     ],
     "answerIndex": 1,
-    "explanation": "Enterprise Value (EV) represents the total value of the operating business, which is claimable by both debt holders and equity shareholders. Equity Value represents only the portion of the business's value that belongs to the equity shareholders after debt has been paid off. Exam Takeaway: EV is the value of the whole firm, whereas Equity Value is the value belonging solely to the owners.",
+    "explanation": "Enterprise Value (EV) is the total value of the firm's core operations, representing claims by both debt holders and equity holders. Equity Value is the value of the business attributable solely to shareholders after debt has been paid off. Exam Takeaway: EV = Equity Value + Debt - Cash.",
     "type": "apti"
   },
   {
-    "question": "Which of the following is the correct formula to calculate the Interest Coverage Ratio?",
-    "options": [
-      "EBITDA / Total Debt",
-      "EBIT / Interest Expense",
-      "Net Income / Interest Expense",
-      "Gross Profit / Interest Expense"
-    ],
-    "answerIndex": 1,
-    "explanation": "The Interest Coverage Ratio is calculated as Operating Income (EBIT) divided by Interest Expense. It measures how easily a company can pay interest on its outstanding debt using its operating profits. Net Income is already net of interest, making it incorrect for this specific solvency metric. Exam Takeaway: Interest Coverage measures a company's cushion for meeting interest obligations from core operating profits.",
-    "type": "apti"
-  },
-  {
-    "question": "In Excel, which error code indicates that a formula cannot find the referenced value, often occurring during a failed VLOOKUP search?",
+    "question": "Which of the following Excel errors occurs when a formula refers to a cell that has been deleted or replaced by another paste operation?",
     "options": [
       "#VALUE!",
+      "#DIV/0!",
       "#REF!",
-      "#N/A",
-      "#DIV/0!"
+      "#NAME?"
     ],
     "answerIndex": 2,
-    "explanation": "The #N/A error stands for 'Not Available' and typically occurs when a lookup function (like VLOOKUP, MATCH, or XLOOKUP) cannot find a match for the specified lookup value. #VALUE! indicates an incorrect data type, #REF! means a cell reference is invalid, and #DIV/0! occurs when dividing by zero. Exam Takeaway: #N/A is the standard signal that a lookup value does not exist in the source range.",
+    "explanation": "The #REF! error stands for 'Reference' and is displayed when Excel cannot find a cell reference specified in a formula, which typically happens when columns, rows, or sheets are deleted. Exam Takeaway: Clean up deleted ranges carefully to prevent cascading #REF! errors in financial models.",
     "type": "apti"
   },
   {
-    "question": "Which of the following represents the correct order of payment to capital providers in the event of a corporate liquidation (from first to last)?",
+    "question": "What is the term for the rate of interest that banks charge on loans to their most creditworthy and reliable corporate customers?",
     "options": [
-      "Common Equity, Preferred Equity, Secured Debt, Unsecured Debt",
-      "Secured Debt, Unsecured Debt, Preferred Equity, Common Equity",
-      "Preferred Equity, Common Equity, Secured Debt, Unsecured Debt",
-      "Unsecured Debt, Secured Debt, Common Equity, Preferred Equity"
+      "Prime Lending Rate (PLR)",
+      "Federal Funds Rate",
+      "Statutory Rate",
+      "Marginal Cost of Funds based Lending Rate (MCLR)"
+    ],
+    "answerIndex": 3,
+    "explanation": "In India, the Marginal Cost of Funds based Lending Rate (MCLR) is the internal benchmark rate used by banks to price loans, reflecting the minimum rate below which they cannot lend, except in specific cases. Exam Takeaway: MCLR ensures transparent and market-linked loan pricing for bank borrowers.",
+    "type": "apti"
+  },
+  {
+    "question": "Which financial statement provides a snapshot of a company's financial position, listing its assets, liabilities, and equity at a specific point in time?",
+    "options": [
+      "Income Statement",
+      "Statement of Cash Flows",
+      "Balance Sheet",
+      "Statement of Retained Earnings"
+    ],
+    "answerIndex": 2,
+    "explanation": "The Balance Sheet is a point-in-time snapshot governed by the accounting equation: Assets = Liabilities + Shareholders' Equity. The Income Statement and Cash Flow Statement cover performance over a period of time. Exam Takeaway: The Balance Sheet is the ultimate ledger showing what a firm owns and owes at a specific date.",
+    "type": "apti"
+  },
+  {
+    "question": "Which of the following is the standard risk-free rate proxy used by financial analysts when calculating the Cost of Equity for an Indian company?",
+    "options": [
+      "The US 10-Year Treasury Yield",
+      "The India 10-Year Government Bond Yield",
+      "The RBI Repo Rate",
+      "The average inflation rate in India"
     ],
     "answerIndex": 1,
-    "explanation": "During bankruptcy or liquidation, claims are settled based on seniority. Secured debt holders are paid first, followed by unsecured debt holders, then preferred shareholders, and finally common equity shareholders, who hold the residual risk. Exam Takeaway: Equity holders are the absolute last in line to receive payouts during a corporate liquidation.",
+    "explanation": "The risk-free rate represents the return on an investment with zero risk of default. In India, the yield on the 10-year Indian Government Bond is the standard benchmark proxy for risk-free returns in local valuation models. Exam Takeaway: Match the currency and geography of your cash flows with the corresponding local government bond yield.",
+    "type": "apti"
+  },
+  {
+    "question": "What does a Debt-to-Equity ratio of 2.0 indicate about a firm's capital structure?",
+    "options": [
+      "The firm has twice as much equity as debt.",
+      "The firm has twice as much debt as equity.",
+      "The firm has no debt in its capital structure.",
+      "The firm's assets are twice its liabilities."
+    ],
+    "answerIndex": 1,
+    "explanation": "A Debt-to-Equity ratio of 2.0 means that for every $1 of equity capital provided by shareholders, the firm has borrowed $2 of debt capital from lenders. Exam Takeaway: A high Debt-to-Equity ratio indicates high financial leverage and increased risk.",
+    "type": "apti"
+  },
+  {
+    "question": "In financial modeling, which metric is calculated by subtracting Capital Expenditures (CapEx) from Cash Flow from Operations (CFO)?",
+    "options": [
+      "EBITDA",
+      "Net Income",
+      "Free Cash Flow (FCF)",
+      "Gross Profit"
+    ],
+    "answerIndex": 2,
+    "explanation": "Free Cash Flow represents the discretionary cash a company has remaining after paying for its operating expenses and capital expenditures required to maintain or expand its asset base. Exam Takeaway: FCF is the core metric used to value businesses because it represents cash actual investors can extract.",
     "type": "apti"
   }
 ]
