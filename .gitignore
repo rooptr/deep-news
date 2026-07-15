@@ -3,3 +3,9 @@
 
 # Ignore massive PDF downloads
 *.pdf
+
+# Generated security and deployment artifacts
+pdf_manifest.json
+.pdf-security
+.pdf-forensics
+site

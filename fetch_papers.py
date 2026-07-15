@@ -8,6 +8,13 @@ from bs4 import XMLParsedAsHTMLWarning
 import gdown
 
 import urllib.parse
+import tempfile
+import hashlib
+import subprocess
+
+MAX_PDF_BYTES = 100 * 1024 * 1024
+ALLOWED_DOWNLOAD_HOSTS = {'drive.google.com', 'drive.usercontent.google.com'}
+MANIFEST_FILE = 'pdf_manifest.json'
 
 warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
@@ -27,6 +34,55 @@ def fetch_paper(filename, url):
     api_url = f"https://{domain}/wp-json/wp/v2/posts?slug={slug}"
     
     req = urllib.request.Request(api_url, headers={'User-Agent': 'Mozilla/5.0'})
+    def validate_pdf(path):
+        size = os.path.getsize(path)
+        if size == 0 or size > MAX_PDF_BYTES:
+            raise ValueError(f"PDF size {size} is outside the allowed range")
+        with open(path, 'rb') as pdf:
+            if pdf.read(5) != b'%PDF-':
+                raise ValueError("downloaded file is not a PDF")
+        detected_type = subprocess.check_output(
+            ['file', '--brief', '--mime-type', path], text=True).strip()
+        if detected_type != 'application/pdf':
+            raise ValueError(f"detected MIME type is {detected_type}")
+
+    def validate_redirect(url_to_check):
+        parsed = urllib.parse.urlparse(url_to_check)
+        if parsed.scheme != 'https' or parsed.hostname not in ALLOWED_DOWNLOAD_HOSTS:
+            raise ValueError(f"download host is not allowlisted: {url_to_check}")
+        request = urllib.request.Request(url_to_check, headers={'User-Agent': 'Mozilla/5.0', 'Range': 'bytes=0-0'})
+        with urllib.request.urlopen(request, timeout=30) as response:
+            final = urllib.parse.urlparse(response.geturl())
+            if final.scheme != 'https' or final.hostname not in ALLOWED_DOWNLOAD_HOSTS:
+                raise ValueError(f"redirected to an unapproved host: {response.geturl()}")
+            content_type = (response.headers.get_content_type() or '').lower()
+            content_length = response.headers.get('Content-Length')
+            # Google Drive may return an HTML confirmation page before gdown follows
+            # through to the PDF. The final magic-byte check below remains mandatory.
+            if content_type not in {'application/pdf', 'application/octet-stream', 'text/html'}:
+                raise ValueError(f"unexpected content type: {content_type}")
+            if content_length and int(content_length) > MAX_PDF_BYTES:
+                raise ValueError("remote PDF exceeds size limit")
+
+    def record_manifest(source_url, path):
+        digest = hashlib.sha256()
+        with open(path, 'rb') as pdf:
+            for chunk in iter(lambda: pdf.read(1024 * 1024), b''):
+                digest.update(chunk)
+        manifest = {}
+        if os.path.exists(MANIFEST_FILE):
+            with open(MANIFEST_FILE, 'r', encoding='utf-8') as existing:
+                manifest = json.load(existing)
+        manifest[filename] = {
+            'source_url': source_url,
+            'source_sha256': digest.hexdigest(),
+            'size_bytes': os.path.getsize(path)
+        }
+        with tempfile.NamedTemporaryFile('w', encoding='utf-8', delete=False, dir='.', suffix='.manifest') as output:
+            json.dump(manifest, output, indent=2)
+            temp_manifest = output.name
+        os.replace(temp_manifest, MANIFEST_FILE)
+
     try:
         response = urllib.request.urlopen(req).read()
         data = json.loads(response)
@@ -54,7 +110,21 @@ def fetch_paper(filename, url):
                 file_id = match.group(1)
                 direct_url = f"https://drive.google.com/uc?export=download&id={file_id}"
                 print(f"Downloading {filename}...")
-                gdown.download(direct_url, filename, quiet=False)
+                validate_redirect(direct_url)
+                temp_path = None
+                try:
+                    with tempfile.NamedTemporaryFile(suffix='.download', delete=False) as temp:
+                        temp_path = temp.name
+                    downloaded = gdown.download(direct_url, temp_path, quiet=False)
+                    if not downloaded:
+                        raise ValueError("download failed")
+                    validate_pdf(temp_path)
+                    os.replace(temp_path, filename)
+                    temp_path = None
+                    record_manifest(drive_link, filename)
+                finally:
+                    if temp_path and os.path.exists(temp_path):
+                        os.remove(temp_path)
                 size = os.path.getsize(filename)
                 print(f"Success! Downloaded {filename} ({size / 1024 / 1024:.2f} MB)")
             else:
