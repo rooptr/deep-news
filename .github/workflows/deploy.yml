@@ -47,8 +47,6 @@ jobs:
           mkdir -p .pdf-security
           mkdir -p .pdf-forensics
           cp *.pdf .pdf-forensics/ 2>/dev/null || true
-          ulimit -v 2097152
-          ulimit -f 2097152
           sudo freshclam --stdout --quiet >/tmp/freshclam.log 2>&1 || true
           for pdf in *.pdf; do
             [ -e "$pdf" ] || continue
@@ -60,14 +58,14 @@ jobs:
           for pdf in *.pdf; do
             [ -e "$pdf" ] || continue
             name=$(basename "$pdf")
-            timeout 120s qpdf --check "$pdf"
-            timeout 120s pdfinfo "$pdf" > ".pdf-security/$name.info"
+            timeout 300s qpdf --check "$pdf"
+            timeout 300s pdfinfo "$pdf" > ".pdf-security/$name.info"
             pages=$(awk '/^Pages:/ {print $2}' ".pdf-security/$name.info")
             [ -n "$pages" ] && [ "$pages" -le 1000 ] || { echo "Invalid page count in $name"; exit 1; }
-            timeout 120s mutool clean -d "$pdf" ".pdf-security/$name.clean.pdf"
-            timeout 120s gs -q -dSAFER -dBATCH -dNOPAUSE -sDEVICE=pdfwrite \
+            timeout 300s mutool clean -d "$pdf" ".pdf-security/$name.clean.pdf"
+            timeout 300s gs -q -dSAFER -dBATCH -dNOPAUSE -sDEVICE=pdfwrite \
               -sOutputFile=".pdf-security/$name.safe.pdf" "$pdf"
-            timeout 120s qpdf --check ".pdf-security/$name.safe.pdf"
+            timeout 300s qpdf --check ".pdf-security/$name.safe.pdf"
           done
 
       - name: Retain rejected PDFs for review

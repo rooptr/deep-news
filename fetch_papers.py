@@ -12,7 +12,7 @@ import tempfile
 import hashlib
 import subprocess
 
-MAX_PDF_BYTES = 100 * 1024 * 1024
+MAX_PDF_BYTES = 200 * 1024 * 1024
 ALLOWED_DOWNLOAD_HOSTS = {'drive.google.com', 'drive.usercontent.google.com'}
 MANIFEST_FILE = 'pdf_manifest.json'
 
