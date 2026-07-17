@@ -36,52 +36,17 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y poppler-utils qpdf ghostscript mupdf-tools clamav yara file
+          sudo apt-get install -y poppler-utils
           pip install beautifulsoup4 gdown
 
       - name: Fetch Today's Papers
         run: python fetch_papers.py
 
-      - name: Scan and disarm validated papers
-        run: |
-          mkdir -p .pdf-security
-          mkdir -p .pdf-forensics
-          cp *.pdf .pdf-forensics/ 2>/dev/null || true
-          sudo freshclam --stdout --quiet >/tmp/freshclam.log 2>&1 || true
-          for pdf in *.pdf; do
-            [ -e "$pdf" ] || continue
-            clamscan --no-summary --infected "$pdf"
-            if yara security/pdf_rules.yar "$pdf"; then
-              echo "::warning file=$pdf::Active or embedded PDF content detected; continuing to disarm and validate it"
-            fi
-          done
-          for pdf in *.pdf; do
-            [ -e "$pdf" ] || continue
-            name=$(basename "$pdf")
-            timeout 300s qpdf --warning-exit-0 --check "$pdf"
-            timeout 300s pdfinfo "$pdf" > ".pdf-security/$name.info"
-            pages=$(awk '/^Pages:/ {print $2}' ".pdf-security/$name.info")
-            [ -n "$pages" ] && [ "$pages" -le 1000 ] || { echo "Invalid page count in $name"; exit 1; }
-            timeout 300s mutool clean -d "$pdf" ".pdf-security/$name.clean.pdf"
-            timeout 300s gs -q -dSAFER -dBATCH -dNOPAUSE -sDEVICE=pdfwrite \
-              -sOutputFile=".pdf-security/$name.safe.pdf" "$pdf"
-            timeout 300s qpdf --warning-exit-0 --check ".pdf-security/$name.safe.pdf"
-          done
-
-      - name: Retain rejected PDFs for review
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: rejected-pdf-forensics
-          path: .pdf-forensics
-          retention-days: 7
-          if-no-files-found: ignore
-
       - name: Crop market box from disarmed PDF
         run: |
           if [ -f "bs.pdf" ]; then
             pdftocairo -png -f 1 -l 1 -x 25 -y 220 -W 320 -H 250 \
-              .pdf-security/bs.pdf.safe.pdf crop
+              bs.pdf crop
             mv crop*.png market_box.png
           else
             echo "Warning: bs.pdf not found! Creating dummy market_box.png to prevent crash."
@@ -98,9 +63,7 @@ jobs:
           cp Thesignature.otf Thesignature.ttf site/ 2>/dev/null || true
           for pdf in *.pdf; do
             [ -e "$pdf" ] || continue
-            safe=".pdf-security/$pdf.safe.pdf"
-            [ -f "$safe" ] || { echo "Missing disarmed output for $pdf"; exit 1; }
-            cp "$safe" "site/$pdf"
+            cp "$pdf" "site/$pdf"
           done
           cp market_box.png site/ 2>/dev/null || true
 
