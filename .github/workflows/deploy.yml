@@ -57,7 +57,7 @@ jobs:
         run: |
           rm -rf site
           mkdir site
-          cp index.html headlines.json gold_rate.json market_stats.json quiz.json site/
+          cp index.html viewer.html headlines.json gold_rate.json market_stats.json quiz.json site/
           cp pdf_manifest.json site/ 2>/dev/null || true
           cp baby.png baby_animated.png box_bottom.png box_lid.png pixel_pizza_slice.png site/ 2>/dev/null || true
           cp Thesignature.otf Thesignature.ttf site/ 2>/dev/null || true

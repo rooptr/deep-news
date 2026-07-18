@@ -8,450 +8,187 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="refresh" content="3600">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand&display=swap" rel="stylesheet">
-    <style>
+        <style>
         :root {
-            --magenta: #ff477e;
-            --orange: #ff9f1c;
-            --yellow: #ffd166;
-            --black: #111;
+            --surface-1: #fbfbfd;
+            --surface-2: #ffffff;
+            --border: rgba(0, 0, 0, 0.08);
+            --text-primary: #1d1d1f;
+            --text-secondary: #515154;
+            --blue: #0071e3;
         }
-
         *, *::before, *::after { box-sizing: border-box; }
-
         body, html {
             margin: 0; padding: 0; min-height: 100%;
-            background-color: #f0f0f0;
-            background-image: radial-gradient(#ccc 15%, transparent 16%), radial-gradient(#ccc 15%, transparent 16%);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            font-family: 'Patrick Hand', cursive;
-            color: var(--black);
+            background-color: var(--surface-1);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-primary);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ========================================
-           MARKET TICKER (UNTOUCHED)
-           ======================================== */
         .market-ticker-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 35px;
-            background: var(--black); border-bottom: 2px solid #333;
+            position: fixed; top: 0; left: 0; width: 100%; height: 38px;
+            background: rgba(255, 255, 255, 0.72); backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--border);
             z-index: 9999; overflow: hidden; display: flex; align-items: center;
-            font-family: 'Courier New', Courier, monospace; font-size: 0.85em;
-            color: #fff; letter-spacing: 0.5px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.5);
+            font-size: 0.85em; font-weight: 500;
         }
         .market-ticker-track {
             display: flex; white-space: nowrap; will-change: transform;
-            transform: translateZ(0); backface-visibility: hidden;
             animation: ticker 50s linear infinite;
         }
         .market-ticker-track:hover { animation-play-state: paused; }
-        .ticker-item { display: flex; align-items: center; padding: 0 30px; font-weight: bold; }
-        .ticker-name { color: #aaa; margin-right: 8px; text-transform: uppercase; }
-        .ticker-value { color: #fff; margin-right: 8px; }
-        .ticker-change { font-size: 0.95em; display: flex; align-items: center; gap: 4px; }
-        .ticker-change.up { color: #4caf50; }
-        .ticker-change.down { color: #f44336; }
-        .ticker-separator { color: #444; margin-left: 25px; }
-        @keyframes ticker {
-            0% { transform: translate3d(0,0,0); }
-            100% { transform: translate3d(-50%,0,0); }
-        }
+        .ticker-item { padding: 0 30px; display: flex; gap: 6px; }
+        .ticker-name { color: var(--text-secondary); }
+        .ticker-change.up { color: #34c759; }
+        .ticker-change.down { color: #ff3b30; }
+        .ticker-separator { color: #d2d2d7; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* ========================================
-           MAIN CONTENT AREA
-           ======================================== */
         .main-content {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 50px 15px; min-height: 100vh;
-            max-width: 500px; margin: 0 auto;
-            gap: 12px;
+            padding: 70px 20px 40px; min-height: 100vh;
+            max-width: 500px; margin: 0 auto; gap: 16px;
         }
 
-        /* ========================================
-           DATE HEADER
-           ======================================== */
         .date-header {
-            font-size: clamp(14px, 3.5vw, 20px);
-            font-weight: bold; text-align: center;
-            background: #fff; padding: 6px 20px;
-            border: 2px solid var(--black);
-            box-shadow: 3px 3px 0px var(--magenta), -2px -2px 0px var(--orange), 5px 5px 0px var(--black);
-            letter-spacing: 1px; text-transform: uppercase;
+            font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+            color: var(--text-secondary); letter-spacing: 0.05em;
+            background: transparent; border: none; box-shadow: none;
         }
 
-        /* ========================================
-           STICKY BILL BUTTON (shared)
-           ======================================== */
-        .sticky-btn {
-            display: block; width: 100%;
-            font-family: 'Patrick Hand', cursive;
-            font-size: clamp(18px, 4vw, 26px);
-            font-weight: bold; text-align: center;
-            background: #fff; color: var(--black);
-            border: 3px solid var(--black);
-            padding: 14px 20px;
-            cursor: pointer;
-            box-shadow: 4px 4px 0px var(--black);
-            transition: all 0.15s ease;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-        .sticky-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px var(--black);
-        }
-        .sticky-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px var(--black);
-        }
-
-        /* Headlines - large, standout */
-        .headlines-container {
-            position: relative;
-            width: 100%;
-        }
-        @font-face {
-            font-family: 'TheSignature';
-            src: url('Thesignature.ttf') format('truetype'),
-                 url('Thesignature.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-        }
+        .headlines-container { position: relative; width: 100%; }
         .deeptis-signature-container {
-            position: absolute;
-            left: -50px;
-            top: -20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transform: rotate(-15deg);
-            z-index: 10;
-            pointer-events: none;
-            line-height: 0.7;
-        }
-        @media (max-width: 600px) {
-            .deeptis-signature-container {
-                left: -10px;
-                top: -35px;
-            }
+            position: absolute; left: 0; top: -25px;
+            transform: none; text-shadow: none; line-height: 1;
         }
         .deeptis-name {
-            font-family: 'TheSignature', cursive;
-            font-size: clamp(38px, 9vw, 54px);
-            color: var(--);
-            white-space: nowrap;
-            text-shadow: 2px 2px 0px #fff, -1px -1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff;
+            font-family: inherit; font-size: 1rem; font-weight: 700; color: var(--blue); letter-spacing: -0.02em; text-shadow: none;
         }
         .deeptis-sub {
-            font-family: 'Patrick Hand', cursive;
-            font-size: clamp(12px, 3vw, 16px);
-            color: var(--black);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            white-space: nowrap;
-            margin-top: -8px;
-            text-shadow: 1px 1px 0px #fff, -1px -1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff;
-        }
-        .btn-headlines {
-            background: #fff8b0;
-            font-size: clamp(22px, 5vw, 32px);
-            padding: 18px 20px;
+            font-family: inherit; font-size: 0.7rem; color: var(--text-secondary); letter-spacing: 0.05em; text-shadow: none;
         }
 
-        /* Newspaper link buttons */
-        .newspaper-stack {
-            display: flex; flex-direction: column;
-            width: 100%; gap: 8px;
+        .sticky-btn {
+            display: block; width: 100%;
+            font-family: inherit; font-size: 1rem; font-weight: 500;
+            text-align: center; color: var(--text-primary);
+            background: var(--surface-2);
+            border: 1px solid var(--border); border-radius: 14px;
+            padding: 16px 20px; cursor: pointer; text-decoration: none;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            text-transform: none;
         }
-        .newspaper-stack .sticky-btn {
-            font-size: clamp(16px, 3.5vw, 22px);
-            padding: 12px 20px;
+        .sticky-btn:hover {
+            transform: translateY(-1px) scale(1.005);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
-        /* Quiz + Market row */
-        .action-row {
-            display: flex; width: 100%; gap: 10px;
-        }
+        .btn-headlines { font-size: 1.2rem; font-weight: 600; color: var(--blue); background: var(--surface-2); }
+        .action-row { display: flex; width: 100%; gap: 12px; }
         .action-row .sticky-btn { flex: 1; }
+        .btn-quiz { background: var(--surface-2); }
+        .btn-market { background: var(--surface-2); animation: none; position: relative; overflow: hidden; }
+        .btn-market::after { display: none; }
 
-        .btn-quiz { background: #e8f5e9; }
+        .newspaper-stack { display: flex; flex-direction: column; width: 100%; gap: 12px; }
+        .newspaper-stack .sticky-btn { padding: 14px 20px; background: var(--surface-2) !important; font-size: 1rem; }
 
-        /* Glittery Market button */
-        .btn-market {
-            background: linear-gradient(135deg, #ffd700 25%, #fff8b0 40%, #ff8c00 55%, #ffd700 100%);
-            background-size: 300% 300%;
-            animation: glitter 3s ease infinite;
-            position: relative; overflow: hidden;
-        }
-        .btn-market::after {
-            content: ''; position: absolute; top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.6) 50%, transparent 60%);
-            animation: shine-sweep 2.5s ease-in-out infinite;
-        }
-        @keyframes glitter {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes shine-sweep {
-            0% { transform: translateX(-100%) rotate(25deg); }
-            100% { transform: translateX(100%) rotate(25deg); }
-        }
-
-        /* ========================================
-           HEADLINES RECEIPT MODAL
-           ======================================== */
-        .receipt-overlay {
+        .receipt-overlay, .modal-overlay, .quiz-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
-            display: none; justify-content: flex-start; align-items: center;
-            z-index: 5000;
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px);
+            display: none; justify-content: center; align-items: center; z-index: 5000;
         }
-        .receipt-overlay.active { display: flex; }
+        .receipt-overlay.active, .modal-overlay.active, .quiz-overlay.active { display: flex; }
 
         .receipt-track {
-            display: flex; gap: 20px;
-            overflow-x: auto; scroll-snap-type: x mandatory;
-            padding: 20px 40px; width: 100%; align-items: center; box-sizing: border-box;
+            display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
+            padding: 20px; width: 100%; align-items: center; box-sizing: border-box;
         }
-        .receipt-container {
-            flex: 0 0 85%; max-width: 420px; scroll-snap-align: center;
-            background: #fffdf5;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1), 0 0 40px rgba(0,0,0,0.05) inset;
-            border-top: 10px solid #d32f2f;
-            padding: 30px 20px;
-            font-family: 'Courier New', Courier, monospace;
-            color: #333; position: relative; max-height: 80vh; overflow-y: auto;
-        }
-        .receipt-container::after {
-            content: ''; position: absolute; bottom: -15px; left: 0;
-            width: 100%; height: 15px;
-            background: linear-gradient(-45deg, transparent 33.33%, #fffdf5 33.33%, #fffdf5 66.66%, transparent 66.66%),
-                        linear-gradient(45deg, transparent 33.33%, #fffdf5 33.33%, #fffdf5 66.66%, transparent 66.66%);
-            background-size: 15px 30px; background-position: 0 100%;
-        }
-        .receipt-close {
-            position: absolute; top: 15px; right: 15px; z-index: 5001;
-            width: 32px; height: 32px; background: var(--magenta); color: #fff;
-            border: 2px solid var(--black); border-radius: 50%;
-            font-size: 16px; font-weight: bold; cursor: pointer;
-            font-family: 'Patrick Hand', cursive;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .receipt-header, .receipt-footer { text-align: center; }
-        .receipt-header h2 { margin: 0; font-size: 1.5em; letter-spacing: 2px; }
-        .receipt-divider { text-align: center; overflow: hidden; white-space: nowrap; margin: 15px 0; opacity: 0.6; }
-        .receipt-paper-title { font-weight: bold; text-decoration: underline; margin-top: 25px; margin-bottom: 8px; font-size: 1.1em; }
-        .receipt-item { margin-bottom: 12px; line-height: 1.4; display: flex; align-items: flex-start; font-size: 0.9em; }
-        .receipt-item::before { content: '- '; margin-right: 5px; }
-
-        /* ========================================
-           CLIPBOARD MODAL (MARKET)
-           ======================================== */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.7);
-            display: none; justify-content: center; align-items: center;
-            z-index: 5000; opacity: 0; transition: opacity 0.3s ease;
-            backdrop-filter: blur(4px);
-        }
-        .modal-overlay.active { display: flex; opacity: 1; }
-        .clipboard {
-            position: relative; background: #8b5a2b;
-            width: 90%; max-width: 500px;
-            padding: 40px 20px 20px 20px; border-radius: 10px;
-            border: 4px solid var(--black);
-            box-shadow: 10px 10px 0px var(--black);
-            transform: translateY(50px);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .modal-overlay.active .clipboard { transform: translateY(0); }
-        .clip {
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            width: 120px; height: 40px; background: #ccc;
-            border: 4px solid var(--black); border-radius: 4px;
-            box-shadow: 6px 6px 0px var(--black);
-        }
-        .gold-sticker {
-            margin-top: 15px;
-            background: linear-gradient(45deg, #ffd700, #ffdf00, #d4af37, #ffd700);
-            background-size: 300% 300%;
-            border: 3px solid var(--black); padding: 10px 20px;
-            font-size: clamp(16px, 4vw, 24px); font-weight: bold;
-            color: var(--black); text-align: center;
-            box-shadow: 4px 4px 0px var(--black);
-            animation: glitter 3s ease infinite; display: none;
-        }
-        .paper {
-            background: #fff; padding: 15px; border: 2px solid var(--black);
-            min-height: 200px; box-shadow: 3px 3px 10px rgba(0,0,0,0.2); text-align: center;
-        }
-        .paper img { max-width: 100%; height: auto; object-fit: contain; border: 2px solid #333; }
-        .modal-close {
-            position: absolute; top: -20px; right: -20px;
-            width: 40px; height: 40px; background: var(--magenta); color: #fff;
-            border: 3px solid var(--black); border-radius: 50%;
-            font-size: 20px; font-weight: bold; cursor: pointer;
-            box-shadow: 2px 2px 0px var(--black); font-family: 'Patrick Hand', cursive;
+        .receipt-container, .clipboard, .quiz-section {
+            flex: 0 0 90%; max-width: 400px; scroll-snap-align: center;
+            background: var(--surface-2); border-radius: 20px;
+            padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            position: relative; max-height: 85vh; overflow-y: auto;
+            font-family: inherit; border: none; transform: none;
         }
 
-        /* ========================================
-           QUIZ SECTION (CLEAN, COMPACT)
-           ======================================== */
-        .quiz-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
-            display: none; justify-content: center; align-items: flex-start;
-            z-index: 6000; overflow-y: auto; padding: 60px 15px 30px 15px;
-        }
-        .quiz-overlay.active { display: flex; }
+        .receipt-container::after { display: none; }
+        .clip { display: none; }
+        .paper { background: none; border: none; box-shadow: none; padding: 0; text-align: left; }
 
-        .quiz-section {
-            width: 100%; max-width: 500px;
-            margin: 0 auto;
+        .receipt-close, .modal-close, .quiz-close {
+            position: absolute; top: 12px; right: 12px;
+            width: 30px; height: 30px; border-radius: 15px;
+            background: #f1f1f2; border: none; color: var(--text-secondary); font-size: 14px;
+            font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            z-index: 10; font-family: inherit; box-shadow: none;
         }
+        .receipt-close:hover, .modal-close:hover, .quiz-close:hover { background: #e5e5ea; }
 
-        .quiz-close {
-            position: absolute; top: -15px; right: -10px;
-            width: 32px; height: 32px; background: var(--magenta); color: #fff;
-            border: 2px solid var(--black); border-radius: 50%;
-            font-size: 16px; font-weight: bold; cursor: pointer;
-            font-family: 'Patrick Hand', cursive;
-            display: flex; align-items: center; justify-content: center; z-index: 10;
-        }
+        .receipt-header h2 { font-size: 1.2rem; font-weight: 600; margin: 0 0 4px; letter-spacing: normal; }
+        .receipt-date { color: var(--text-secondary); font-size: 0.8rem; margin: 0 0 16px; }
+        .receipt-divider { display: none; }
+        .receipt-paper-title { font-weight: 600; text-decoration: none; margin-top: 24px; margin-bottom: 12px; font-size: 1rem; color: var(--blue); }
+        .receipt-item { margin-bottom: 12px; font-size: 0.95rem; line-height: 1.4; display: block; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+        .receipt-item::before { display: none; }
+        .receipt-item:last-child { border-bottom: none; }
 
-        .quiz-filter-row {
-            display: flex; gap: 6px; margin-bottom: 10px;
-        }
+        .quiz-filter-row { display: flex; gap: 8px; margin-bottom: 16px; justify-content: center; }
         .quiz-filter-btn {
-            font-family: 'Patrick Hand', cursive;
-            font-size: clamp(14px, 3vw, 18px);
-            font-weight: bold; padding: 6px 18px;
-            border: 2px solid var(--black);
-            cursor: pointer; transition: all 0.15s;
-            background: #eee; color: var(--black);
-            box-shadow: 2px 2px 0px var(--black);
+            background: transparent; border: 1px solid var(--border); border-radius: 16px;
+            padding: 6px 16px; font-size: 0.85rem; font-weight: 500; color: var(--text-secondary);
+            cursor: pointer; transition: 0.2s; box-shadow: none; font-family: inherit;
         }
-        .quiz-filter-btn.active {
-            background: var(--black); color: #fff;
-        }
-        .quiz-filter-btn:hover:not(.active) {
-            background: #ddd;
-        }
+        .quiz-filter-btn.active { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
+        .quiz-filter-btn:hover:not(.active) { background: var(--surface-1); }
 
-        .quiz-card {
-            background: #fff; border: 2px solid #ddd;
-            border-radius: 8px; padding: 18px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
-
-        .quiz-header {
-            font-size: 1.3em; font-weight: bold;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 12px; padding-bottom: 6px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
-        .quiz-question { display: none; animation: fadeIn 0.25s ease; }
-        .quiz-question.active { display: block; }
-
-        .quiz-q-text {
-            font-size: 1.15em; margin-bottom: 12px;
-            font-weight: bold; line-height: 1.3;
-        }
-
+        .quiz-card { background: none; border: none; padding: 0; box-shadow: none; max-width: none; }
+        .quiz-header { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; border: none; padding: 0; }
+        .quiz-question { display: none; }
+        .quiz-question.active { display: block; animation: fadeIn 0.3s; }
+        .quiz-q-text { font-size: 1.05rem; margin-bottom: 16px; line-height: 1.4; font-weight: 600; }
+        
         .quiz-option {
-            display: block; width: 100%; text-align: left;
-            background: #f9f9f9; border: 2px solid #ddd;
-            padding: 10px 12px; margin-bottom: 8px;
-            font-family: inherit; font-size: 1em;
-            cursor: pointer; transition: all 0.15s;
-            border-radius: 6px;
+            display: block; width: 100%; text-align: left; background: var(--surface-1);
+            border: 1px solid var(--border); padding: 12px 16px; margin-bottom: 10px;
+            border-radius: 12px; font-size: 0.95rem; cursor: pointer; transition: 0.2s; font-family: inherit;
         }
-        .quiz-option:hover:not(:disabled) { background: #f0f0f0; border-color: #bbb; }
-        .quiz-option.correct { background: #d4edda; border-color: #27ae60; }
-        .quiz-option.wrong { background: #f8d7da; border-color: #c0392b; }
+        .quiz-option:hover:not(:disabled) { background: #e5e5ea; border-color: #d2d2d7; }
+        .quiz-option.correct { background: #e8f5e9; border-color: #34c759; color: #116823; }
+        .quiz-option.wrong { background: #fbe9e7; border-color: #ff3b30; color: #a91209; }
 
         .quiz-explanation {
-            display: none; margin-top: 12px;
-            font-size: 0.95em; color: #444;
-            background: #f8f9fa; padding: 12px;
-            border: 1px solid #e0e0e0; border-radius: 6px;
-            line-height: 1.5;
+            display: none; margin-top: 16px; padding: 12px; font-size: 0.9rem;
+            background: var(--surface-1); border-radius: 12px; color: var(--text-secondary);
+            border: 1px solid var(--border);
         }
-
-        .quiz-controls {
-            display: flex; justify-content: space-between;
-            margin-top: 15px; border-top: 1px solid #eee; padding-top: 12px;
-        }
+        
+        .quiz-controls { display: flex; justify-content: space-between; margin-top: 24px; border-top: none; padding: 0; }
         .quiz-btn {
-            background: var(--black); color: #fff;
-            border: 2px solid var(--black); padding: 6px 22px;
-            font-family: inherit; font-size: 1.1em;
-            cursor: pointer; border-radius: 6px;
-            box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
-            transition: transform 0.1s;
+            background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+            padding: 8px 16px; cursor: pointer; font-weight: 500; color: var(--text-primary);
+            box-shadow: none; font-family: inherit; font-size: 0.95rem;
         }
-        .quiz-btn:active:not(:disabled) { transform: translateY(2px); box-shadow: none; }
-        .quiz-btn:disabled { background: #ccc; cursor: not-allowed; box-shadow: none; color: #888; border-color: #ccc; }
+        .quiz-btn:active:not(:disabled) { transform: translateY(1px); }
+        .quiz-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .gold-sticker { font-weight: 600; color: #cf9b21; padding: 12px; background: #fffcf0; border-radius: 12px; border: 1px solid #f8eeb2; box-shadow: none; animation: none; font-family: inherit; font-size: 1rem; margin-top: 16px; }
 
-        /* ========================================
-           FIXED BABY SPRITE
-           ======================================== */
-        .baby-fixed-container {
-            position: fixed; bottom: 0; left: 0;
-            width: 100%; height: 120px;
-            pointer-events: none; z-index: 4999;
-        }
-        .animated-walker {
-            position: absolute; bottom: 0;
-            animation: walk-across 30s linear infinite; pointer-events: auto;
-        }
-        @keyframes walk-across {
-            0% { left: -10%; }
-            100% { left: 110%; }
-        }
-        .baby-sprite {
-            width: clamp(50px, 15vw, 80px); height: auto;
-            filter: drop-shadow(2px 0 0 var(--black)) drop-shadow(-2px 0 0 var(--black))
-                    drop-shadow(0 2px 0 var(--black)) drop-shadow(0 -2px 0 var(--black));
-            overflow: visible;
-            pointer-events: auto;
-        }
-        .speech-container { position: absolute; top: -35px; left: 15px; }
-
-        @keyframes swing-leg-r { 0%, 100% { transform: rotate(-30deg); } 50% { transform: rotate(30deg); } }
-        @keyframes swing-leg-l { 0%, 100% { transform: rotate(30deg); } 50% { transform: rotate(-30deg); } }
-        @keyframes swing-arm-r { 0%, 100% { transform: rotate(30deg); } 50% { transform: rotate(-30deg); } }
-        @keyframes swing-arm-l { 0%, 100% { transform: rotate(-30deg); } 50% { transform: rotate(30deg); } }
-        @keyframes bob-body { 0%, 50%, 100% { transform: translateY(0); } 25%, 75% { transform: translateY(-2px); } }
-
-        .leg-front { animation: swing-leg-r 1s infinite ease-in-out; transform-box: view-box; }
-        .leg-back  { animation: swing-leg-l 1s infinite ease-in-out; transform-box: view-box; }
-        .arm-front { animation: swing-arm-r 1s infinite ease-in-out; transform-box: view-box; }
-        .arm-back  { animation: swing-arm-l 1s infinite ease-in-out; transform-box: view-box; }
-        .walker-group { animation: bob-body 1s infinite ease-in-out; }
+        .baby-fixed-container { position: fixed; bottom: 0; left: 0; width: 100%; height: 100px; pointer-events: none; z-index: 4999; }
+        .animated-walker { position: absolute; bottom: 0; animation: walk-across 30s linear infinite; pointer-events: auto; }
+        @keyframes walk-across { 0% { left: -10%; } 100% { left: 110%; } }
+        .baby-sprite { width: 60px; height: auto; pointer-events: auto; filter: none; }
+        
         .bubble {
-            font-family: 'Patrick Hand', cursive;
-            font-size: clamp(12px, 3.5vw, 16px); font-weight: bold;
-            color: var(--black); background: #fff;
-            padding: 4px 10px; border: 2px solid var(--black);
-            border-radius: 10px; white-space: nowrap;
-            display: none;
+            background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);
+            padding: 6px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 500;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08); display: none; font-family: inherit; border: 1px solid var(--border);
         }
-        .bubble::after {
-            content: ''; position: absolute; bottom: -5px; left: 8px;
-            border-width: 5px 5px 0 0; border-style: solid;
-            border-color: var(--black) transparent transparent transparent;
-        }
+        .bubble::after { display: none; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
